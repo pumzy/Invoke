@@ -19,3 +19,16 @@ _Modelled after Soundcloud.com, this website will allow users to seamlessly list
 * Wave Forms
 * Tags and the discover feature (Using the Echo Nest API)
 * History
+
+## Design Docs
+* [View Wireframes][wireframes]
+* [React Components][components]
+* [API endpoints][api-endpoints]
+* [DB schema][schema]
+* [Sample State][sample-state]
+
+[wireframes]: docs/wireframes
+[components]: docs/component-hierarchy.md
+[sample-state]: docs/sample-state.md
+[api-endpoints]: docs/api-endpoints.md
+[schema]: docs/schema.md
