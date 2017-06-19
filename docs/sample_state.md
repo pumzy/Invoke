@@ -3,7 +3,8 @@
   session: {
     currentUser: {
       id: 1,
-      username: "bob"
+      username: "bob",
+      preference_arbiter: 0.7
     },
     errors: []
   },
