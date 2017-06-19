@@ -40,9 +40,12 @@ Search Bar
     * This will have a number of Song widgets (SongWidgetContainer)
   * NumberOfFollowsContainer
   * NumberOfFollowersContainer
+* AllContainer
+  * A number of Songplay Containers
+  * PlaylistPlay Containers
 * SongsContainer
   * A number of Songplay Containers
-* Playlist/Album Containers
+* Playlists/Albums Containers
   * PlaylistPlay Containers -- Can be on All or albums/playlists page
 * A number of Songplay Containers
 * ProfileHeaderContainer.
