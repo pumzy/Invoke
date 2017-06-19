@@ -2,7 +2,7 @@
 
 | Path  | Component |
 | ------------- | ------------- |
-| "/"  | "Stream"  |
+| "/"  | Stream  |
 | "/stream"  | LoggedInHomePage > StreamContainer  |
 | "/discover"  | LoggedInHomePage > DiscoverContainer  |
 | "/charts"  | LoggedInHomePage > ChartsContainer  |
