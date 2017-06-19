@@ -1,6 +1,8 @@
 
 # Development README for Invoke
 
+_A note: Many of the specifications outlined in this proposal were not designed to be achieved in the allocated two weeks, and may represent post presentation ambitions for this site._
+
 ## Minimum Viable Product
 
 _Modelled after Soundcloud.com, this website will allow users to seamlessly listen to their favourite music, as well as upload their original content_
