@@ -46,8 +46,8 @@ id          | integer   | not null, primary key
 body        | string    | not null
 user_id   | integer   | not null, foreign key , indexed
 song_id     | integer   | not null, foreign key , indexed
-comment time | date | not null
-created at | date | not null
+comment_time | date | not null
+created_at | date | not null
 
 ## Follows_join_table
 Column Name | Data Type | Additional Details
