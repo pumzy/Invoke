@@ -8,6 +8,32 @@
     },
     errors: []
   },
+  playqueue : {
+    1 : {
+      id: 4,
+      title: "Odovician Dreams",
+      user_id: 3,
+      artist: "Aftermath",
+      genre: "Post Rock",
+      track_url: 'toounderground4u.com',
+      cover_art_url: 'thecoolestbandever.org',
+      likes: {
+        1: {
+          id: 12,
+          user_id: 19
+        }
+      },
+      comments: {
+        1 : {
+          id: 17,
+          user_id: 4,
+          body: "Damn yo, awesome song",
+          comment_time: 63,
+          created_at: 07/08/2015
+        }
+      }
+    }  
+  },
   users: {
     1: {
       id: 2,
