@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, Link } from 'react-redux';
 
-import { login, logout, signup } from '../../actions/session_actions';
+import { login, logout, signup } from '../actions/session_actions';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class SessionForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.loggedIn) {
-      this.props.history.push('/stream');
+      this.props.history.push('/');
     }
   }
 
@@ -42,7 +42,11 @@ class SessionForm extends React.Component {
 
 
   render() {
-
+    let buttontext;
+    if (this.props.formType === "signup"){
+      buttontext = "Sign Up"
+    } else{ buttontext = "Sign In"
+    };
     return (
       <div className="session-form-container">
         <form onSubmit={this.handleSubmit} className="session-form-form">
@@ -63,7 +67,7 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             <br/>
-            <button onClick={this.handleSubmit}></button>
+            <button onClick={this.handleSubmit}>{buttontext}</button>
           </div>
         </form>
       </div>

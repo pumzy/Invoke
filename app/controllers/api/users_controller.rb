@@ -26,7 +26,8 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
       if @user.save
-       render :show, status: :created, location: @user
+        login(@user)
+       render :show
       else
        render json: @user.errors, status: :unprocessable_entity
       end
@@ -47,7 +48,7 @@ class Api::UsersController < ApplicationController
   # DELETE /api/users/1.json
   def destroy
     @user.destroy
-     head :no_content 
+     head :no_content
   end
 
   private
