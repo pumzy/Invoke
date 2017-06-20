@@ -9,6 +9,9 @@
 	after_initialize :ensure_session_token
 	before_validation :ensure_session_token_uniqueness
 
+  # validates_with AttachmentPresenceValidator, attributes: :avatar
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100#" }, default_url: "photo.jpg"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   # Need to do the song models.
 
@@ -17,6 +20,14 @@
 		self.password_digest = BCrypt::Password.create(password)
 		@password = password
 	end
+
+  def avatar_thumb
+     avatar.url(:thumb)
+  end
+
+  def avatar_medium
+     avatar.url(:medium)
+  end
 
 	def self.find_by_credentials(username, password)
 		user = User.find_by(username: username)

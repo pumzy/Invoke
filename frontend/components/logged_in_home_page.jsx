@@ -15,6 +15,7 @@ class LoggedInHomePage extends React.Component {
       return (
         <div>
           <h1> Welcome {this.props.currentUser.username} </h1>
+          <img src={this.props.currentUser.avatar_url} />
           <button onClick={this.props.logout}>Log Out!</button>
         </div>
       );

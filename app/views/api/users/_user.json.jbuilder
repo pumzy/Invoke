@@ -1,4 +1,3 @@
 json.id user.id
 json.username user.username
-json
-json.image_url user.avatar.url
+json.avatar_url asset_path(user.avatar.url(:thumb))
