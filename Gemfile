@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.1'
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+gem 'annotate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,6 +31,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry-rails'
 gem "paperclip", "~> 5.0.0"
 gem 'rails_12factor'
+gem 'figaro'
+gem 'aws-sdk', '~> 2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
