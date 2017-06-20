@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, Link } from 'react-redux';
 
-import { login, logout, signup } from '../actions/session_actions';
+import { login, logout, signup, clearErrors } from '../actions/session_actions';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -86,6 +86,7 @@ const mapDispatchToProps = (dispatch, { location }) => {
   const formType = location.pathname.slice(1);
   const processForm = (formType === 'login') ? login : signup;
   return {
+    clearErrors: () => dispatch(clearErrors()),
     processForm: user => dispatch(processForm(user)),
     formType
   };

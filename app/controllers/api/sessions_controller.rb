@@ -7,7 +7,7 @@ class Api::SessionsController < ApplicationController
         login(@user)
         render "api/users/show"
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: ["Invalid username or Password!"], status: 401
       end
   end
 

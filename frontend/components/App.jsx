@@ -10,8 +10,8 @@ const App = () =>(
     <AuthRoute path="/" component={DefaultHomePage} />
     <AuthRoute path="/login" component={SessionForm} />
     <AuthRoute path="/signup" component={SessionForm} />
+    <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />
   </div>
 );
 
 export default App;
-// <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />

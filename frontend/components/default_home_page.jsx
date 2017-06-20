@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { logout } from '../actions/session_actions'
+import { logout, clearErrors } from '../actions/session_actions'
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import SessionForm from './session_form'
 
 
 
-class Greeting extends React.Component   {
+class DefaultHomePage extends React.Component   {
   // constructor(){
   //   // this.currentUser = this.props.currentUser;
   // }
@@ -39,16 +39,18 @@ class Greeting extends React.Component   {
 
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.session.currentUser }
+  return { currentUser: state.session.currentUser,
+           errors: state.session.errors  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    clearErrors: () => dispatch(clearErrors()),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Greeting);
+export default connect(mapStateToProps, mapDispatchToProps)(DefaultHomePage);
 
 
 
