@@ -19,6 +19,10 @@ class SessionForm extends React.Component {
     }
   }
 
+  componentWillMount(){
+    this.props.clearErrors();
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -28,8 +32,14 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = this.state;
-    this.props.processForm({user});
+    if (this.props.formType === 'login'){
+      this.props.login({user})
+    } else if (this.props.formType === 'signup'){
+      this.props.signup({user})
+    }
   }
+
+
 
 
   displayErrors() {
@@ -45,13 +55,19 @@ class SessionForm extends React.Component {
     let buttontext;
     if (this.props.formType === "signup"){
       buttontext = "Sign Up"
-    } else{ buttontext = "Sign In"
+    } else{ buttontext = "Log In"
+    };
+
+    let headertext;
+    if (this.props.formType === "signup"){
+      headertext = `Welcome to our community ${this.state.username}`
+    } else{ headertext = `Welcome back, ${this.state.username}`
     };
     return (
       <div className="session-form-container">
+
         <form onSubmit={this.handleSubmit} className="session-form-form">
-          Welcome to Invoke.
-          <br/>
+        <h2>{headertext}</h2>
           {this.displayErrors()}
           <div className="session-form">
             <br/>
@@ -67,7 +83,7 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             <br/>
-            <button onClick={this.handleSubmit}>{buttontext}</button>
+            <button onClick={this.handleSubmit} className='auth-form-button'>{buttontext}</button>
           </div>
         </form>
       </div>
@@ -78,17 +94,15 @@ class SessionForm extends React.Component {
 const mapStateToProps = ({ session }) => {
   return {
     loggedIn: Boolean(session.currentUser),
-    errors: session.errors
+    errors: session.errors,
   }
 };
 
 const mapDispatchToProps = (dispatch, { location }) => {
-  const formType = location.pathname.slice(1);
-  const processForm = (formType === 'login') ? login : signup;
   return {
     clearErrors: () => dispatch(clearErrors()),
-    processForm: user => dispatch(processForm(user)),
-    formType
+    login: (user) => dispatch(login(user)),
+    signup: (user) => dispatch(signup(user))
   };
 };
 
@@ -96,3 +110,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SessionForm);
+
+
+
+
+
+// processForm: user => dispatch(processForm(user)),
+// formType
+// const processForm = (formType === 'login') ? login : signup;
