@@ -11,10 +11,11 @@
    border-radius: 3%;
    height: 300px;
  }
-
+ //
  .modal-overall-container {
    display: inline-block;
  }
+
 .modal-backdrop {
     position: absolute;
     width: 100%;
@@ -34,6 +35,7 @@
   padding-right: 10px;
   padding-bottom: 10px;
   padding-top: 0px;
+
 }
 .session-form {
   display: flex;
@@ -54,3 +56,126 @@
   padding: 7px 15px 8px 15px;
   font-size: 13px;
 }
+
+
+.uploadavatarimage {
+  display: inline;
+  position: absolute;
+  max-width:50px;
+  max-height:50px;
+  width: auto;
+  height: auto;
+  left: 173px;
+  bottom: 112px;
+}
+
+.imagepreviewonform {
+  display: inline;
+}
+
+.filestyle {
+  display: inline-block;
+  margin-right: -100px;
+}
+
+.group-span-filestyle, .bootstrap-filestyle.input-group {
+  display: inline-block;
+}
+
+.btn.btn-default {
+  display: inline-block;
+  border: 1px solid grey;
+  padding: 5px;
+  // margin-right: 100px;
+}
+
+html {
+  background-color:  #ebebeb;
+}
+.defaulthomecontainer {
+  background-image: asset-url('backgroundimage.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: absolute;
+  // top: 50%;
+
+  // position: absolute;
+  left: 50%;
+  transform: translate(-50%, -10%);
+}
+
+
+button {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  border-radius: 3px;
+  border: 1px solid #e5e5e5;
+  text-decoration: none;
+  height: 30px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.loginbutton {
+  background: 0 0;
+  color: black;
+  border-color: black;
+  margin-right: 6px;
+  height: 30px;
+  padding: 0 15px;
+}
+
+.loginbutton:hover {
+  outline: 0;
+  border-color: #ccc;
+}
+
+.create-new-user-homepage-button:hover {
+  outline: 0;
+  border-color: brown;
+}
+
+.create-new-user-homepage-button {
+  background-color: #f50;
+  border-color: #f50;
+  color: #fff;
+}
+
+.homepagetopbuttons {
+  position: relative;
+  top: 10px;
+  right: 10px;
+}
+
+.homepagelogo {
+  height: 70px;
+  width: 111px;
+  background-image: asset-url('logo.png');
+  z-index: 100;
+  position: relative;
+  left: 20px;
+  top: 20px;
+}
+
+.errorsul {
+  position: relative;
+  right: 20px;
+  list-style: none;
+}
+
+
+// .modal-overall-container {
+//   position: absolute;
+// }

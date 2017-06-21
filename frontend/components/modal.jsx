@@ -12,7 +12,6 @@ class Modal extends React.Component{
           <div className='modal-children-container' >
             {this.props.children}
           </div>
-        <div className='modal-backdrop' onClick={e => this.close(e)}/>
         </div>
       )
     }

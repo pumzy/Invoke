@@ -29,25 +29,37 @@ class DefaultHomePage extends React.Component   {
     this.setState({ createModalOpen: false})
   }
 
+  close(e) {
+    e.preventDefault()
+    this.setState({ loginModalOpen: false, createModalOpen: false })
+  }
+
 
 
   render(){
+
+    let backdrop;
+    if (this.state.loginModalOpen === true ||this.state.createModalOpen === true  ){
+    backdrop = <div className='modal-backdrop' onClick={e => this.close(e)}/>
+    }
+
+
     let heading = <h1>Welcome to Invoke</h1>
       return (
-        <div>
-          {heading}
-
-
-        <button onClick={() => this.openLoginModal()}>Login</button>
+        <div className='defaulthomecontainer'>
+        <div className='homepagelogo'>
+        </div>
         <Modal isOpen={this.state.loginModalOpen} onClose={() => this.closeLoginModal()}>
           <SessionForm formType={'login'} />
         </Modal>
-
-
-        <button className='create-new-user-homepage-button' onClick={() => this.openCreateModal()}>Create a new account</button>
         <Modal isOpen={this.state.createModalOpen} onClose={() => this.closeCreateModal()}>
           <SessionForm formType={'signup'} />
         </Modal>
+        <div className="homepagetopbuttons">
+        <button onClick={() => this.openLoginModal()} className="loginbutton">Login</button>
+        <button className='create-new-user-homepage-button' onClick={() => this.openCreateModal()}>Create a new account</button>
+        </div>
+        {backdrop}
         </div>
       );
     }

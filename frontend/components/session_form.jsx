@@ -8,9 +8,12 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      imageFile: null,
+      imageUrl: null
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateFile = this.updateFile.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -35,16 +38,39 @@ class SessionForm extends React.Component {
     if (this.props.formType === 'login'){
       this.props.login({user})
     } else if (this.props.formType === 'signup'){
-      this.props.signup({user})
+      var formData = new FormData();
+
+      if (this.props.imageFile){
+      formData.append("user[username]", this.state.username)
+      formData.append("user[password]", this.state.password)
+      formData.append("user[avatar]", this.state.imageFile)
+      this.props.signup(formData)
+      } else {
+        formData.append("user[username]", this.state.username)
+        formData.append("user[password]", this.state.password)
+        this.props.signup(formData)
+      }
     }
   }
 
+  updateFile(e){
+    var file = e.currentTarget.files[0]
+    var fileReader = new FileReader();
+    var that = this;
+    fileReader.onloadend = () => (
+      that.setState({imageFile: file, imageUrl: fileReader.result})
+    );
 
+
+    if (file){
+      fileReader.readAsDataURL(file);
+    };
+  }
 
 
   displayErrors() {
     return(
-      <ul>
+      <ul className="errorsul">
         {this.props.errors.map((error, i) => ( <li key={`error-${i}`}> {error} </li>))}
       </ul>
     );
@@ -63,15 +89,21 @@ class SessionForm extends React.Component {
       headertext = `Welcome to our community ${this.state.username}`
     } else{ headertext = `Welcome back, ${this.state.username}`
     };
+    let avatarupload;
+    let avatarpreview;
+    if (this.props.formType == "signup"){
+       avatarupload = <input type="file" onChange={this.updateFile} className="filestyle" data-buttonText="Upload an Avatar!" />
+       avatarpreview =  <img className="uploadavatarimage" src={this.state.imageUrl} />
+       $(":file").filestyle({buttonText: "Upload an Avatar", input: false, buttonBefore: true});
+       }
     return (
       <div className="session-form-container">
 
         <form onSubmit={this.handleSubmit} className="session-form-form">
         <h2>{headertext}</h2>
-          {this.displayErrors()}
           <div className="session-form">
             <br/>
-              <input type="text"
+            <input type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
                 className="login-input"
@@ -83,9 +115,12 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             <br/>
+            <span className="imagepreviewonform">{avatarupload} {avatarpreview}</span>
+            <br />
             <button onClick={this.handleSubmit} className='auth-form-button'>{buttontext}</button>
           </div>
         </form>
+        {this.displayErrors()}
       </div>
     );
   }
