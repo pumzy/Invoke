@@ -2,13 +2,20 @@
 #
 # Table name: songs
 #
-#  id           :integer          not null, primary key
-#  title        :string           not null
-#  genre        :string
-#  release_date :date             not null
-#  user_id      :integer          not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                     :integer          not null, primary key
+#  title                  :string           not null
+#  genre                  :string
+#  user_id                :integer          not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  track_file_name        :string
+#  track_content_type     :string
+#  track_file_size        :integer
+#  track_updated_at       :datetime
+#  cover_art_file_name    :string
+#  cover_art_content_type :string
+#  cover_art_file_size    :integer
+#  cover_art_updated_at   :datetime
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

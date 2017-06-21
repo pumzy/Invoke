@@ -6,7 +6,7 @@ import LoggedInHomePage from './logged_in_home_page'
 import SessionForm from './session_form'
 
 const App = () =>(
-  <div>
+  <div className="invisible">
     <AuthRoute path="/" component={DefaultHomePage} />
     <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />
   </div>

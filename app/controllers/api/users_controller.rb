@@ -38,7 +38,7 @@ class Api::UsersController < ApplicationController
   # PATCH/PUT /api/users/1.json
   def update
       if @user.update(user_params)
-       render :show, status: :ok, location: @user
+       render :show
       else
         render json: @user.errors, status: :unprocessable_entity
       end

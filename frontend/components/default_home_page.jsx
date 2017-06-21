@@ -35,12 +35,11 @@ class DefaultHomePage extends React.Component   {
   }
 
 
-
   render(){
 
     let backdrop;
     if (this.state.loginModalOpen === true ||this.state.createModalOpen === true  ){
-    backdrop = <div className='modal-backdrop' onClick={e => this.close(e)}/>
+      backdrop = <div className='modal-backdrop' onClick={e => this.close(e)}/>
     }
 
 
@@ -49,8 +48,8 @@ class DefaultHomePage extends React.Component   {
         <div className='defaulthomecontainer'>
         <div className='homepagelogo'>
         </div>
-        <Modal isOpen={this.state.loginModalOpen} onClose={() => this.closeLoginModal()}>
-          <SessionForm formType={'login'} />
+        <Modal isOpen={this.state.loginModalOpen} onClose={() => this.closeLoginModal()} >
+          <SessionForm formType={'login'}  />
         </Modal>
         <Modal isOpen={this.state.createModalOpen} onClose={() => this.closeCreateModal()}>
           <SessionForm formType={'signup'} />
