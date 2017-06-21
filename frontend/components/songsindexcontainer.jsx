@@ -1,27 +1,38 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import LoadingIcon from './loading_icon';
+import { fetchSongs } from '../actions/song_actions'
+import { connect } from 'react-redux'
+import SongPlay from './songplaycontainer'
 
-class SongsIndex extends Component {
+class SongsIndex extends React.Component {
   componentDidMount() {
-    this.props.requestAllPokemon();
+    this.props.fetchSongs();
   }
 
   render() {
-    const { pokemon, loading } = this.props;
     return (
-      loading ?
-      <LoadingIcon /> :
-      <section className="pokedex">
+     <section className="songindex">
+       <h1>All Songs</h1>
         <ul>
-          {pokemon.map(poke => <PokemonIndexItem key={poke.id} pokemon={poke} />)}
+          {this.props.allsongs.map(song => <li key={song.id}>  <SongPlay song={song} /> </li>  )}
         </ul>
-
-        <Route exact path="/" component={PokemonFormContainer} />
-        <Route path="/pokemon/:pokemonId" component={PokemonDetailContainer} />
       </section>
     );
   }
 }
 
-export default PokemonIndex;
+
+
+const mapStateToProps = (state) => {
+  debugger
+  return { byID: state.songs.byID,
+           allsongs: state.songs.allsongs  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchSongs: () => dispatch(fetchSongs())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongsIndex);
