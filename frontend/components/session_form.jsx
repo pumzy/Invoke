@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, Link } from 'react-redux';
 
-import { login, logout, signup, clearErrors } from '../actions/session_actions';
+import { login, logout, signup, clearErrors, signupnormal } from '../actions/session_actions';
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class SessionForm extends React.Component {
     } else if (this.props.formType === 'signup'){
       var formData = new FormData();
 
-      if (this.props.imageFile){
+      if (this.state.imageUrl !== null){
       formData.append("user[username]", this.state.username)
       formData.append("user[password]", this.state.password)
       formData.append("user[avatar]", this.state.imageFile)
@@ -48,7 +48,7 @@ class SessionForm extends React.Component {
       } else {
         formData.append("user[username]", this.state.username)
         formData.append("user[password]", this.state.password)
-        this.props.signup(formData)
+        this.props.signupnormal(this.state)
       }
     }
   }
@@ -137,7 +137,8 @@ const mapDispatchToProps = (dispatch, { location }) => {
   return {
     clearErrors: () => dispatch(clearErrors()),
     login: (user) => dispatch(login(user)),
-    signup: (user) => dispatch(signup(user))
+    signup: (user) => dispatch(signup(user)),
+    signupnormal: (user) => dispatch(signupnormal(user))
   };
 };
 

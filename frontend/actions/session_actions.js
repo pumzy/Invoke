@@ -21,10 +21,15 @@ export const clearErrors = errors => ({
 
 
 export const signup = user => dispatch => {
-  if (user.avatar === null){
-    user = {user: {username: user.username, password: user.password}}
-  };
   return APIUtil.signup(user).then(user => (
+    dispatch(receiveCurrentUser(user))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+};
+
+export const signupnormal = user => dispatch => {
+  return APIUtil.signupnormal(user).then(user => (
     dispatch(receiveCurrentUser(user))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))
