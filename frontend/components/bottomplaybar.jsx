@@ -13,7 +13,7 @@ class BottomPlayBar extends React.Component {
     if (this.props.audio.track_url !== "") {
       audioplayer = <div>
                         <h2>{this.props.audio.title}</h2>
-                        <audio controls> <source src={this.props.audio.track_url} type="audio/mpeg" /> </audio>
+                        <audio controls autoPlay> <source src={this.props.audio.track_url} type="audio/mpeg" /> </audio>
                     </div>
     } else {
       audioplayer = <h2>No song in queue</h2>

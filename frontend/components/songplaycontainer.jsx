@@ -17,16 +17,12 @@ class SongPlay extends React.Component {
   render(){
     return(
       <div>
+        <h3>{this.props.song.title}</h3>
         <button onClick={() => this.giveToPlaybar(this.props.song)}>Give to Playbar</button>
-        <h2>{this.props.song.title}</h2>
-          <audio controls>
-            <source src={this.props.song.track_url} type="audio/mpeg" />
-        </audio>
       </div>
     )
   }
 }
-
 
 const mapStateToProps = (state) => {
   return {};
@@ -39,3 +35,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SongPlay);
+
+
+
+
+//   <audio controls>
+//     <source src={this.props.song.track_url} type="audio/mpeg" />
+// </audio>
