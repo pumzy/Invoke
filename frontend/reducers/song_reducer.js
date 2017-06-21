@@ -9,9 +9,7 @@ const SongReducer = (state={ byID: {}, allsongs: [] }, action) => {
   switch (action.type) {
     case RECEIVE_SONGS:
     action.songs.forEach(song => (newState.byID[song.id] = song))
-    action.songs.forEach(song => (newState.allsongs.push(song)))
-    return newState;
-    debugger
+    action.songs.forEach(song => (newState.allsongs.push(song)))    
     return newState;
     case RECEIVE_SONG:
     newState.allsongs.push(action.song.id)

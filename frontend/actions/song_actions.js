@@ -29,7 +29,6 @@ export const removeSong = song => {
 
 export const fetchSongs = () => dispatch => (
   APIUtil.fetchSongs().then(songs => {
-    debugger
     return dispatch(receiveSongs(songs))
   }, err => (
     dispatch(receiveErrors(err.responseJSON))

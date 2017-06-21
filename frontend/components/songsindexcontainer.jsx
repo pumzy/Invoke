@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { fetchSongs } from '../actions/song_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
@@ -11,12 +11,16 @@ class SongsIndex extends React.Component {
 
   render() {
     return (
+    <div>
      <section className="songindex">
        <h1>All Songs</h1>
         <ul>
           {this.props.allsongs.map(song => <li key={song.id}>  <SongPlay song={song} /> </li>  )}
         </ul>
       </section>
+      <Link to="/test"> Test</Link>
+      <Link to="/stream">Backlink</Link>
+    </div>
     );
   }
 }
@@ -24,7 +28,7 @@ class SongsIndex extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  debugger
+  
   return { byID: state.songs.byID,
            allsongs: state.songs.allsongs  }
 }

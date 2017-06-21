@@ -178,6 +178,13 @@ button {
 }
 
 
+.playbar {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -10%)
+}
+
 // .modal-overall-container {
 //   position: absolute;
 // }
