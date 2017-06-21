@@ -7,13 +7,37 @@ import { connect } from 'react-redux'
 
 class BottomPlayBar extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+
+
+  handleClick(){
+    var music = document.getElementById("audio")
+    if (music.paused){
+      music.play()
+      playbutton.className = "";
+      playbutton.className = "pause";
+    } else {
+      music.pause();
+		  playbutton.className = "";
+		  playbutton.className = "play";
+    };
+  }
+
 
   render(){
     let audioplayer;
     if (this.props.audio.track_url !== "") {
-      audioplayer = <div>
-                        <h2>{this.props.audio.title}</h2>
-                        <audio controls autoPlay> <source src={this.props.audio.track_url} type="audio/mpeg" /> </audio>
+      audioplayer = <div className="playbar">
+                        <div id="playbutton" className="play" onClick={this.handleClick}>
+                        <audio id="audio">
+                          <source src={this.props.audio.track_url}type="audio/ogg" />
+                          <source src={this.props.audio.track_url} type="audio/mpeg" />
+                        </audio>
+                        </div>
                     </div>
     } else {
       audioplayer = <h2>No song in queue</h2>
