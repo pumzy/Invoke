@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { fetchOneUser } from '../actions/user_actions'
 
 
 
@@ -10,6 +11,7 @@ class BottomPlayBar extends React.Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.user = this.props.fetchOneUser(this.props.audio.user_id)
   }
 
 
@@ -51,14 +53,16 @@ class BottomPlayBar extends React.Component {
                         <div className="progress">
                           <div>Placeholder For Progress bar</div>
                         </div>
-                          <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art} />
+                          <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
                           <div className="song-infoplayer-slice">
                           {this.props.audio.title} by
-                          {this.props.audio.user.username}
+                          {this.user.username}
                           </div>
                           </div>
                         </div>
     }
+
+    debugger
     // else {
     //   audioplayer = <h2>No song in queue</h2>
     // }
@@ -81,7 +85,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSongs: () => dispatch(fetchSongs())
+    fetchSongs: () => dispatch(fetchSongs()),
+    fetchOneUser: (id) => dispatch(fetchOneUser(id))
   }
 }
 
