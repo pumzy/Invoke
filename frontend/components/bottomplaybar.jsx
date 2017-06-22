@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { fetchOneUser } from '../actions/user_actions'
+import { fetchOneUser, fetchOneUserByID } from '../actions/user_actions'
 
 
 
@@ -15,7 +15,7 @@ class BottomPlayBar extends React.Component {
 
   componentWillReceiveProps(nextProps){
     if (nextProps.audio.track_url !== "" && nextProps.audio.id !== this.props.audio.id){
-      this.props.fetchOneUser(nextProps.audio.user_id)
+      this.props.fetchOneUserByID(nextProps.audio.user_id)
     }
   }
 
@@ -96,7 +96,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSongs: () => dispatch(fetchSongs()),
-    fetchOneUser: (id) => dispatch(fetchOneUser(id))
+    fetchOneUser: (username) => dispatch(fetchOneUser(username)),
+    fetchOneUserByID: (username) => dispatch(fetchOneUserByID(username))
   }
 }
 

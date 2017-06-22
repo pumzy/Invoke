@@ -12,3 +12,10 @@ export const fetchSongs = () => {
     url: "api/songs"
   })
 }
+
+export const fetchSongByUserID = (userid) => {
+  return $.ajax({
+    method: "GET",
+    url: `api/songs/userfind/${userid}`
+  })
+}

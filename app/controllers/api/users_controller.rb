@@ -1,5 +1,4 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /api/users
   # GET /api/users.json
@@ -8,13 +7,15 @@ class Api::UsersController < ApplicationController
   end
 
   def show2
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(id: params[:id])
     render :show
   end
 
   # GET /api/users/1
   # GET /api/users/1.json
   def show
+    @user = User.find_by(username: params[:id])
+    render :show
   end
 
   # GET /api/users/new

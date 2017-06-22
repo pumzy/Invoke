@@ -3,20 +3,20 @@ import {  RECEIVE_SONGS, RECEIVE_SONG, REMOVE_SONG } from '../actions/song_actio
 
 
 
-const SongReducer = (state={ byID: {}, allsongs: [] }, action) => {
+const SongReducer = (state={ byUsername: {}, allsongs: [] }, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_SONGS:
-    action.songs.forEach(song => (newState.byID[song.id] = song))
+    action.songs.forEach(song => (newState.byUsername[song.id] = song))
     action.songs.forEach(song => (newState.allsongs.push(song)))    
     return newState;
     case RECEIVE_SONG:
     newState.allsongs.push(action.song.id)
-    newState.byID[action.song.id] = action.song;
+    newState.byUsername[action.song.id] = action.song;
     return newState;
     case REMOVE_SONG:
-    newState.byID.delete(action.song.id)
+    newState.byUsername.delete(action.song.id)
     return newState;
     default:
     return state;
@@ -26,5 +26,5 @@ const SongReducer = (state={ byID: {}, allsongs: [] }, action) => {
 export default SongReducer;
 //
 
-// return merge({}, state, { byID: action.songs });
-// return merge({}, state, {byID :{[action.song.id]: action.song}, allsongs: });
+// return merge({}, state, { byUsername: action.songs });
+// return merge({}, state, {byUsername :{[action.song.id]: action.song}, allsongs: });

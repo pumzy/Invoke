@@ -35,10 +35,21 @@ export const fetchSongs = () => dispatch => (
   ))
 )
 
+
 export const fetchOneSong = (id) => dispatch => (
   APIUtil.fetchOneSong(id).then(song => (
     dispatch(receiveSong(song))
   ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
+
+export const fetchSongsByUserID = (id) => dispatch => (
+  APIUtil.fetchSongByUserID(id).then(songs => {
+    debugger
+    return dispatch(receiveSongs(songs))
+  }, err => (
     dispatch(receiveErrors(err.responseJSON))
   ))
 )

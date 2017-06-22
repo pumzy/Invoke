@@ -41,8 +41,8 @@ export const fetchOneUser = (id) => dispatch => (
   ))
 )
 
-export const fetchOneUserByUsername = (username) => dispatch => (
-  APIUtil.fetchOneUserByUsername(username).then(user => (
+export const fetchOneUserByID = (username) => dispatch => (
+  APIUtil.fetchOneUserByID(username).then(user => (
     dispatch(receiveUser(user))
   ),
 )

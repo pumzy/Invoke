@@ -1,13 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logout } from '../actions/session_actions'
 import NavBar from './navbar'
+import SongIndex from './songsindexcontainer'
+
 
 class LoggedInHomePage extends React.Component {
   // constructor(){
   //   // this.currentUser = this.props.currentUser;
   // }
+
   handleLogout(){
     this.props.logout().then(() => this.props.history.push("/login") )
   }
@@ -15,8 +18,7 @@ class LoggedInHomePage extends React.Component {
   render(){
       return (
         <div>
-        <div>
-        </div>
+          <Route exact path="/stream" component={SongIndex} />
         </div>
       );
     }

@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     resources :playlists
     resources :songs
     resources :users
-    get '/users/show2/:username', to: "users#show2"
+    get '/users/show2/:id', to: "users#show2"
+    get '/songs/userfind/:userid', to: "songs#indexuser"
     resource :session, only: [:create, :destroy, :show]
   end
 

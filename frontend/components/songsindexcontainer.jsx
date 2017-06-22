@@ -28,8 +28,8 @@ class SongsIndex extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  
-  return { byID: state.songs.byID,
+
+  return { byUsername: state.songs.byUsername,
            allsongs: state.songs.allsongs  }
 }
 

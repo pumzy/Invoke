@@ -11,7 +11,7 @@
   },
   playqueue : [1,3],
   users: {
-    byID: {
+    byUsername: {
       2: {
         id: 2,
         username: "bob2",
@@ -26,7 +26,7 @@
     allusers = [2,3,6]
   }
   songs: {
-    byID : {
+    byUsername : {
       4: {
         id: 4,
         title: "Odovician Dreams",
@@ -57,7 +57,7 @@
     allsongs: [4, 32]
   },
   playlists: {
-    byID : {
+    byUsername : {
       1: {
         title: "This is cool music, friends!",
         user_id: 5,
@@ -71,7 +71,7 @@
       allplaylists = [1],
     },
   likes: {
-    byID : {
+    byUsername : {
       1 : {
         id: 1
         user_id: 7
