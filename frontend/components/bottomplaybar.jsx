@@ -15,39 +15,62 @@ class BottomPlayBar extends React.Component {
 
 
   handleClick(){
-    var music = document.getElementById("audio")
-    if (music.paused){
-      music.play()
+    if (this.music.paused){
+      this.music.play()
       playbutton.className = "";
       playbutton.className = "pause";
     } else {
-      music.pause();
+      this.music.pause();
 		  playbutton.className = "";
 		  playbutton.className = "play";
     };
   }
+
+  // moveTracker(){
+  // let duration;
+  // var tracker  = document.getElementById("playhead")
+  // var music = document.getElementById("audio")
+  //
+  // // timeupdate is when the tracker changes position
+  // // adjust the CSS for the class?
+  //
+  // }
 
 
   render(){
     let audioplayer;
     if (this.props.audio.track_url !== "") {
       audioplayer = <div className="playbar">
-                        <div id="playbutton" className="play" onClick={this.handleClick}>
-                        <audio id="audio">
-                          <source src={this.props.audio.track_url}type="audio/ogg" />
-                          <source src={this.props.audio.track_url} type="audio/mpeg" />
-                        </audio>
+                          <audio ref={audio => this.music = audio}>
+                            <source src={this.props.audio.track_url}type="audio/ogg" />
+                            <source src={this.props.audio.track_url} type="audio/mpeg" />
+                          </audio>
+                        <div className="controls">
+                        <button id="playbutton" className="play" onClick={this.handleClick} />
                         </div>
-                    </div>
-    } else {
-      audioplayer = <h2>No song in queue</h2>
+                        <div className="progress">
+                          <div>Placeholder For Progress bar</div>
+                        </div>
+                          <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art} />
+                          <div className="song-infoplayer-slice">
+                          {this.props.audio.title} by
+                          {this.props.audio.user.username}
+                          </div>
+                          </div>
+                        </div>
     }
+    // else {
+    //   audioplayer = <h2>No song in queue</h2>
+    // }
 
+    // <div id="progess">
+    //   <div id="tracker"> </div>
+    // </div>
 
     return(
-      <div className="playbar">
+      <footer className="audiofooter">
         {audioplayer}
-      </div>
+      </footer>
     )
   }
 }

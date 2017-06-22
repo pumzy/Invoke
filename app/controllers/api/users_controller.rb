@@ -7,6 +7,11 @@ class Api::UsersController < ApplicationController
     @users = User.all
   end
 
+  def show2
+    @user = User.find_by(username: params[:username])
+    render :show
+  end
+
   # GET /api/users/1
   # GET /api/users/1.json
   def show

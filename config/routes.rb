@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :playlists
     resources :songs
     resources :users
+    get '/users/show2/:username', to: "users#show2"
     resource :session, only: [:create, :destroy, :show]
   end
 

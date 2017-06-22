@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logout } from '../actions/session_actions'
+import NavBar from './navbar'
 
 class LoggedInHomePage extends React.Component {
   // constructor(){
@@ -14,9 +15,8 @@ class LoggedInHomePage extends React.Component {
   render(){
       return (
         <div>
-          <h1> Welcome {this.props.currentUser.username} </h1>
-          <img src={this.props.currentUser.avatar_url} />
-          <button onClick={this.props.logout}>Log Out!</button>
+        <div>
+        </div>
         </div>
       );
     }
@@ -35,3 +35,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoggedInHomePage);
+
+// <NavBar />

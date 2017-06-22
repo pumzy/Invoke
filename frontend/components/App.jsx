@@ -6,14 +6,19 @@ import LoggedInHomePage from './logged_in_home_page'
 import SessionForm from './session_form'
 import SongIndex from './songsindexcontainer'
 import BottomPlayBar from './bottomplaybar'
+import NavBar from './navbar'
+
 
 const App = () =>(
+  <div>
+  <header><ProtectedRoute exact path="/" component={NavBar} /></header>
   <div className="invisible">
     <AuthRoute path="/" component={DefaultHomePage} />
     <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />
     <ProtectedRoute exact path="/stream" component={SongIndex} />
     <ProtectedRoute exact path="/test" component={SongIndex} />
-    <ProtectedRoute path="/" component={BottomPlayBar} />
+  </div>
+  <ProtectedRoute path="/" component={BottomPlayBar} />
   </div>
 );
 

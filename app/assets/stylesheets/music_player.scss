@@ -1,0 +1,87 @@
+
+
+
+#playbutton {
+  height: 20px;
+  width: 20px;
+  border: none;
+  background-size: cover;
+  background-position: center;
+  background-color: none;
+
+}
+
+.play {
+  display: inline-block;
+  background-image: asset-url("play-button.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-blend-mode: multiply;
+
+}
+
+.pause {
+  background-image: asset-url("pause-button.png");
+  background-blend-mode: multiply;
+
+}
+
+.audiofooter {
+
+
+background-color: white;
+border: 1px solid black;
+width: 100%;
+padding:  10px;
+margin: auto;
+height: 30px;
+position: fixed;
+bottom: 0px;
+z-index: 1;
+left: 0;
+
+
+ .playbar {
+
+   display: flex;
+   height: 100%;
+   flex-direction: row;
+   position: relative;
+   max-width: 1100px;
+  //  bottom: 30px;
+  //  max-width: 1100px;
+   padding: 0;
+   margin: 0 auto;
+   justify-content: space-between;
+ }
+
+}
+
+.playbar div {
+  display: inline-block;
+  height: 0;
+}
+
+.controls {
+  width: 170px;
+  // display: inline-block;
+  display: flex;
+  justify-content: flex-start;
+  // flex: 1;
+}
+//
+//
+.progress {
+  height: 35px;
+  margin-right: 30px;
+  // display: inline-block;
+
+  // display: flex;
+  // flex: 4;
+  // justify-content: center;
+}
+
+.currentSongInfo {
+  // display: inline-block;
+  // justify-content: flex-end;
+}

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Root from './components/root';
 import configureStore from './store/store';
 import { fetchSongs, fetchOneSong } from './actions/song_actions'
+import { fetchOneUserByUsername } from './actions/user_actions'
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.fetchSongs = fetchSongs;
   window.fetchSong = fetchOneSong;
+  window.fetchOneUserByUsername = fetchOneUserByUsername
   window.store = store
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
