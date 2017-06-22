@@ -4,6 +4,7 @@ import React from 'react'
 export const RECEIVE_SONGS = "RECEIVE_SONGS";
 export const RECEIVE_SONG = "RECEIVE_SONG";
 export const REMOVE_SONG = "REMOVE_SONG";
+export const REMOVE_SONGS = "REMOVE_SONGS";
 
 
 export const receiveSong = (song) => {
@@ -20,10 +21,18 @@ export const receiveSongs = (songs) => {
   }
 }
 
+
+
 export const removeSong = song => {
   return {
     type: REMOVE_SONG,
     song
+  }
+}
+
+export const removeSongs = () => {
+  return {
+    type: REMOVE_SONGS
   }
 }
 
@@ -47,7 +56,6 @@ export const fetchOneSong = (id) => dispatch => (
 
 export const fetchSongsByUserID = (id) => dispatch => (
   APIUtil.fetchSongByUserID(id).then(songs => {
-    debugger
     return dispatch(receiveSongs(songs))
   }, err => (
     dispatch(receiveErrors(err.responseJSON))

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import { fetchSongs } from '../actions/song_actions'
+import { fetchSongs, removeSongs } from '../actions/song_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
 
 class SongsIndex extends React.Component {
   componentDidMount() {
     this.props.fetchSongs();
+  }
+
+  componentWillUnmount(){
+    this.props.removeSongs()
   }
 
   render() {
@@ -35,7 +39,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSongs: () => dispatch(fetchSongs())
+    fetchSongs: () => dispatch(fetchSongs()),
+    removeSongs: () => dispatch(removeSongs())
   }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchSongsByUserID } from '../actions/song_actions.js'
+import { fetchSongsByUserID, removeSongs } from '../actions/song_actions.js'
 import { fetchOneUserByID, fetchOneUser } from '../actions/user_actions.js'
 import Error404 from './404page'
 import {connect} from 'react-redux'
@@ -19,16 +19,22 @@ class UserPage extends React.Component {
       this.props.fetchSongsByUserID(response.user.id)
     });
 
-    // let result;
-    // if (this.user !== null) {
-    //   result = <h1>this.props.user.username</h1>
-    //   this.result = result
-    // }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.match.params.username !== this.props.match.params.username){
+    this.props.removeSongs()
+    }
+  }
+
+  componentWillUnmount(){
   }
 
   componentWillUpdate(nextProps){
     if (nextProps.match.params.username !== this.props.match.params.username){
-      this.props.fetchOneUser(nextProps.match.params.username)
+      this.props.fetchOneUser(nextProps.match.params.username).then(response => {
+        this.props.fetchSongsByUserID(response.user.id)
+      });
     }
   }
 
@@ -64,12 +70,12 @@ const mapStateToProps = (state, ownProps) => {
     // const getuser = new Promise((resolve, reject) => resolve(store.dispatch(fetchOneUserByID(username)))).then( () => ({user: state.users.byUsername[state.users.allusers[0]]}));
     return {user: state.users.byUsername[ownProps.match.params.username],
             songs: state.songs.allsongs }
-
-}
+          }
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id)),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
+    removeSongs: () => dispatch(removeSongs())
   }
 }
 
