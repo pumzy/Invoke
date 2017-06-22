@@ -38,15 +38,12 @@ export const fetchUsers = () => dispatch => (
 export const fetchOneUser = (id) => dispatch => (
   APIUtil.fetchOneUser(id).then(user => (
     dispatch(receiveUser(user))
-  ), err => (
-    dispatch(receiveErrors(err.responseJSON))
   ))
 )
 
 export const fetchOneUserByUsername = (username) => dispatch => (
   APIUtil.fetchOneUserByUsername(username).then(user => (
     dispatch(receiveUser(user))
-  ), err => (
-    dispatch(receiveErrors(err.responseJSON))
-  ))
+  ),
+)
 )

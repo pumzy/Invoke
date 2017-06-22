@@ -11,9 +11,13 @@ class BottomPlayBar extends React.Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.user = this.props.fetchOneUser(this.props.audio.user_id)
   }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.audio.track_url !== "" && nextProps.audio.id !== this.props.audio.id){
+      this.props.fetchOneUser(nextProps.audio.user_id)
+    }
+  }
 
 
   handleClick(){
@@ -41,6 +45,8 @@ class BottomPlayBar extends React.Component {
 
   render(){
     let audioplayer;
+
+    const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
       audioplayer = <div className="playbar">
                           <audio ref={audio => this.music = audio}>
@@ -56,13 +62,12 @@ class BottomPlayBar extends React.Component {
                           <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
                           <div className="song-infoplayer-slice">
                           {this.props.audio.title} by
-                          {this.user.username}
+                          {artist.username}
                           </div>
                           </div>
                         </div>
     }
 
-    debugger
     // else {
     //   audioplayer = <h2>No song in queue</h2>
     // }
@@ -79,9 +84,14 @@ class BottomPlayBar extends React.Component {
   }
 }
 
+const selectSingleArtist = (state) => {
+  return state.users.byID[state.audio.id] || { username: "" };
+}
+
 const mapStateToProps = (state) => {
-  return { audio: state.audio }
-};
+  return { audio: state.audio,
+  artist: selectSingleArtist(state) }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

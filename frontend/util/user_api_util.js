@@ -15,7 +15,6 @@ export const fetchUsers = () => {
 
 
 export const fetchOneUserByUsername = (username) => {
-  debugger
   return $.ajax({
     method: "GET",
     url: `api/users/show2/${username}`

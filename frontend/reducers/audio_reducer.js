@@ -4,7 +4,7 @@ import { RECEIVE_AUDIO, REMOVE_AUDIO} from '../actions/audio_actions';
 
 const defaultState = {
   track_url: "",
-  user: {},
+  user_id: null,
   id: null
 }
 
