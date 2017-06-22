@@ -332,7 +332,7 @@ button {
 .navbarlogo {
   height: 100%;
   width: 100%;
-  background-image: url("logo.png");
+  background-image:  asset-url('logo.png');
   background-size: cover;
   background-position: top;
   position: relative;
