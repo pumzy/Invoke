@@ -21,6 +21,10 @@ class SongPage extends React.Component {
     this.props.fetchSongByTitle(this.props.match.params.title)
   }
 
+  componentWillUnmount(){
+    this.props.removeSongs()
+  }
+
   componentWillReceiveProps(nextProps){
 
     if (nextProps.match.params.username !== this.props.match.params.username || nextProps.match.params.title !== this.props.match.params.title){
@@ -54,14 +58,15 @@ class SongPage extends React.Component {
     let date1 = new Date(`${this.props.song.created_at}`);
     let datenow = new Date()
     let timeDiff = Math.abs(datenow.getTime() - date1.getTime());
-    let daysago = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    let daysago = Math.abs(timeDiff / (1000 * 3600 * 24));
     var daysresult;
 
-    if (daysago === 1){
-      var daysresult = `${daysago} day`
-    } else if (daysago === 0) {
-      var daysresult = `today`
+    if (daysago < 1){
+      var daysresult = `Today`
+    } else if (daysago < 2) {
+      var daysresult = `1 day`
     } else {
+      daysago = Math.floor(daysago)
       var daysresult = `${daysago} days`
     }
 
@@ -96,15 +101,15 @@ class SongPage extends React.Component {
             <div className='song-information'>
               <div className='song-info'>
                 <div className="left">
-                  <div className="playBTN">{songplay}</div>
+                  {songplay}
                   <div className="infospan">
-                    <div className="artist"></div>
-                    <div className="title"></div>
+                    <div className="artist"> <span className="song-header-artist" onClick={this.goToUser}>{this.props.user.username}</span></div>
+                    <div className="title"> <span className="song-header-title">{this.props.song.title}</span></div>
                   </div>
                 </div>
                 <div className="right">
-                  <div className="time"></div>
-                  <div className="genre"></div>
+                  <div className="genre"><span className="how-long-ago">{daysresult}</span></div>
+                  <div className="time"><span className="genre-tag">{genre}</span></div>
                 </div>
               </div>
               <div className='waveform'>

@@ -22,12 +22,12 @@ class SongPlayButton extends React.Component {
   giveToPlaybar(song){
     const reset = new Promise((resolve, reject) => resolve(this.props.removeAudio()));
     reset.then(() => this.props.receiveAudio(song));
-  }
 
+  }
   render(){
     return(
       <div>
-        <button onClick={() => this.giveToPlaybar(this.props.song)}>Play</button>
+        <img src="https://s3.us-east-2.amazonaws.com/invoke-development/songshow-playbutton.png" onClick={() => this.giveToPlaybar(this.props.song)} className="PlayinSongPage" />
       </div>
     )
   }

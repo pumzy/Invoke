@@ -27,7 +27,9 @@ class Song < ApplicationRecord
   validates_attachment_content_type :cover_art, content_type: /\Aimage\/.*\z/
 
   has_attached_file :track,  default_url: "app/assets/songs/Save-Tonight.mp3"
-  validates_attachment_content_type :track, :content_type => [ 'audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio' ]
+  validates_attachment_content_type :track, :content_type => /\Aaudio\/.*\z/
+
+  #  [ ["audio/mpeg"], 'audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio' ]
 
 
 
