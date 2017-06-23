@@ -74,10 +74,10 @@ html {
   position: absolute;
   max-width:50px;
   max-height:50px;
+  right: 30px;
+  bottom: 50%;
   width: auto;
   height: auto;
-  left: 173px;
-  bottom: 112px;
 }
 
 .imagepreviewonform {
@@ -189,7 +189,8 @@ button {
 
 .errorsul {
   position: relative;
-  right: 20px;
+  top: 10px;
+  text-align: center;
   list-style: none;
 }
 
@@ -208,7 +209,7 @@ button {
   font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
   font-weight: 300;
   width:100%;
-  transform: translate(30%, 0%);  
+  transform: translate(30%, 0%);
   z-index: 20;
   left: 0;
 }

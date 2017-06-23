@@ -59,14 +59,14 @@ let links =  <ul className='user-page-navlinks'>
 result = <div className="user-page-overall">
                 <div className='user-header'>
                   <div className="header-replacement"></div>
-                      <div className='user-avatar' >
-                        <img src={this.props.user.avatar_url} />
-                      </div>
                   <ul className='user-information'>
                     <li>
                       <span>{this.props.user.username}</span>
                     </li>
                   </ul>
+                  <div className='user-avatar' >
+                    <img src={this.props.user.avatar_url} />
+                  </div>
                 </div>
                 {links}
                 <ul>
