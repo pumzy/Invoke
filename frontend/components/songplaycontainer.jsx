@@ -1,12 +1,21 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { receiveAudio, removeAudio } from '../actions/audio_actions'
+import { fetchOneUserByID } from '../actions/user_actions'
 
 class SongPlay extends React.Component {
   constructor(props){
     super(props);
     this.giveToPlaybar = this.giveToPlaybar.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.props.fetchOneUserByID(this.props.song.user_id)
+  }
+
+
+  handleClick(){
+      let path = `${this.props.user.username}/${this.props.song.title}`
+      this.props.history.push(path)
   }
 
   giveToPlaybar(song){
@@ -17,24 +26,28 @@ class SongPlay extends React.Component {
   render(){
     return(
       <div>
-        <h3>{this.props.song.title}</h3>
+        <a onClick={this.handleClick}> {this.props.song.title}</a>
         <button onClick={() => this.giveToPlaybar(this.props.song)}>Give to Playbar</button>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {};
+const mapStateToProps = (state, passedDown) => {
+  return {
+    user: state.users.byID[passedDown.song.user_id]
+  };
 }
 const mapDispatchToProps = (dispatch) => {
   return {
     receiveAudio: (song) => dispatch(receiveAudio(song)),
-    removeAudio: (song) => dispatch(removeAudio(song))
+    removeAudio: (song) => dispatch(removeAudio(song)),
+    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongPlay);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SongPlay));
 
 
 

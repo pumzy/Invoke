@@ -23,7 +23,7 @@ const App = () =>(
       <ProtectedRoute exact path="/test" component={SongIndex} />
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
-      <ProtectedRoute path="/:username" component={UserPage} />
+      <ProtectedRoute exact path="/:username" component={UserPage} />
     </Switch>
   </div>
   <ProtectedRoute path="/" component={BottomPlayBar} />

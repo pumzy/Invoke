@@ -20,7 +20,7 @@ class NavBar extends React.Component {
       <ul className="navigation-left">
         <li> <NavLink to="/stream" > <div className="navbarlogo"></div> </NavLink> </li>
         <li> <NavLink to="/stream" > Home </NavLink> </li>
-        <li> <NavLink to="you/collection"> Collection </NavLink> </li>
+        <li> <NavLink to="/you/collection"> Collection </NavLink> </li>
       </ul>
         <ul>
           <input type="search" placeholder="Search" className="nav-search"/>

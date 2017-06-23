@@ -43,14 +43,14 @@ export const fetchUsers = () => dispatch => (
   ))
 )
 
-export const fetchOneUser = (id) => dispatch => (
-  APIUtil.fetchOneUser(id).then(user => (
+export const fetchOneUser = (username) => dispatch => (
+  APIUtil.fetchOneUser(username).then(user => (
     dispatch(receiveUser(user))
   ))
 )
 
-export const fetchOneUserByID = (username) => dispatch => (
-  APIUtil.fetchOneUserByID(username).then(user => (
+export const fetchOneUserByID = (id) => dispatch => (
+  APIUtil.fetchOneUserByID(id).then(user => (
     dispatch(receiveUser(user))
   ),
 )
