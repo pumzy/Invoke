@@ -14,10 +14,10 @@ class SongsIndex extends React.Component {
   }
 
   render() {
+    
     return (
     <div>
      <section className="songindex">
-       <h1>All Songs</h1>
         <ul>
           {this.props.allsongs.map(song => <li key={song.id}>  <SongPlay song={song} /> </li>  )}
         </ul>

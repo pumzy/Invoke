@@ -54,6 +54,14 @@ export const fetchOneSong = (id) => dispatch => (
   ))
 )
 
+export const fetchSongByTitle = (title) => dispatch => (
+  APIUtil.fetchSongByTitle(title).then(song => (
+    dispatch(receiveSong(song))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
 export const createSong = (song) => dispatch => (
   APIUtil.createSong(song).then(song => (
     dispatch(receiveSong(song))

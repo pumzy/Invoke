@@ -13,7 +13,7 @@ const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [] }, action) =
     action.users.forEach(user => (newState.allusers.push(user)))
     return newState;
     case RECEIVE_USER:
-    newState.allusers.push(action.user.id)
+    newState.allusers.push(action.user)
     newState.byUsername[action.user.username] = action.user;
     newState.byID[action.user.id] = action.user;
     return newState;
@@ -22,7 +22,7 @@ const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [] }, action) =
     newState.byUsername.delete(action.user.username)
     return newState;
     case CLEAR_USERS:
-    return { byUsername: {}, byID: {}, allusers: [] }; 
+    return { byUsername: {}, byID: {}, allusers: [] };
     default:
     return state;
   }

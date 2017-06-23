@@ -23,6 +23,13 @@ export const fetchSongs = () => {
   })
 }
 
+export const fetchSongByTitle = (title) => {
+  return $.ajax({
+    method: "GET",
+    url: `api/songs/show2/${title}`
+  })
+}
+
 export const fetchSongByUserID = (userid) => {
   return $.ajax({
     method: "GET",

@@ -11,6 +11,11 @@ class Api::SongsController < ApplicationController
     render :index
   end
 
+  def show2
+    @song = Song.find_by(title: params[:title])
+    render :show
+  end
+
 
   def show
   end
@@ -25,7 +30,7 @@ class Api::SongsController < ApplicationController
   def create
   @song = Song.new(song_params)
   @song.user_id = current_user.id
-  debugger
+
     if @song.save
      render :show
     else

@@ -1,10 +1,11 @@
-import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
 import { receiveAudio, removeAudio } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
+import React from 'react'
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-class SongPlay extends React.Component {
+
+class SongPlayButton extends React.Component {
   constructor(props){
     super(props);
     this.giveToPlaybar = this.giveToPlaybar.bind(this);
@@ -26,8 +27,7 @@ class SongPlay extends React.Component {
   render(){
     return(
       <div>
-        <a onClick={this.handleClick}> {this.props.song.title}</a>
-        <button onClick={() => this.giveToPlaybar(this.props.song)}>Give to Playbar</button>
+        <button onClick={() => this.giveToPlaybar(this.props.song)}>Play</button>
       </div>
     )
   }
@@ -47,11 +47,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SongPlay));
-
-
-
-
-//   <audio controls>
-//     <source src={this.props.song.track_url} type="audio/mpeg" />
-// </audio>
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SongPlayButton));

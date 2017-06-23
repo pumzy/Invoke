@@ -3,8 +3,9 @@ html {
 }
 
 .invisible{
-  position: absolute;
+  position: relative;
   width: 100%;
+  top: 17px;
 
 }
  .modal-children-container {
@@ -125,26 +126,26 @@ body {
   transform: translate(0, -8%);
   // position: absolute;
   // background-color:
+  button {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    text-decoration: none;
+    height: 30px;
+    font-size: 14px;
+    line-height: 20px;
+    white-space: nowrap;
+    font-weight: 100;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
 }
 
 
-button {
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  border-radius: 3px;
-  border: 1px solid #e5e5e5;
-  text-decoration: none;
-  height: 30px;
-  font-size: 14px;
-  line-height: 20px;
-  white-space: nowrap;
-  font-weight: 100;
-  text-align: center;
-  vertical-align: baseline;
-  box-sizing: border-box;
-  cursor: pointer;
-}
 
 .loginbutton {
   background: 0 0;

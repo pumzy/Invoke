@@ -8,6 +8,7 @@ import SongIndex from './songsindexcontainer'
 import BottomPlayBar from './bottomplaybar'
 import NavBar from './navbar'
 import UserPage from './userpage'
+import SongPage from './songpage'
 import Error404 from './404page'
 import SongUpload from './upload'
 
@@ -24,6 +25,7 @@ const App = () =>(
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
       <ProtectedRoute exact path="/:username" component={UserPage} />
+      <ProtectedRoute exact path="/:username/:title" component={SongPage} />
     </Switch>
   </div>
   <ProtectedRoute path="/" component={BottomPlayBar} />
