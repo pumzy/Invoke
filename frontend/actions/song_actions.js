@@ -7,6 +7,7 @@ export const REMOVE_SONG = "REMOVE_SONG";
 export const REMOVE_SONGS = "REMOVE_SONGS";
 
 
+
 export const receiveSong = (song) => {
   return {
     type: RECEIVE_SONG,
@@ -47,6 +48,14 @@ export const fetchSongs = () => dispatch => (
 
 export const fetchOneSong = (id) => dispatch => (
   APIUtil.fetchOneSong(id).then(song => (
+    dispatch(receiveSong(song))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
+export const createSong = (song) => dispatch => (
+  APIUtil.createSong(song).then(song => (
     dispatch(receiveSong(song))
   ), err => (
     dispatch(receiveErrors(err.responseJSON))

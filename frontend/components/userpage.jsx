@@ -3,7 +3,8 @@ import { fetchSongsByUserID, removeSongs } from '../actions/song_actions.js'
 import { fetchOneUserByID, fetchOneUser } from '../actions/user_actions.js'
 import Error404 from './404page'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
+
 import SongPlay from './songplaycontainer'
 
 
@@ -45,15 +46,38 @@ class UserPage extends React.Component {
     if (!this.props.user){
       result = <Error404 />
     } else {
-      let songs = this.props.songs.map(song => (<SongPlay song={song}/>));
-      result = <div><h1>{this.props.user.username}</h1>
-                    {songs}
+      let songs = this.props.songs.map(song => (<SongPlay song={song} key={song.id} />));
+
+let links =  <ul className='user-page-navlinks'>
+                <li><NavLink to={`/${this.props.user.username}`}>All</NavLink></li>
+                <li><NavLink to={`/${this.props.user.username}/songs`}>Tracks</NavLink></li>
+                <li><NavLink to={`/${this.props.user.username}/playlists`}>Playlists</NavLink></li>
+                <li><NavLink to={`/${this.props.user.username}/albums`}>Albums</NavLink></li>
+                <li><NavLink to={`/${this.props.user.username}/reposts`}>Reposts</NavLink></li>
+            </ul>
+
+result = <div className="user-page-overall">
+                <div className='user-header'>
+                  <div className="header-replacement"></div>
+                      <div className='user-avatar' >
+                        <img src={this.props.user.avatar_url} />
+                      </div>
+                  <ul className='user-information'>
+                    <li>
+                      <span>{this.props.user.username}</span>
+                    </li>
+                  </ul>
+                </div>
+                {links}
+                <ul>
+                  {songs}
+                </ul>
               </div>
     }
 
 
     return(
-      <div>
+      <div className="user-page">
         {result}
       </div>
     )

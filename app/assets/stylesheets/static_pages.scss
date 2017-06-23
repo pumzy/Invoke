@@ -1,4 +1,12 @@
+html {
+  height: 100vh;
+}
 
+.invisible{
+  position: absolute;
+  width: 100%;
+
+}
  .modal-children-container {
    position: absolute;
    top: 50%;
@@ -17,11 +25,13 @@
  }
 
 .modal-backdrop {
+    top: 0;
     position: absolute;
     width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
+    height: 100vh;
+    // top: 0px;
+    // left: 0px;
+
     right: 0px;
     z-index: 50;
     background-color: rgba(0, 0, 0, 0.3)
@@ -90,25 +100,31 @@
   // margin-right: 100px;
 }
 
-html {
+body {
   background-color:  #ebebeb;
 }
 
-.defaulthomecontainer {
+.headercontainer {
   background-image: asset-url('backgroundimage.jpg');
-  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
+  // background-size: 80%;
   height: 400px;
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  position: absolute;
-  // top: 50%;
+  margin: 0 auto;
 
+}
+
+.defaulthomecontainer {
+  // top: 50%;
   // position: absolute;
-  left: 50%;
-  transform: translate(-50%, -10%);
+  transform: translate(0, -8%);
+  // position: absolute;
+  // background-color:
 }
 
 
@@ -184,14 +200,17 @@ button {
 
 .navbar {
   display: flex;
-  position: relative;
+  position: fixed;
   justify-content: space-between;
   border: 1px solid black;
   background: #323232;
   height: 46px;
   font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
   font-weight: 300;
-  width:100;
+  width:100%;
+  transform: translate(30%, 0%);  
+  z-index: 20;
+  left: 0;
 }
 
 .navbar ul {
@@ -282,7 +301,7 @@ button {
   position: absolute;
   display: flex;
   flex-direction: column;
-  left: 0;
+  right: 3%;
   top: 100%;
   width: 100%;
   align-items: flex-end;
@@ -320,6 +339,7 @@ button {
   padding: 12px 28px 12px 10px;
   box-sizing: border-box;
   position: relative;
+
 }
 
 .first-child {

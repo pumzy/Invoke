@@ -9,6 +9,7 @@ import BottomPlayBar from './bottomplaybar'
 import NavBar from './navbar'
 import UserPage from './userpage'
 import Error404 from './404page'
+import SongUpload from './upload'
 
 
 
@@ -21,6 +22,7 @@ const App = () =>(
       <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />
       <ProtectedRoute exact path="/test" component={SongIndex} />
       <ProtectedRoute path="/areyoulost" component={Error404} />
+      <ProtectedRoute path="/upload" component={SongUpload} />
       <ProtectedRoute path="/:username" component={UserPage} />
     </Switch>
   </div>

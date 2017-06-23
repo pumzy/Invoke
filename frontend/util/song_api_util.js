@@ -6,6 +6,16 @@ export const fetchOneSong = (id) => {
   })
 }
 
+export const createSong = (formData) => {
+  return $.ajax({
+    method: "POST",
+    url: `api/songs`,
+    data: formData,
+    contentType: false,
+    processData: false
+  })
+}
+
 export const fetchSongs = () => {
   return $.ajax({
     method: "GET",

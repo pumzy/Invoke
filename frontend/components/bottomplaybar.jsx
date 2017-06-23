@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { fetchOneUser, fetchOneUserByID } from '../actions/user_actions'
+import { fetchOneUser, fetchOneUserByID, clearUsers } from '../actions/user_actions'
 
 
 
@@ -18,6 +18,9 @@ class BottomPlayBar extends React.Component {
       this.props.fetchOneUserByID(nextProps.audio.user_id)
     }
   }
+
+  // componentDidUpdate() AT SOME POINT WE WANT TO CLEAR ALL THE USERS UP FROM THE STATE
+
 
 
   handleClick(){
@@ -85,7 +88,7 @@ class BottomPlayBar extends React.Component {
 }
 
 const selectSingleArtist = (state) => {
-  return state.users.byID[state.audio.id] || { username: "" };
+  return state.users.byID[state.audio.user_id] || { username: "" };
 }
 
 const mapStateToProps = (state) => {
@@ -96,8 +99,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSongs: () => dispatch(fetchSongs()),
+    clearUsers: () => dispatch(clearUsers()),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
-    fetchOneUserByID: (username) => dispatch(fetchOneUserByID(username))
+    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id))
   }
 }
 

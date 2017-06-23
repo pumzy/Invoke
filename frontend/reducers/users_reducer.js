@@ -1,5 +1,5 @@
 import { merge } from 'lodash'
-import {  RECEIVE_USERS, RECEIVE_USER, REMOVE_USER } from '../actions/user_actions'
+import {  RECEIVE_USERS, RECEIVE_USER, REMOVE_USER, CLEAR_USERS } from '../actions/user_actions'
 
 
 
@@ -21,6 +21,8 @@ const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [] }, action) =
     newState.byID.delete(action.user.id)
     newState.byUsername.delete(action.user.username)
     return newState;
+    case CLEAR_USERS:
+    return { byUsername: {}, byID: {}, allusers: [] }; 
     default:
     return state;
   }

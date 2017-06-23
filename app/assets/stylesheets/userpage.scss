@@ -1,0 +1,118 @@
+.header-replacement {
+  display: inline-block;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-height: 260px;
+}
+
+
+.user-information li{
+  display: inline;
+}
+
+.user-page-overall {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    height: 100%;
+    width: 90%;
+    padding-bottom: 50px;
+    background: white;
+}
+
+//  background: #518489;
+//  background: -webkit-linear-gradient(-45deg, #518489 0%,#343a59 100%);
+.user-header {
+     display: flex;
+     flex-direction: column;
+     height: 260px;
+     background-image: asset-url('grey-background.jpg');
+     background: -moz-linear-gradient(-45deg, #518489 0%, #343a59 100%); /* FF3.6-15 */
+    //  position: relative;
+    // transform: translate(0%, 11%);
+}
+
+.user-avatar img {
+      border-radius: 50%;
+      top: 0;
+      right: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+.user-avatar {
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  left: 40px;
+  top: 20px;
+  height: 185px;
+  width: 185px;
+  border-radius: 50%;
+  background: -moz-linear-gradient(-45deg, #518489 0%, #343a59 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #518489 0%,#343a59 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #518489 0%,#343a59 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  position: relative;
+}
+
+.user-avatar-circle {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1;
+  }
+
+.user-page {
+  position: relative;
+  top: 13px;
+}
+
+.user-page-navlinks {
+  display: flex;
+  color: #333;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+  margin: 15px 25px 0px 25px;
+  border-bottom: 1px solid #f2f2f2;
+  list-style: none;
+  position: relative;
+
+  li:first-child {
+    margin-left: 0;
+  }
+
+  li {
+      float: left;
+      margin: 0 12px -1px;
+
+      a {
+          cursor: pointer;
+          color: #333;
+          border-bottom: 1px solid transparent;
+          display: block;
+          text-decoration: none;
+          font-weight: 550;
+      }
+      a.active {
+        border-color: #f50;
+        color: #f50;
+        cursor: default;
+      }
+
+      a:hover {
+        z-index: 10;
+        border-bottom: 1px solid black;
+        cursor: pointer;
+        background-color: white;
+      }
+
+      a.active:hover {
+        border-bottom: 1px solid orange;
+      }
+
+
+    }
+}

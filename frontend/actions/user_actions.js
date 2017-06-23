@@ -2,6 +2,7 @@ import * as APIUtil from '../util/user_api_util';
 import React from 'react'
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
+export const CLEAR_USERS = "CLEAR_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const REMOVE_USER = "REMOVE_USER";
 
@@ -23,6 +24,13 @@ export const receiveUsers = (users) => {
 export const removeUser = user => {
   return {
     type: REMOVE_USER,
+    user
+  }
+}
+
+export const clearUsers = user => {
+  return {
+    type: CLEAR_USERS,
     user
   }
 }

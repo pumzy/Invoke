@@ -25,10 +25,11 @@ class Api::SongsController < ApplicationController
   def create
   @song = Song.new(song_params)
   @song.user_id = current_user.id
+  debugger
     if @song.save
      render :show
     else
-      render json: @song.errors, status: :unprocessable_entity
+     render json: @song.errors, status: :unprocessable_entity
     end
   end
 
