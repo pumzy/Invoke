@@ -16,6 +16,7 @@ class NavBar extends React.Component {
   render(){
 
     return(
+    <div className="navbar-container">
     <nav className="navbar">
       <ul className="navigation-left">
         <li> <NavLink to="/stream" > <div className="navbarlogo"></div> </NavLink> </li>
@@ -38,6 +39,7 @@ class NavBar extends React.Component {
         </li>
       </ul>
     </nav>
+    </div>
     )
   }
 }

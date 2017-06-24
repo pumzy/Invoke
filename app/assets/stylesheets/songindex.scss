@@ -6,24 +6,32 @@
 
 
 
+.userpage-belowheader {
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
 .songindexlist {
   width: 67%;
 }
 
 .index {
-  width: 80%;
+  width: 1240px;
   align-items: center;
+  box-sizing: border-box;
   background-color: white;
   margin: 0 auto;
   padding: 0 30px;
+  position: relative;
+  bottom: 3px;
 }
 
 .usersongindex {
-  width: 90%;
+  width: 1240px;
   align-items: center;
   background-color: white;
   margin: 0 auto;
-  padding: 0 30px;
+  // padding: 0 30px;
 }
 
 .streamheader {

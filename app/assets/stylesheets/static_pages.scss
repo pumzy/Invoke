@@ -209,10 +209,10 @@ body {
   height: 46px;
   font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
   font-weight: 300;
-  width:100%;
-  transform: translate(30%, 0%);
+  width: 1238px;
+  // transform: translate(30%, 0%);
   z-index: 20;
-  left: 0;
+  // text-align:center;
 }
 
 .navbar ul {
@@ -283,6 +283,8 @@ body {
     &:hover {
       background-color: #323232;
     }
+
+
 }
 
 .navbar a {
@@ -383,5 +385,10 @@ input[type="search"] {
 }
 
 .navbar {
-  transform: translate(0%, -71%);
+  transform: translate(5.4%, -71%);
+}
+
+.navbar-container {
+  // padding: 0 30px;
+  box-sizing: border-box;
 }
