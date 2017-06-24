@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, NavLink } from 'react-router-dom';
 import { fetchSongs, removeSongs } from '../actions/song_actions'
 import { fetchUsers, clearUsers } from '../actions/user_actions'
 import { connect } from 'react-redux'
@@ -17,10 +17,20 @@ class SongsIndex extends React.Component {
 
   render() {
     return (
-    <div>
-     <section className="songindex">
+    <div className="index">
+      <div className="Homepagenavdiv">
+      <nav className='homepage-nav'>
+            <ul className="homepage-nav-list">
+              <li className="flexfoo"><NavLink to='/stream'>Stream</NavLink></li>
+              <li className="flexfoo"><NavLink to='/charts'>Charts</NavLink></li>
+              <li className="flexfoo"><NavLink to='/discover'>Discover</NavLink></li>
+            </ul>
+          </nav>
+        </div>
+     <section className="songindexlist">
+       <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
-          {this.props.allsongs.map(song => <li key={song.id}>  <SongPlay song={song} user={this.props.usersbyID[song.user_id]} /> </li>  )}
+          {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
         </ul>
       </section>
       <Link to="/test"> Test</Link>

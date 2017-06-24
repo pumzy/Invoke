@@ -1,8 +1,9 @@
 
 .songplaybox {
-  width: 100%;
+  // width: 67%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   .songplay-header {
     margin-bottom: 12px;
@@ -49,6 +50,9 @@
         z-index: 2;
         object-fit: contain;
       }
+      .songplay-coverart {
+        margin-right: 10px;
+      }
 
 
       .songplay-song {
@@ -68,6 +72,7 @@
           line-height: 1.3;
           display: flex;
           flex-direction: row;
+          justify-content: space-between;
 
           img {
             margin-right: 5px;
@@ -101,6 +106,7 @@
               color: #333;
               max-width: 100%;
               font-weight: 100;
+              font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
             }
           }
 
@@ -108,9 +114,42 @@
             position: relative;
             // flex:7;
             right: 0;
+            .songplay-genre{
+              height: 16px;
+              padding: 0 6px;
+              line-height: 16px;
+              font-size: 12px;
+              background: #999;
+              border: 1px solid #999;
+              border-left-width: 0;
+              color: #fff;
+              font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+              font-weight: 100;
+              cursor: pointer;
+              border-radius: 20px;
+            }
           }
 
         }
+
+
+        .songplay-waveform {
+          height: 60px;
+          position: relative;
+          border: 2px solid grey;
+        }
+
+        .songplay-buttonbar {
+          margin-top: 10px;
+          height: 30px;
+          border: 2px solid grey;
+
+        }
+
+
+
+
+
 
       }
 

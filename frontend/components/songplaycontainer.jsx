@@ -82,11 +82,11 @@ class SongPlay extends React.Component {
           <div className="songplay-header">  <img src={`${this.props.user.avatar_url}`} className="songplay-avatar" onClick={this.goToSong}/> <Link to={`/${this.username}`}>  {this.username} posted a track {daysresult} </Link> </div>
           <div className="songplay-item">
             <div className='songplay-coverart' >
-              <img src={this.props.song.cover_art_url} />
+              <img onClick={this.goToSong} src={this.props.song.cover_art_url} />
             </div>
+            <SongPlayButton song={this.props.song} />
             <div className='songplay-song'>
               <div className='songplay-song-information'>
-                <SongPlayButton song={this.props.song} />
                 <div className="songplay-left">
                   <div className="infospan">
                     <div className="songplay-artist"> <span className="songplay-span-artist" onClick={this.goToUser}>{this.username}</span></div>
