@@ -4,7 +4,7 @@ html {
 
 .invisible{
   position: relative;
-  width: 100%;
+  width: 1373px;
   top: 17px;
 
 }
@@ -28,12 +28,13 @@ html {
 .modal-backdrop {
     top: 0;
     position: absolute;
-    width: 100%;
+    width: 2000px;
     height: 100vh;
+    margin-left: -100px;
     // top: 0px;
     // left: 0px;
 
-    right: 0px;
+    left: 0px;
     z-index: 50;
     background-color: rgba(0, 0, 0, 0.3)
   }
@@ -123,7 +124,8 @@ body {
 .defaulthomecontainer {
   // top: 50%;
   // position: absolute;
-  transform: translate(0, -8%);
+
+  transform: translate(0, -15%);
   // position: absolute;
   // background-color:
   button {
@@ -407,10 +409,14 @@ input[type="search"] {
 }
 
 .navbar {
-  transform: translate(5.4%, -70%);
+  transform: translate(5.4%, -73%);
 }
 
-.navbar-container {
-  // padding: 0 30px;
-  box-sizing: border-box;
+.navbar-color {
+  width: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 46px;
+  background-color: #323232;
 }

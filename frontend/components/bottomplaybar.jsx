@@ -11,16 +11,24 @@ class BottomPlayBar extends React.Component {
   constructor(props){
     super(props);
     this.handleClick = this.handleClick.bind(this);
+
   }
 
   componentWillReceiveProps(nextProps){
     if (nextProps.audio.track_url !== "" && nextProps.audio.id !== this.props.audio.id){
       this.props.fetchOneUserByID(nextProps.audio.user_id)
     }
+    if (this.props.audio.id === null){
+      this.footer.className = "aintnothinghere"
+    } else {
+      this.footer.className = "audiofooter"
+    }
   }
 
   // componentDidUpdate() AT SOME POINT WE WANT TO CLEAR ALL THE USERS UP FROM THE STATE
+  componentDidMount(){
 
+  }
 
 
   handleClick(){
@@ -32,6 +40,7 @@ class BottomPlayBar extends React.Component {
       this.music.pause();
 		  playbutton.className = "";
 		  playbutton.className = "play";
+      // debugger
     };
   }
 
@@ -42,6 +51,8 @@ class BottomPlayBar extends React.Component {
   //
   // // timeupdate is when the tracker changes position
   // // adjust the CSS for the class?
+  // Can check the duration of the player by doing this.audio.duration
+  // Can check the current time by doing this.audio.currentTime
   //
   // }
 
@@ -52,15 +63,15 @@ class BottomPlayBar extends React.Component {
     const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
       audioplayer = <div className="playbar">
-                          <audio ref={audio => this.music = audio}>
+                          <audio ref={audio => this.music = audio} autoPlay>
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
                         <div className="controls">
-                        <button id="playbutton" className="play" onClick={this.handleClick} />
+                        <button id="playbutton" className="pause" onClick={this.handleClick} />
                         </div>
                         <div className="progress">
-                          <div>Placeholder For Progress bar</div>
+                          <div ref={div => this.playbar = div}>Placeholder For Progress bar</div>
                         </div>
                           <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
                           <div className="song-infoplayer-slice">
@@ -71,16 +82,8 @@ class BottomPlayBar extends React.Component {
                         </div>
     }
 
-    // else {
-    //   audioplayer = <h2>No song in queue</h2>
-    // }
-
-    // <div id="progess">
-    //   <div id="tracker"> </div>
-    // </div>
-
     return(
-      <footer className="audiofooter">
+      <footer className="audiofooter" ref={footer => this.footer = footer}>
         {audioplayer}
       </footer>
     )
@@ -92,6 +95,7 @@ const selectSingleArtist = (state) => {
 }
 
 const mapStateToProps = (state) => {
+  debugger
   return { audio: state.audio,
   artist: selectSingleArtist(state) }
 }

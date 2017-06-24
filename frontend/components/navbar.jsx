@@ -17,6 +17,7 @@ class NavBar extends React.Component {
 
     return(
     <div className="navbar-container">
+    <div className="navbar-color"></div>
     <nav className="navbar">
       <ul className="navigation-left">
         <li className="navbarlogo"> <NavLink to="/stream" > <div className=""></div> </NavLink> </li>
@@ -28,6 +29,7 @@ class NavBar extends React.Component {
         </ul>
       <ul className="navigation-right">
         <li> <NavLink to="/upload"> Upload </NavLink></li>
+        <li className="line" />
         <li className="user-dropdown" > <a> <img src={this.props.currentUser.avatar_url} className="nav-profile-photo"/ > <span className="nav-username" >{this.props.currentUser.username} </span></a>
           <ul className="user-dropdown-ul">
           <li className="user-dropdown-li first-child"> <NavLink to={`/${this.props.currentUser.username}`}> Profile </NavLink></li>
