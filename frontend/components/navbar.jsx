@@ -19,7 +19,7 @@ class NavBar extends React.Component {
     <div className="navbar-container">
     <nav className="navbar">
       <ul className="navigation-left">
-        <li> <NavLink to="/stream" > <div className="navbarlogo"></div> </NavLink> </li>
+        <li className="navbarlogo"> <NavLink to="/stream" > <div className=""></div> </NavLink> </li>
         <li> <NavLink to="/stream" > Home </NavLink> </li>
         <li> <NavLink to="/you/collection"> Collection </NavLink> </li>
       </ul>

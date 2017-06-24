@@ -204,12 +204,12 @@ body {
   display: flex;
   position: fixed;
   justify-content: space-between;
-  border: 1px solid black;
+  // border: 1px solid black;
   background: #323232;
   height: 46px;
   font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
   font-weight: 300;
-  width: 1238px;
+  width: 1240px;
   // transform: translate(30%, 0%);
   z-index: 20;
   // text-align:center;
@@ -232,6 +232,14 @@ body {
 
 .navbar li {
  display: inline-block;
+ font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
+
+ .selected {
+   color: #fff!important;
+   background-color: #111;
+   outline: 0;
+
+ }
 
 
  // text-decoration: underline;
@@ -299,6 +307,9 @@ body {
       color: white;
       background-color: #323232;
     }
+    font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
+
+
 }
 
 .navbar .user-dropdown-ul {
@@ -310,6 +321,8 @@ body {
   width: 100%;
   align-items: flex-end;
   padding-top: 0px;
+  font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
+
 
 
 }
@@ -319,8 +332,8 @@ body {
 }
 
 .nav-username {
-  font-family: sans-serif;
-  font-size: 18px;
+  font: 100 14px/1.5 "Interstate","Lucida Grande",Arial,sans-serif;
+
   position: relative;
   bottom: 11px;
 }
@@ -354,13 +367,22 @@ body {
 
 
 .navbarlogo {
+  border: none;
+  padding: 0;
   height: 100%;
   width: 100%;
-  background-image:  asset-url('logo.png');
-  background-size: cover;
-  background-position: top;
-  position: relative;
-  left: 10px;
+  background-image:  asset-url('logo-navbar.png');
+  background-color: orange;
+  object-fit: contain;
+  background-position: right 319px top 2px;
+    a:hover {
+      color: none;
+      background-image:  asset-url('logo-navbar.png');
+      background-position: right 319px top 2px;
+      background-color:  orange;
+    }
+  // background-size: cover;
+  // background-position: top;
 }
 
 input[type="search"] {
@@ -385,7 +407,7 @@ input[type="search"] {
 }
 
 .navbar {
-  transform: translate(5.4%, -71%);
+  transform: translate(5.4%, -70%);
 }
 
 .navbar-container {
