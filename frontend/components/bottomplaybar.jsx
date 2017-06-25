@@ -19,6 +19,10 @@ class BottomPlayBar extends React.Component {
     this.dragOver = this.dragOver.bind(this);
     this.dragwidth = null;
     this.dragmusic = null;
+    this.timeshow = this.timeshow.bind(this)
+    this.setdata = this.setdata.bind(this);
+    this.username = null;
+    this.title = null;
   }
 
   componentWillReceiveProps(nextProps){
@@ -33,15 +37,37 @@ class BottomPlayBar extends React.Component {
   }
 
   // componentDidUpdate() AT SOME POINT WE WANT TO CLEAR ALL THE USERS UP FROM THE STATE
+  timeshow(currenttime) {
+      let minutes = parseInt(Math.floor(currenttime / 60));
+
+      let seconds = parseInt(currenttime % 60);
+      seconds = (seconds < 10) ? `0${seconds}` : seconds;
+      if ( minutes === 0 ) {
+        return `0:${seconds}`;
+      }
+      minutes = (minutes < 10) ? `0${minutes}` : minutes;
+      return `${minutes}:${seconds}`;
+    }
+
+
+
+
+
 
 
   movebar(e){
     let duration = this.music.duration;
     let currentTime = this.music.currentTime;
+    this.fullduration.innerText = (this.timeshow(this.music.duration))
+
 
     let newval = currentTime/duration;
     let res = newval.toLocaleString("en", {minimumFractionDigits: 10, style: "percent"})
     this.playbar.style.width = res;
+    this.timeelapased.innerText = `${this.timeshow(currentTime)}`
+    let ballval = newval * this.playbarholder.clientWidth
+    this.ball.style.left = ballval + 'px';
+
   }
 
   // We need to use this.clientX to get the X coordainate
@@ -54,20 +80,17 @@ class BottomPlayBar extends React.Component {
 
   clickbar(e){
     var holderwidth =  this.playbarholder.clientWidth
-
     let duration = this.music.duration
     var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft;
-    this.ball.offsetLeft = newpos;
     this.music.style.width = newpos;
     this.music.currentTime = (newpos/holderwidth) * duration;
-    // debugger
+    //
 
   }
 
 
   dragOver(e) {
     e.preventDefault()
-    console.log("dragging over")
        return false;
     }
 
@@ -88,13 +111,11 @@ class BottomPlayBar extends React.Component {
     var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft;
     this.dragwidth = newpos;
     this.dragmusic = (newpos/holderwidth) * duration;
-    // debugger
+    //
   }
 
   dragdrop(e){
     // e.preventDefault();
-    debugger
-    console.log("drop")
     this.playbar.style.width = this.dragwidth;
     this.music.currentTime = this.dragmusic;
   }
@@ -105,6 +126,11 @@ class BottomPlayBar extends React.Component {
     return true;
   }
 
+  setdata(){
+
+    this.title.innerText = this.props.audio.title;
+    this.username.innerText = this.props.artist.username;
+  }
 
 
 
@@ -144,27 +170,31 @@ class BottomPlayBar extends React.Component {
   render(){
     let audioplayer;
 
-    const artist = this.props.artist
+    // const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
+
       audioplayer = <div className="playbar">
-                          <audio onTimeUpdate={this.movebar}  ref={audio => this.music = audio} autoPlay >
+                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata}  ref={audio => this.music = audio} autoPlay >
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
-                        <div className="controls">
-                        <button id="playbutton" className="pause" onClick={this.handleClick} />
-                        </div>
-                        <div className="progress-bar-background" ref={div => this.playbarholder = div} onClick={this.clickbar} onDrop={this.dragdrop} onDragEnter={this.dragEnter} onDragOver={this.dragOver}>
-                          <div className="dragball" ref={div => this.ball = div} onDragStart={this.dragbar} onDrag={this.dragbar}  draggable="true" ></div>
-                          <div className="progress-bar" ref={div => this.playbar = div} onClick={this.clickbar} ></div>
-                        </div>
-                          <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
-                          <div className="song-infoplayer-slice">
-                          {this.props.audio.title} by
-                          {artist.username}
+                              <div className="controls">
+                                <button id="playbutton" className="pause" onClick={this.handleClick} />
+                              </div>
+                              <span className="time-elapsed" ref={span => this.timeelapased = span}></span>
+                              <div className="progress-bar-background" ref={div => this.playbarholder = div} onClick={this.clickbar}    onDrop={this.dragdrop} onDragEnter={this.dragEnter} onDragOver={this.dragOver}>
+                                <div className="dragball" ref={div => this.ball = div} onDragStart={this.dragbar} onDrag={this.dragbar}  draggable="true" ></div>
+                                <div className="progress-bar" ref={div => this.playbar = div} onClick={this.clickbar} ></div>
+                              </div>
+                              <span className="full-duration" ref={span => this.fullduration = span}></span>
+                              <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
+                              <div className="song-infoplayer-slice">
+                                <span ref={span=> this.username = span} ></span>
+                                <span ref={span=> this.title = span} ></span>
+                              </div>
                           </div>
-                          </div>
                         </div>
+
     }
 
     return(

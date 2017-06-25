@@ -17,8 +17,16 @@
   width: 10px;
   border-radius: 50%;
   background-color: blue;
+  position: relative;
+  border: 1px solid #f50;
 
 
+
+}
+
+.time-elapsed {
+  position: relative;
+  right: 20px;
 }
 
 
