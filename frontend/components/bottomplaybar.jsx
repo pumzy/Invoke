@@ -21,6 +21,7 @@ class BottomPlayBar extends React.Component {
     this.dragmusic = null;
     this.timeshow = this.timeshow.bind(this)
     this.setdata = this.setdata.bind(this);
+    this.ended = this.ended.bind(this);
     this.username = null;
     this.title = null;
   }
@@ -51,7 +52,11 @@ class BottomPlayBar extends React.Component {
 
 
 
+    ended(e){
 
+      this.playbutton.className = "";
+		  this.playbutton.className = "play";
+    }
 
 
 
@@ -174,12 +179,12 @@ class BottomPlayBar extends React.Component {
     if (this.props.audio.track_url !== "") {
 
       audioplayer = <div className="playbar">
-                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata}  ref={audio => this.music = audio} autoPlay >
+                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended}  ref={audio => this.music = audio} autoPlay >
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
                               <div className="controls">
-                                <button id="playbutton" className="pause" onClick={this.handleClick} />
+                                <button id="playbutton" className="pause" onClick={this.handleClick} ref={button => this.playbutton = button}/>
                               </div>
                               <span className="time-elapsed" ref={span => this.timeelapased = span}></span>
                               <div className="progress-bar-background" ref={div => this.playbarholder = div} onClick={this.clickbar}    onDrop={this.dragdrop} onDragEnter={this.dragEnter} onDragOver={this.dragOver}>
