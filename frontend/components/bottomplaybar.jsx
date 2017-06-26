@@ -73,7 +73,7 @@ class BottomPlayBar extends React.Component {
     this.playbar.style.width = res;
     this.timeelapased.innerText = `${this.timeshow(currentTime)}`
     let ballval = newval * this.playbarholder.clientWidth
-    this.ball.style.left = ballval + 'px';
+    this.ball.style.left = (ballval) + 'px';
 
   }
 
