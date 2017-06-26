@@ -24,6 +24,7 @@ class Song < ApplicationRecord
 
   validates_presence_of :title
   belongs_to :user
+  has_many :comments
 
   has_attached_file :cover_art, styles: { medium: "300x300>", thumb: "100x100#" }, default_url: "photo.jpg"
   validates_attachment_content_type :cover_art, content_type: /\Aimage\/.*\z/

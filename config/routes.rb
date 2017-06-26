@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/users/show2/:id', to: "users#show2"
     get '/songs/show2/:title', to: "songs#show2"
     get '/songs/userfind/:userid', to: "songs#indexuser"
+    get '/comments/songfind/:songid', to: "comments#indexsong"
     resource :session, only: [:create, :destroy, :show]
   end
 

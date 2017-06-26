@@ -31,6 +31,8 @@
 
   # Need to do the song models.
   has_many :songs
+  has_many :comments
+
 
 
 	def password=(password)

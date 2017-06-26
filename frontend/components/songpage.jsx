@@ -6,6 +6,7 @@ import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { fetchSongByTitle, removeSongs, deleteSong } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongUpdate from './edit';
+import {fetchCommentsBySongID } from '../actions/comment_actions'
 
 
 
@@ -18,13 +19,18 @@ class SongPage extends React.Component {
     this.goToUser = this.goToUser.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
     this.byeBye = this.byeBye.bind(this);
+    this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
   }
 
   componentDidMount(){
     this.props.fetchOneUser(this.props.match.params.username);
-    this.props.fetchSongByTitle(this.props.match.params.title)
+    this.props.fetchSongByTitle(this.props.match.params.title).then((response) => this.props.fetchCommentsBySongID(response.song.id));
+  }
+
+  howLongAgo(){
+
   }
 
 
@@ -72,6 +78,12 @@ class SongPage extends React.Component {
           this.editbutton = <button onClick={this.goToEdit} className="editbutton">Edit</button>
           this.deletebutton = <button onClick={this.byeBye} className="deletebutton">Delete</button>
         }}
+
+
+    let comments = this.props.comments.map(comment => {
+      debugger
+      return <li>{comment.body}</li>
+      })
     let genre = `#${this.props.song.genre}`
     let songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
     let date;
@@ -80,7 +92,6 @@ class SongPage extends React.Component {
     let timeDiff = Math.abs(datenow.getTime() - date1.getTime());
     let daysago = Math.abs(timeDiff / (1000 * 3600 * 24));
     var daysresult;
-
     if (daysago < 1){
       var daysresult = `Today`
     } else if (daysago < 2) {
@@ -150,6 +161,9 @@ class SongPage extends React.Component {
           {this.deletebutton}
           {this.editbutton}
         </div>
+          <ul>
+            {comments}
+          </ul>
         </div>
 
       )
@@ -168,7 +182,8 @@ const mapStateToProps = (state, ownProps) => {
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
-      currentUser: state.session.currentUser
+      currentUser: state.session.currentUser,
+      comments: state.comments.allcomments
     };
   }
 
@@ -178,7 +193,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSongByTitle: (title)=> dispatch(fetchSongByTitle(title)),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
     removeSongs: () => dispatch(removeSongs()),
-    deleteSong: (song) => dispatch(deleteSong(song))
+    deleteSong: (song) => dispatch(deleteSong(song)),
+    fetchCommentsBySongID: (id) => dispatch(fetchCommentsBySongID(id))
   }
 }
 

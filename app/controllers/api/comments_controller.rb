@@ -13,6 +13,12 @@ class Api::CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def indexsong
+    @comments = Comment.where(song_id: params[:songid])
+    render :index
+  end
+
+
 
   def edit
   end
