@@ -70,6 +70,14 @@ export const createSong = (song) => dispatch => (
   ))
 )
 
+export const updateSong = (song, id) => dispatch => (
+  APIUtil.updateSong(song, id).then(song => (
+    dispatch(receiveSong(song))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
 
 export const fetchSongsByUserID = (id) => dispatch => (
   APIUtil.fetchSongByUserID(id).then(songs => {

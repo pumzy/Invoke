@@ -15,7 +15,7 @@ import SongUpload from './upload'
 
 
 const App = () =>(
-  <div>
+  <div className="centerme">
   <header><ProtectedRoute path="/" component={NavBar} /></header>
   <div className="invisible">
   <AuthRoute path="/" component={DefaultHomePage} />

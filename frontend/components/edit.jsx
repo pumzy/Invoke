@@ -1,5 +1,5 @@
 import React from 'react'
-import {createSong} from '../actions/song_actions'
+import {updateSong} from '../actions/song_actions'
 import {connect} from 'react-redux'
 
 class SongUpload extends React.Component {
@@ -11,16 +11,13 @@ class SongUpload extends React.Component {
       genre: '',
       imageFile: null,
       imageUrl: "",
-      songFile: null,
-      songUrl: null,
       loading: false
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateCoverart = this.updateCoverart.bind(this);
-    this.updateTrack = this.updateTrack.bind(this);
     this.goBack = this.goBack.bind(this);
     this.openCoverartUploadBox = this.openCoverartUploadBox.bind(this);
-    this.openSongUploadBox = this.openSongUploadBox.bind(this);
   }
 
 

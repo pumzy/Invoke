@@ -2,6 +2,12 @@ html {
   height: 100vh;
 }
 
+.centerme {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .invisible{
   position: relative;
   width: 1373px;
@@ -28,9 +34,11 @@ html {
 .modal-backdrop {
     top: 0;
     position: absolute;
-    width: 2000px;
+    width: 115vw;
     height: 100vh;
-    margin-left: -100px;
+
+    margin-left: -500px;
+    right: 0;
     // top: 0px;
     // left: 0px;
 
