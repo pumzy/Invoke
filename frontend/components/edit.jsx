@@ -1,30 +1,46 @@
 import React from 'react'
 import {updateSong} from '../actions/song_actions'
+import {fetchSongByTitle} from '../actions/song_actions'
 import {connect} from 'react-redux'
 
 class SongUpdate extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      title: this.props.song.title,
-      description: this.props.song.description,
-      genre: this.props.song.genre,
-      imageFile: null,
-      imageUrl: this.props.song.imageUrl,
-      loading: false
-    };
+
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateCoverart = this.updateCoverart.bind(this);
     this.goBack = this.goBack.bind(this);
     this.openCoverartUploadBox = this.openCoverartUploadBox.bind(this);
+    this.state = {
+      title: "",
+      description: "",
+      genre: "",
+      imageFile: null,
+      imageUrl: "",
+      loading: false
+    }
+
+
   }
 
+  componentWillReceiveProps(nextProps){
+  }
 
   componentDidMount(){
-    this.imagespoofbutton.style.opacity = '0.5'
-    this.imagespoofbutton.innerText = "Update your Cover Art"
-    this.imagespoofbutton.style.border = "1px solid black"
+    // this.imagespoofbutton.style.opacity = '0.5'
+    // this.imagespoofbutton.innerText = "Update your Cover Art"
+    // this.imagespoofbutton.style.border = "1px solid black"
+
+    this.props.fetchSongByTitle(this.props.match.params.title).then(() => (this.setState({
+      title: this.props.song.title,
+      description: this.props.song.description,
+      genre: this.props.song.genre,
+      imageFile: null,
+      imageUrl: this.props.song.cover_art_url,
+      loading: false
+    })))
+
   }
 
   updateCoverart(e){
@@ -67,7 +83,10 @@ class SongUpdate extends React.Component {
       var formData = new FormData();
       formData.append("song[title]", this.state.title)
       formData.append("song[genre]", this.state.genre)
+      formData.append("song[description]", this.state.description)
+      if (this.props.song.cover_art_url !== this.state.imageUrl){
       formData.append("song[cover_art]", this.state.imageFile)
+      }
       this.props.updateSong(formData, this.props.song.id).then(() => this.props.history.push(`/${this.props.currentUser}/${this.state.title}`))
       this.setState({loading:true})
     }
@@ -99,6 +118,8 @@ class SongUpdate extends React.Component {
   }
 
   render() {
+    if (this.props.song){
+
     let buttontext = `Upload ${this.state.title}`
     let futureurl = `invoke-.herokuapp.com/${this.props.currentUser}/${this.state.title}`
     let headertext;
@@ -106,12 +127,10 @@ class SongUpdate extends React.Component {
     let imagepreview;
     let trackupload;
 
+
+
    imageupload = <input type="file" onChange={this.updateCoverart} className="uploadsong-imageselectbutton" data-buttonText="Upload an image!" ref={input => this.imagebutton = input}/>
    imagepreview =  <img className="uploadsong-imagepreview" src={this.state.imageUrl} />
-
-
-
-if (this.state.songFile !== null){
     return (
       <div className="centerer">
       <div className="upload-form-container">
@@ -160,6 +179,10 @@ if (this.state.songFile !== null){
       </div>
       </div>
     );
+  } else {
+    return(
+      <h1>loading</h1>
+    )
   }
 
 
@@ -168,16 +191,18 @@ if (this.state.songFile !== null){
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     loggedIn: Boolean(state.session.currentUser),
-    currentUser: state.session.currentUser.username
+    currentUser: state.session.currentUser.username,
+    song: state.songs.byTitle[ownProps.match.params.title]
   }
 };
 
 const mapDispatchToProps = (dispatch, { location }) => {
   return {
-    updateSong: (song, id) => dispatch(updateSong(song, id))
+    updateSong: (song, id) => dispatch(updateSong(song, id)),
+    fetchSongByTitle: (title) => dispatch(fetchSongByTitle(title))
   };
 };
 

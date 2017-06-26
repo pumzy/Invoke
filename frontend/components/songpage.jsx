@@ -3,7 +3,7 @@ import { fetchOneUser, clearUsers } from '../actions/user_actions.js'
 import Error404 from './404page'
 import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
-import { fetchSongByTitle, removeSongs } from '../actions/song_actions.js'
+import { fetchSongByTitle, removeSongs, deleteSong } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongUpdate from './edit';
 
@@ -16,12 +16,18 @@ class SongPage extends React.Component {
   constructor(props){
     super(props)
     this.goToUser = this.goToUser.bind(this);
+    this.goToEdit = this.goToEdit.bind(this);
+    this.byeBye = this.byeBye.bind(this);
+    this.editbutton = null;
+    this.deletebutton = null;
   }
 
   componentDidMount(){
     this.props.fetchOneUser(this.props.match.params.username);
     this.props.fetchSongByTitle(this.props.match.params.title)
   }
+
+
 
   componentWillUnmount(){
     this.props.removeSongs()
@@ -39,6 +45,14 @@ class SongPage extends React.Component {
     this.props.history.push(`/${this.props.match.params.username}`)
   }
 
+  goToEdit(){
+      this.props.history.push(`${this.props.location.pathname}/edit`)
+  }
+
+  byeBye(){
+    this.props.deleteSong(this.props.song).then(() => this.props.history.push(`/${this.props.match.params.username}`))
+  }
+
   // componentDidUpdate(prevProps){
   //   if (prevProps.match.params.username !== this.props.match.params.username || prevProps.match.params.title !== this.props.match.params.title){
   //     this.props.fetchOneUser(prevProps.match.params.username).then(response => {
@@ -49,15 +63,15 @@ class SongPage extends React.Component {
 
 
   render(){
-    let editbutton = null;
-    if (this.props.currentUser&& this.props.user){
-      if (this.props.currentUser.id === this.props.user.id){
-        editbutton = <Route to={`${this.props.location.pathname}/edit`} Component={SongUpdate} song={this.props.song} />
-    }}
 
     if (!this.props.song || !this.props.user) {
       return null
     } else {
+      if (this.props.currentUser && this.props.user){
+        if (this.props.currentUser.id === this.props.user.id){
+          this.editbutton = <button onClick={this.goToEdit} className="editbutton">Edit</button>
+          this.deletebutton = <button onClick={this.byeBye} className="deletebutton">Delete</button>
+        }}
     let genre = `#${this.props.song.genre}`
     let songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
     let date;
@@ -132,7 +146,10 @@ class SongPage extends React.Component {
       return(
         <div className="song-page">
           {result}
-          {editbutton}
+        <div className="songpage-user-buttons">
+          {this.deletebutton}
+          {this.editbutton}
+        </div>
         </div>
 
       )
@@ -160,7 +177,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id)),
     fetchSongByTitle: (title)=> dispatch(fetchSongByTitle(title)),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
-    removeSongs: () => dispatch(removeSongs())
+    removeSongs: () => dispatch(removeSongs()),
+    deleteSong: (song) => dispatch(deleteSong(song))
   }
 }
 

@@ -48,7 +48,11 @@ class Api::SongsController < ApplicationController
   end
 
   def destroy
-    @song.destroy
+    if @song.destroy
+     render :destroy
+    else
+     render json: @song.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -58,6 +62,6 @@ class Api::SongsController < ApplicationController
     end
 
     def song_params
-      params.require(:song).permit(:title, :genre, :track, :cover_art)
+      params.require(:song).permit(:title, :genre, :track, :cover_art, :description)
     end
 end

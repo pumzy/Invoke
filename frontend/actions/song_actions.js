@@ -86,3 +86,11 @@ export const fetchSongsByUserID = (id) => dispatch => (
     dispatch(receiveErrors(err.responseJSON))
   ))
 )
+
+export const deleteSong = (song) => dispatch => (
+  APIUtil.deleteSong(song).then(song => (
+     dispatch(removeSong(song))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)

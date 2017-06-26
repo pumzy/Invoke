@@ -46,3 +46,10 @@ export const fetchSongByUserID = (userid) => {
     url: `api/songs/userfind/${userid}`
   })
 }
+
+export const deleteSong = (song) => {
+  return $.ajax({
+    method: "DELETE",
+    url: `api/songs/${song.id}`,
+  })
+}

@@ -33,8 +33,6 @@ class SongsIndex extends React.Component {
           {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
         </ul>
       </section>
-      <Link to="/test"> Test</Link>
-      <Link to="/stream">Backlink</Link>
     </div>
     );
   }

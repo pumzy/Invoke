@@ -10,6 +10,7 @@ import NavBar from './navbar'
 import UserPage from './userpage'
 import SongPage from './songpage'
 import Error404 from './404page'
+import SongUpdate from './edit';
 import SongUpload from './upload'
 
 
@@ -25,6 +26,7 @@ const App = () =>(
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
       <ProtectedRoute exact path="/:username" component={UserPage} />
+      <ProtectedRoute exact path="/:username/:title/edit" component={SongUpdate} />
       <ProtectedRoute exact path="/:username/:title" component={SongPage} />
     </Switch>
   </div>
