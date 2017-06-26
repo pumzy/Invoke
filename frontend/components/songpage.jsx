@@ -49,7 +49,6 @@ class SongPage extends React.Component {
 
 
   render(){
-    debugger
     let editbutton = null;
     if (this.props.currentUser&& this.props.user){
       if (this.props.currentUser.id === this.props.user.id){
