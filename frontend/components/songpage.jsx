@@ -5,6 +5,8 @@ import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { fetchSongByTitle, removeSongs } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
+import SongUpdate from './edit';
+
 
 
 // this.props.match.params.title
@@ -47,7 +49,12 @@ class SongPage extends React.Component {
 
 
   render(){
-
+    debugger
+    let editbutton = null;
+    if (this.props.currentUser&& this.props.user){
+      if (this.props.currentUser.id === this.props.user.id){
+        editbutton = <Route to={`${this.props.location.pathname}/edit`} Component={SongUpdate} song={this.props.song} />
+    }}
 
     if (!this.props.song || !this.props.user) {
       return null
@@ -126,7 +133,9 @@ class SongPage extends React.Component {
       return(
         <div className="song-page">
           {result}
+          {editbutton}
         </div>
+
       )
     }
   }
@@ -142,7 +151,8 @@ const mapStateToProps = (state, ownProps) => {
 
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
-      song: state.songs.byTitle[ownProps.match.params.title]
+      song: state.songs.byTitle[ownProps.match.params.title],
+      currentUser: state.session.currentUser
     };
   }
 

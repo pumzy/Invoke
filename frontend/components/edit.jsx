@@ -2,15 +2,15 @@ import React from 'react'
 import {updateSong} from '../actions/song_actions'
 import {connect} from 'react-redux'
 
-class SongUpload extends React.Component {
+class SongUpdate extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      title: '',
-      description: '',
-      genre: '',
+      title: this.props.song.title,
+      description: this.props.song.description,
+      genre: this.props.song.genre,
       imageFile: null,
-      imageUrl: "",
+      imageUrl: this.props.song.imageUrl,
       loading: false
     };
 
@@ -20,6 +20,12 @@ class SongUpload extends React.Component {
     this.openCoverartUploadBox = this.openCoverartUploadBox.bind(this);
   }
 
+
+  componentDidMount(){
+    this.imagespoofbutton.style.opacity = '0.5'
+    this.imagespoofbutton.innerText = "Update your Cover Art"
+    this.imagespoofbutton.style.border = "1px solid black"
+  }
 
   updateCoverart(e){
     var file = e.currentTarget.files[1]
@@ -62,8 +68,7 @@ class SongUpload extends React.Component {
       formData.append("song[title]", this.state.title)
       formData.append("song[genre]", this.state.genre)
       formData.append("song[cover_art]", this.state.imageFile)
-      formData.append("song[track]", this.state.songFile)
-      this.props.createSong(formData).then(() => this.props.history.push(`/${this.props.currentUser}/${this.state.title}`))
+      this.props.updateSong(formData, this.props.song.id).then(() => this.props.history.push(`/${this.props.currentUser}/${this.state.title}`))
       this.setState({loading:true})
     }
 
@@ -75,14 +80,8 @@ class SongUpload extends React.Component {
 
   openCoverartUploadBox(){
     this.imagebutton.click()
-    this.imagespoofbutton.style.opacity = '0.5'
-    this.imagespoofbutton.innerText = "Update your Cover Art"
-    this.imagespoofbutton.style.border = "1px solid black"
   }
 
-  openSongUploadBox(){
-    this.songbutton.click()
-  }
 
 
   updateCoverart(e){
@@ -101,25 +100,15 @@ class SongUpload extends React.Component {
 
   render() {
     let buttontext = `Upload ${this.state.title}`
-
     let futureurl = `invoke-.herokuapp.com/${this.props.currentUser}/${this.state.title}`
-
-
     let headertext;
-    headertext = `Add ${this.state.title} to the Invoke database`
-    // Include this later
-
     let imageupload;
     let imagepreview;
     let trackupload;
 
    imageupload = <input type="file" onChange={this.updateCoverart} className="uploadsong-imageselectbutton" data-buttonText="Upload an image!" ref={input => this.imagebutton = input}/>
    imagepreview =  <img className="uploadsong-imagepreview" src={this.state.imageUrl} />
-  //  $(":file").filestyleimage({buttonText: "Choose some coverart", input: false, buttonBefore: true});
 
-   trackupload = <input type="file" onChange={this.updateTrack} className="file-upload-input" data-buttonText="Upload a song!" ref={input => this.songbutton = input} />
-  //  $(":file").filestyleimage({buttonText: "Choose a track", input: false, buttonBefore: true});
-    // <span>{trackupload}</span>
 
 
 if (this.state.songFile !== null){
@@ -171,18 +160,6 @@ if (this.state.songFile !== null){
       </div>
       </div>
     );
-  } else {
-    return (
-      <div className="upload-file-container">
-        <div className="upload-div">
-          <h1 className="upload-title">Upload to Invoke</h1>
-            {trackupload}
-            <button className="upload-spoof-button" onClick={this.openSongUploadBox}>Choose a file to upload</button>
-          </div>
-      </div>
-    )
-
-
   }
 
 
@@ -200,11 +177,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, { location }) => {
   return {
-    createSong: (song) => dispatch(createSong(song))
+    updateSong: (song, id) => dispatch(updateSong(song, id))
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SongUpload);
+)(SongUpdate);
