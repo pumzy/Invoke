@@ -19,6 +19,8 @@ class BottomPlayBar extends React.Component {
     this.dragOver = this.dragOver.bind(this);
     this.dragwidth = null;
     this.dragmusic = null;
+    this.goToUser = null;
+    this.goToSong = null;
     this.timeshow = this.timeshow.bind(this)
     this.setdata = this.setdata.bind(this);
     this.ended = this.ended.bind(this);
@@ -86,7 +88,7 @@ class BottomPlayBar extends React.Component {
   clickbar(e){
     var holderwidth =  this.playbarholder.clientWidth
     let duration = this.music.duration
-    var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft;
+    var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft- this.container.offsetLeft;
     this.music.style.width = newpos;
     this.music.currentTime = (newpos/holderwidth) * duration;
     //
@@ -109,11 +111,12 @@ class BottomPlayBar extends React.Component {
 
   dragbar(e){
     // e.preventDefault();
+
     var holderwidth =  this.playbarholder.clientWidth
     console.log("hello");
     let duration = this.music.duration
 
-    var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft;
+    var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft - this.container.offsetLeft;
     this.dragwidth = newpos;
     this.dragmusic = (newpos/holderwidth) * duration;
     //
@@ -135,6 +138,9 @@ class BottomPlayBar extends React.Component {
 
     this.title.innerText = this.props.audio.title;
     this.username.innerText = this.props.artist.username;
+    this.goToUser = () => { return this.props.history.push(`/${this.props.artist.username}`)}
+    this.goToSong = () => { return this.props.history.push(`/${this.props.artist.username}/${this.props.audio.title}`)}
+
   }
 
 
@@ -178,7 +184,7 @@ class BottomPlayBar extends React.Component {
     // const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
 
-      audioplayer = <div className="playbar">
+      audioplayer = <div className="playbar" ref={div => this.container = div}>
                           <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended}  ref={audio => this.music = audio} autoPlay >
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
@@ -192,10 +198,10 @@ class BottomPlayBar extends React.Component {
                                 <div className="progress-bar" ref={div => this.playbar = div} onClick={this.clickbar} ></div>
                               </div>
                               <span className="full-duration" ref={span => this.fullduration = span}></span>
-                              <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} />
+                              <div className="currentSongInfo"> <img  className="song-coverart-playerslice" src={this.props.audio.cover_art_url} onClick={this.goToSong} />
                               <div className="song-infoplayer-slice">
-                                <span ref={span=> this.username = span} ></span>
-                                <span ref={span=> this.title = span} ></span>
+                                <span className="playbar-artist-infoslice" ref={span=> this.username = span} onClick={this.goToUser}></span>
+                                <span className="playbar-song-infoslice"ref={span=> this.title = span} onClick={this.goToSong}></span>
                               </div>
                           </div>
                         </div>

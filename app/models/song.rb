@@ -16,6 +16,7 @@
 #  cover_art_content_type :string
 #  cover_art_file_size    :integer
 #  cover_art_updated_at   :datetime
+#  description            :string
 #
 
 class Song < ApplicationRecord
