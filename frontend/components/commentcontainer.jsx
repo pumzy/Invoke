@@ -7,7 +7,6 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 class CommentShow extends React.Component {
   constructor(props){
     super(props);
-    debugger
     // this.giveToPlaybar = this.giveToPlaybar.bind(this
     this.goToSong = this.goToSong.bind(this)
     this.goToUser = this.goToUser.bind(this)
@@ -44,7 +43,7 @@ class CommentShow extends React.Component {
 
 
   render(){
-    debugger
+
       if (this.props.user !== null ){
 
         return(

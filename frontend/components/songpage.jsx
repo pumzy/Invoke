@@ -6,7 +6,7 @@ import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { fetchSongByTitle, removeSongs, deleteSong } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongUpdate from './edit';
-import {fetchCommentsBySongID, removeComments } from '../actions/comment_actions'
+import {fetchCommentsBySongID, removeComments, createComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
 
 
@@ -20,11 +20,48 @@ class SongPage extends React.Component {
     this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      body: "",
+      comment_time: "",
+      song_id: null
+    }
   }
 
   componentDidMount(){
     this.props.fetchOneUser(this.props.match.params.username);
     this.props.fetchSongByTitle(this.props.match.params.title).then((response) => this.props.fetchCommentsBySongID(response.song.id));
+  }
+
+  handleSubmit(e){
+    if (e.keyCode === 13) {
+    var comment = this.state;
+    let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
+    if (currentlyPlayingSong.length === 0 || currentlyPlayingSong[0].innerText !== this.props.song.title){
+
+      var secondval = Math.floor(Math.random()*60)
+      if (secondval < 10) {
+        secondval = `0${secondval}`
+      } else {
+        secondval = `${secondval}`
+      }
+      comment.comment_time = `0${Math.floor(Math.random()*3.5)}:` + secondval
+    } else {
+      comment.comment_time = document.getElementsByClassName("time-elapsed")[0].innerText
+    }
+
+    comment.song_id = this.props.song.id
+    var that = this;
+    this.setState({
+      body: "",
+      comment_time: "",
+      song_id: null
+    })
+    this.props.createComment({comment}).then(() => this.props.fetchCommentsBySongID(this.props.song.id))
+    this.props.removeComments();
+
+  } else
+   {return null;}
   }
 
   howLongAgo(passedindate){
@@ -45,6 +82,11 @@ class SongPage extends React.Component {
     return daysresult
   }
 
+  update(field) {
+    return e => this.setState({
+      [field]: e.currentTarget.value
+    });
+  }
 
 
   componentWillUnmount(){
@@ -86,7 +128,7 @@ class SongPage extends React.Component {
 
 
     let comments = this.props.comments.map(comment => {
-      debugger
+
       return <CommentShow comment={comment} timeago={this.howLongAgo(comment.created_at)} />
       })
 
@@ -136,9 +178,19 @@ class SongPage extends React.Component {
       return(
         <div className="song-page">
           {result}
-        <div className="songpage-user-buttons">
-          {this.deletebutton}
-          {this.editbutton}
+        <div className="songpage-utilty-bar">
+          <input type="text"
+              value={this.state.body}
+              onChange={this.update('body')}
+              onKeyDown={this.handleSubmit}
+              className="comment-input-songpage"
+              placeholder="Write a Comment"
+              ref={input => this.commentfield = input}
+            />
+          <div className="songpage-user-buttons">
+            {this.deletebutton}
+            {this.editbutton}
+          </div>
         </div>
         <div className="rest-of-songpage">
         <div className="left-comment-pane"></div>
@@ -178,7 +230,8 @@ const mapDispatchToProps = (dispatch) => {
     removeSongs: () => dispatch(removeSongs()),
     deleteSong: (song) => dispatch(deleteSong(song)),
     fetchCommentsBySongID: (id) => dispatch(fetchCommentsBySongID(id)),
-    removeComments: () => dispatch(removeComments())
+    removeComments: () => dispatch(removeComments()),
+    createComment: (comment) => dispatch(createComment(comment))
   }
 }
 

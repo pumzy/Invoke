@@ -6,6 +6,7 @@ export const fetchOneComment = (id) => {
 }
 
 export const createComment = (comment) => {
+
   return $.ajax({
     method: "POST",
     url: `api/comments`,
