@@ -44,7 +44,7 @@ class CommentShow extends React.Component {
 
   render(){
 
-      if (this.props.user !== null ){
+      if (this.props.user !== null && this.props.user !== undefined ){
 
         return(
           <div className='commentbox'>

@@ -38,7 +38,7 @@ class SongPage extends React.Component {
     var comment = this.state;
     let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
     if (currentlyPlayingSong.length === 0 || currentlyPlayingSong[0].innerText !== this.props.song.title){
-
+      
       var secondval = Math.floor(Math.random()*60)
       if (secondval < 10) {
         secondval = `0${secondval}`
