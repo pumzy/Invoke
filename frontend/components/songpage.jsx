@@ -38,7 +38,7 @@ class SongPage extends React.Component {
     var comment = this.state;
     let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
     if (currentlyPlayingSong.length === 0 || currentlyPlayingSong[0].innerText !== this.props.song.title){
-      
+
       var secondval = Math.floor(Math.random()*60)
       if (secondval < 10) {
         secondval = `0${secondval}`
@@ -179,6 +179,8 @@ class SongPage extends React.Component {
         <div className="song-page">
           {result}
         <div className="songpage-utilty-bar">
+          <div className="comment-creation-portion">
+          <img className="comment-currentuser-avatar" src={this.props.currentUser.avatar_url} />
           <input type="text"
               value={this.state.body}
               onChange={this.update('body')}
@@ -187,9 +189,10 @@ class SongPage extends React.Component {
               placeholder="Write a Comment"
               ref={input => this.commentfield = input}
             />
+        </div>
           <div className="songpage-user-buttons">
-            {this.deletebutton}
             {this.editbutton}
+            {this.deletebutton}
           </div>
         </div>
         <div className="rest-of-songpage">
