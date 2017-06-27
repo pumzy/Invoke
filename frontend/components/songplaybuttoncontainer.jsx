@@ -1,4 +1,4 @@
-import { receiveAudio, removeAudio, removeAudioToken } from '../actions/audio_actions'
+import { receiveAudio, removeAudio, removeAudioToken, receivePlayToken } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import React from 'react'
 import { Route, withRouter } from 'react-router-dom';
@@ -13,6 +13,10 @@ class SongPlayButton extends React.Component {
     this.props.fetchOneUserByID(this.props.song.user_id);
   }
 
+  componentDidMount(){
+
+  }
+
 
   handleClick(){
       let path = `/${this.props.user.username}/${this.props.song.title}`
@@ -20,13 +24,40 @@ class SongPlayButton extends React.Component {
   }
 
   giveToPlaybar(song){
-    const reset = new Promise((resolve, reject) => resolve(this.props.removeAudio()));
-    reset.then(() => this.props.receiveAudio(song));
+    // if (this.props.audio.id === this.props.song.id && this.props.audio.token === "PAUSE") {
+    //   this.playbutton.src = "https://s3.us-east-2.amazonaws.com/invoke-development/songshow-playbutton.png"
+    //
+    //
+    //
+    //   // Dispatch the pause action, set the audio to pause.
+    //   // Got to dispatch the pause action in the playbutton container
+    //
+    //   // In the audio - this.music.pause
+    //
+    //   // Change the photo back to the play photo
+    // } else if (this.props.audio.id === this.props.song.id && this.props.audio.token === "PLAY"){
+    //   this.playbutton.src = "https://s3.us-east-2.amazonaws.com/invoke-development/songshow-pausebutton.png"
+    // }
+
+    // else {
+      const reset = new Promise((resolve, reject) => resolve(this.props.removeAudio()));
+      reset.then(() => this.props.receiveAudio(Object.assign(song, {token: "PLAYING"})));
+    // }
+
+    // this.props.receiveAudioPause(this.props.song)
+
+
+
+    // this.playbutton.src = "https://s3.us-east-2.amazonaws.com/invoke-development/songshow-pausebutton.png"
   }
   render(){
+
+
+
+
     return(
       <div>
-        <img src="https://s3.us-east-2.amazonaws.com/invoke-development/songshow-playbutton.png" onClick={() =>this.giveToPlaybar(this.props.song)} className="PlayinSongPage" />
+        <img src="https://s3.us-east-2.amazonaws.com/invoke-development/songshow-playbutton.png" onClick={() =>this.giveToPlaybar(this.props.song)} className="PlayinSongPage"  ref={img => this.playbutton = img}/>
       </div>
     )
   }
@@ -34,7 +65,8 @@ class SongPlayButton extends React.Component {
 
 const mapStateToProps = (state, passedDown) => {
   return {
-    user: state.users.byID[passedDown.song.user_id]
+    user: state.users.byID[passedDown.song.user_id],
+    audio: state.audio
   };
 }
 const mapDispatchToProps = (dispatch) => {
@@ -42,7 +74,8 @@ const mapDispatchToProps = (dispatch) => {
     receiveAudio: (song) => dispatch(receiveAudio(song)),
     removeAudio: (song) => dispatch(removeAudio(song)),
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
-    removeAudioToken: () => dispatch(removeAudioToken())
+    removeAudioToken: () => dispatch(removeAudioToken()),
+    receivePlayToken: () => dispatch(receivePlayToken())
   }
 }
 

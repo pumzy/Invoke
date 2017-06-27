@@ -19,6 +19,9 @@
     display: flex;
     flex-direction: row;
     // background-color: none;
+    width: 100%;
+    margin: auto;
+    right: 30px;
     background-repeat: no-repeat;
     background-size: cover;
     background: -moz-linear-gradient(-45deg, #518489 0%, #343a59 100%);
@@ -230,6 +233,9 @@
   width:  1240px;
   padding-bottom: 50px;
   background: white;
+  padding: 0px 30px;
+  box-sizing: border-box;
+
 
 
   span {
@@ -252,6 +258,8 @@
       color: white;
       cursor: pointer;
      }
+
+
 
 
 
@@ -333,14 +341,62 @@
 
   .left-comment-pane {
     height: 100vh;
-    border: 1px solid grey;
     width: 150px;
+
+    .artist-avatar-songpage {
+      width: 120px;
+      height: 120px;
+      display: block;
+      border-radius: 50%;
+      box-shadow: rgba(0,0,0,.1)0 0 0 1px inset;
+      background-size: cover;
+      background-position: 50% 50%;
+    }
+
+    .artist-info-songpage {
+
+      .artist-info-username {
+            margin: 6px 0 5px 0;
+            line-height: 1.3;
+            font-weight: 100;
+            font-size: 14px;
+            text-align: center;
+            text-indent: 2px;
+
+      }
+    }
 
   }
 
   .comments-songpage {
     width: 100%;
+    margin: 0 10px;
+
+    .song-date-description {
+      margin: 0 10px;
+      .song-dd-heading {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.3em;
+        font-weight: bold;
+      }
+
+      .song-dd-text {
+        font-weight: 100;
+        margin: 0 0 .5em 0;
+        font-size: 14px;
+        line-height: 1.3em;
+
+      }
+
+
+    }
+
+
   }
+
+
+
 
 }
 
@@ -440,6 +496,7 @@
       height: 40px;
       left: -6px;
       top: -6px;
+      object-fit: cover;
     }
 
     .comment-input-songpage {
@@ -465,4 +522,15 @@
 .not-sidebar {
   display: flex;
   flex-direction: row;
+}
+
+#comment-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-y: 10px;
+  background-image: asset-url("comment-icon.jpg");
+  margin-right: 3px;
 }

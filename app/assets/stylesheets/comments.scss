@@ -22,11 +22,19 @@
 
 }
 
+
+
 .commentbox {
   width: 100%;
   // padding: 10px 10px 10px 0;
   background-color: transparent;
   font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+
+
+
+  &:hover .comment-item .comment-info .right-comment #comment-delete-button {
+    visibility: visible;
+  }
 
   .right-comment > span {
     margin-top: 0;
@@ -83,7 +91,7 @@
         height: 40px;
         width: 40px;
         box-shadow: rgba(0,0,0,.1)0 0 0 1px inset;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 50%;
 
       }
@@ -138,11 +146,12 @@
         color: #999;
       }
 
-      #comment-reply-button {
-        min-width: 25px;
+      #comment-delete-button {
+        visibility: hidden;
+        width: 20px;
         font-size: 11px;
         padding: 2px 9px 2px 8px;
-        height: 22px;
+        height: 20px;
         line-height: 16px;
         border: 1px solid #e5e5e5;
         border-radius: 3px;
@@ -151,7 +160,17 @@
         font-weight: 100;
         text-align: center;
         vertical-align: baseline;
+        background-image: asset-url("delete-dustbin.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: relative;
+        top: 3px;
+        left: 10px;
+
+
       }
+
+
 
     }
 

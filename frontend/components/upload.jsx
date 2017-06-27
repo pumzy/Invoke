@@ -66,6 +66,7 @@ class SongUpload extends React.Component {
       formData.append("song[genre]", this.state.genre)
       formData.append("song[cover_art]", this.state.imageFile)
       formData.append("song[track]", this.state.songFile)
+      formData.append("song[description]", this.state.description)
       this.props.createSong(formData).then(() => this.props.history.push(`/${this.props.currentUser}/${this.state.title}`))
       this.setState({loading:true})
     }

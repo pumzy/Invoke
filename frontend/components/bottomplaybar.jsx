@@ -2,6 +2,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { fetchOneUser, fetchOneUserByID, clearUsers } from '../actions/user_actions'
+import { receivePauseToken, receivePlayToken} from '../actions/audio_actions'
+
 
 
 
@@ -39,6 +41,25 @@ class BottomPlayBar extends React.Component {
     }
   }
 
+
+
+  componentWillUpdate(nextProps){
+    debugger
+
+    if (!this.music){
+      return;
+    }
+    if (nextProps.audio.token === "PLAYING"){
+      this.music.play()
+
+      this.playbutton.className = "pause";
+    } else if (nextProps.audio.token === "PAUSED"){
+      this.music.pause()
+      this.playbutton.className = "play";
+    }
+  }
+
+
   // componentDidUpdate() AT SOME POINT WE WANT TO CLEAR ALL THE USERS UP FROM THE STATE
   timeshow(currenttime) {
       let minutes = parseInt(Math.floor(currenttime / 60));
@@ -56,8 +77,9 @@ class BottomPlayBar extends React.Component {
 
     ended(e){
 
-      this.playbutton.className = "";
-		  this.playbutton.className = "play";
+      // this.playbutton.className = "";
+		  // this.playbutton.className = "play";
+      store.dispatch(this.props.receivePauseToken());
     }
 
 
@@ -146,14 +168,16 @@ class BottomPlayBar extends React.Component {
 
 
   handleClick(){
-    if (this.music.paused){
-      this.music.play()
-      playbutton.className = "";
-      playbutton.className = "pause";
-    } else {
-      this.music.pause();
-		  playbutton.className = "";
-		  playbutton.className = "play";
+    if (this.props.audio.token === "PAUSED"){
+      // this.music.play()
+      // playbutton.className = "";
+      // playbutton.className = "pause";
+      store.dispatch(this.props.receivePlayToken())
+    } else if (this.props.audio.token === "PLAYING") {
+      // this.music.pause();
+		  // playbutton.className = "";
+		  // playbutton.className = "play";
+      store.dispatch(this.props.receivePauseToken());
     };
   }
 
@@ -185,7 +209,7 @@ class BottomPlayBar extends React.Component {
     if (this.props.audio.track_url !== "") {
 
       audioplayer = <div className="playbar" ref={div => this.container = div}>
-                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended}  ref={audio => this.music = audio} autoPlay >
+                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended}  ref={audio => this.music = audio} >
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
@@ -230,7 +254,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchSongs: () => dispatch(fetchSongs()),
     clearUsers: () => dispatch(clearUsers()),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
-    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id))
+    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
+    receivePlayToken: () => dispatch(receivePlayToken),
+    receivePauseToken: () => dispatch(receivePauseToken)
   }
 }
 

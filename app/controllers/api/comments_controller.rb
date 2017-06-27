@@ -43,7 +43,7 @@ class Api::CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      render :destroy
+      render :show
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

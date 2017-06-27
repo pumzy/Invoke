@@ -22,6 +22,16 @@ const CommentReducer = (state={ bySongID: {}, byID: {}, allcomments: [] }, actio
     case REMOVE_COMMENT:
       delete newState.byID[action.comment.id]
       delete newState.bySongID[action.comment.user_id]
+      let indexneeded = state.allcomments.indexOf(action.comment);
+      let commentdup = state.allcomments.slice(0)
+      var newarray = [];
+      state.allcomments.forEach(comment => {
+        if( comment.id !== action.comment.id) {
+          newarray.push(comment)
+        }
+      })
+
+      newState.allcomments = newarray
       return newState;
 
     case REMOVE_COMMENTS:

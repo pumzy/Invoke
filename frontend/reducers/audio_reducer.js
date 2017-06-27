@@ -1,6 +1,6 @@
 import {merge} from 'lodash';
 
-import { RECEIVE_AUDIO, REMOVE_AUDIO, REMOVE_AUDIO_TOKEN} from '../actions/audio_actions';
+import { RECEIVE_AUDIO, REMOVE_AUDIO, REMOVE_AUDIO_TOKEN, RECEIVE_AUDIO_TOKEN} from '../actions/audio_actions';
 
 const defaultState = {
   track_url: "",
@@ -17,6 +17,8 @@ export const AudioReducer = (state=defaultState, action ) => {
       return merge(newState, action.audio)
     case REMOVE_AUDIO:
       return newState;
+    case RECEIVE_AUDIO_TOKEN:
+      return merge({},state, {token: action.token})
     case REMOVE_AUDIO_TOKEN:
       return merge({},state, {token:""})
     default:

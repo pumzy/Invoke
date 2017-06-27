@@ -57,7 +57,7 @@ export const fetchOneComment = (id) => dispatch => (
 
 export const createComment = (comment) => dispatch => (
   APIUtil.createComment(comment).then(comment => {
-    return dispatch(removeComments(comment.id))
+    return dispatch(receiveComment(comment))
   }, err => (
     dispatch(receiveErrors(err.responseJSON))
   ))

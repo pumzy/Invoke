@@ -2,8 +2,10 @@ import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
 import { fetchSongs, removeSongs } from '../actions/song_actions'
 import { fetchUsers, clearUsers } from '../actions/user_actions'
+import { removeAudioToken} from '../actions/audio_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
+// import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
 class SongsIndex extends React.Component {
   componentDidMount() {
@@ -13,6 +15,8 @@ class SongsIndex extends React.Component {
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.clearUsers()
+
+    // this.props.removeAudioToken();
   }
 
   render() {
@@ -44,7 +48,8 @@ const mapStateToProps = (state) => {
 
   return { byUsername: state.songs.byUsername,
            allsongs: state.songs.allsongs,
-           usersbyID: state.users.byID}
+           usersbyID: state.users.byID,
+          audio: state.audio}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -52,7 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSongs: () => dispatch(fetchSongs()),
     removeSongs: () => dispatch(removeSongs()),
     fetchUsers: () => dispatch(fetchUsers()),
-    clearUsers: () => dispatch(clearUsers())
+    clearUsers: () => dispatch(clearUsers()),
+    removeAudioToken: () => dispatch(removeAudioToken())
   }
 }
 

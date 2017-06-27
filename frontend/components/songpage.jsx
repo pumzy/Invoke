@@ -6,7 +6,7 @@ import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { fetchSongByTitle, removeSongs, deleteSong } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongUpdate from './edit';
-import {fetchCommentsBySongID, removeComments, createComment } from '../actions/comment_actions'
+import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
 
 
@@ -57,8 +57,9 @@ class SongPage extends React.Component {
       comment_time: "",
       song_id: null
     })
-    this.props.createComment({comment}).then(() => this.props.fetchCommentsBySongID(this.props.song.id))
-    this.props.removeComments();
+    // .then(() => this.props.fetchCommentsBySongID(this.props.song.id))
+    // this.props.removeComments();
+    this.props.createComment({comment})
 
   } else
    {return null;}
@@ -129,21 +130,33 @@ class SongPage extends React.Component {
 
     let comments = this.props.comments.map(comment => {
 
-      return <CommentShow comment={comment} timeago={this.howLongAgo(comment.created_at)} />
+      return <CommentShow comment={comment} timeago={this.howLongAgo(comment.created_at)} parent={this} />
       })
 
 
-    // Pass down the component with both the comment and the time it was created at- which can be done by doing this.howLongAgo(comment.created_at) && comment as (comment)
-    // document.getElementsByClassName("time-elapsed")[0].innerText
+
 
 
 
     let genre = `#${this.props.song.genre}`
     let songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
 
-    // }
     let timesincerelease = this.howLongAgo(this.props.song.created_at)
+
+
+    // Created date functionality
+    
+    let releasedate
+
+    let rubydate = this.props.song.created_at.slice(0, 10)
+    let createddate = new Date(rubydate)
+    releasedate = createddate.toDateString()
+
+
+    //
+
     let result;
+
     if (!(this.props.match.params.username && this.props.match.params.title )){
       result = <Error404 />
     } else {
@@ -196,14 +209,27 @@ class SongPage extends React.Component {
           </div>
         </div>
         <div className="rest-of-songpage">
-        <div className="left-comment-pane"></div>
+        <div className="left-comment-pane">
+          <img className="artist-avatar-songpage" src={this.props.user.avatar_url} onClick={this.goToUser}/ >
+          <div className="artist-info-songpage">
+            <h3 className="artist-info-username" onClick={this.goToUser}> {this.props.user.username} </h3>
+          </div>
+        </div>
         <div className="comments-songpage">
-          <h3 className="comment-count">{this.props.comments.length} {this.props.comments.length !== 1 ? "comments" : "comment"}</h3>
+          <div className="song-date-description">
+            <h3 className="song-dd-heading">Release date:</h3>
+            <h4 className="song-dd-text">{releasedate}</h4>
+            <h3 className="song-dd-heading">Description:</h3>
+            <h4 className="song-dd-text">{this.props.song.description}</h4>
+          </div>
+          <h3 className="comment-count"><div id="comment-icon"></div>{this.props.comments.length} {this.props.comments.length !== 1 ? "comments" : "comment"}</h3>
           <ul className="comment-list">
             {comments}
           </ul>
         </div>
-        <div className="songpage-sidebar"></div>
+        <div className="songpage-sidebar">
+
+        </div>
         </div>
         </div>
 
@@ -216,7 +242,6 @@ class SongPage extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
@@ -234,7 +259,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteSong: (song) => dispatch(deleteSong(song)),
     fetchCommentsBySongID: (id) => dispatch(fetchCommentsBySongID(id)),
     removeComments: () => dispatch(removeComments()),
-    createComment: (comment) => dispatch(createComment(comment))
+    createComment: (comment) => dispatch(createComment(comment)),
+    deleteComment: (comment) => dispatch(deleteComment(comment))
   }
 }
 

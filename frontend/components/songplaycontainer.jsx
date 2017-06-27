@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { receiveAudio, removeAudio } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
+import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 
 class SongPlay extends React.Component {
   constructor(props){
@@ -71,8 +72,12 @@ class SongPlay extends React.Component {
 
     let genre = `#${this.props.song.genre}`
 
-
-
+    let spb;
+    if (this.props.audio.id === this.props.song.id ){
+      spb  = <SongCurrentPlayButton song={this.props.song} playstate={this.props.audio.token}/>
+    } else {
+      spb = <SongPlayButton song={this.props.song} />
+    }
 
 
       if (this.props.user !== null ){
@@ -84,7 +89,7 @@ class SongPlay extends React.Component {
             <div className='songplay-coverart' >
               <img onClick={this.goToSong} src={this.props.song.cover_art_url} />
             </div>
-            <SongPlayButton song={this.props.song} />
+             {spb}
             <div className='songplay-song'>
               <div className='songplay-song-information'>
                 <div className="songplay-left">
@@ -111,7 +116,8 @@ class SongPlay extends React.Component {
 
 const mapStateToProps = (state, passedDown) => {
   return {
-    user: state.users.byID[passedDown.song.user_id]
+    user: state.users.byID[passedDown.song.user_id],
+    audio: state.audio
   }
 }
 
