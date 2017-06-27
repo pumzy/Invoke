@@ -1,3 +1,160 @@
 // Place all the styles related to the comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.comment-count {
+  font-weight: 100;
+  color: #999;
+  border-bottom: 1px solid #f2f2f2;
+  display: block;
+  padding-bottom: 7px;
+  margin: 0 10px;
+  font-weight: 100;
+  color: #999;
+  font-size: 14px;
+  line-height: 1.3;
+
+}
+
+
+.comment-list {
+  width: 100%;
+
+}
+
+.commentbox {
+  width: 100%;
+  // padding: 10px 10px 10px 0;
+  background-color: transparent;
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+
+  .right-comment > span {
+    margin-top: 0;
+    background-color: transparent;
+    color: black;
+    overflow-wrap: none;
+    word-wrap: none;
+    word-break: none;
+    padding: 0;
+    cursor: default;
+    display: block;
+    line-height: normal;
+
+    &:hover {
+        color: black
+      }
+
+  }
+  .left-comment > span {
+    margin-top: 0;
+     background-color: transparent;
+     color: black;
+     overflow-wrap: none;
+     word-wrap: none;
+     word-break: none;
+     padding: 0;
+     display: block;
+     cursor: default;
+     line-height: normal;
+     &:hover {
+       color: black
+     }
+
+
+  }
+
+  .comment-item {
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    position: relative;
+    padding: 10px;
+
+
+    .comment-user-avatar {
+      margin-right: 10px;
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: transparent;
+
+      img {
+        background-color: transparent;
+        height: 40px;
+        width: 40px;
+        box-shadow: rgba(0,0,0,.1)0 0 0 1px inset;
+        object-fit: contain;
+        border-radius: 50%;
+
+      }
+    }
+
+    .comment-info {
+      width: 100%;
+      background-color: transparent;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .left-comment {
+        background-color: column;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        span {
+          display: block;
+        }
+        #comment-span-author-time {
+          font-size: 11px;
+          color: #ccc;
+
+          a {
+            background-color: transparent;
+            color: #999;
+            font-size: 12px;
+
+            &:hover {
+              color: black;
+            }
+          }
+
+        }
+
+        #comment-span-body {
+          word-break: break-word;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          font-size: 12px;
+        }
+
+      }
+
+    .right-comment {
+      #comment-timeago {
+        font-size: 11px;
+        white-space: nowrap;
+        color: #999;
+      }
+
+      #comment-reply-button {
+        min-width: 25px;
+        font-size: 11px;
+        padding: 2px 9px 2px 8px;
+        height: 22px;
+        line-height: 16px;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        background-color: #fff;
+        cursor: pointer;
+        font-weight: 100;
+        text-align: center;
+        vertical-align: baseline;
+      }
+
+    }
+
+    }
+  }
+}

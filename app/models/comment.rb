@@ -6,7 +6,7 @@
 #  body         :string           not null
 #  user_id      :integer          not null
 #  song_id      :integer          not null
-#  comment_time :integer
+#  comment_time :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

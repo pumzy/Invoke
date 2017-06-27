@@ -32,7 +32,7 @@ export const fetchComments = () => {
 
 
 export const fetchCommentsBySongID = (songid) => {
-  debugger
+
   return $.ajax({
     method: "GET",
     url: `api/comments/songfind/${songid}`
