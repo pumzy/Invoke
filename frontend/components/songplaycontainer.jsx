@@ -5,6 +5,7 @@ import { receiveAudio, removeAudio } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
+import Wavesurfer from 'react-wavesurfer'
 
 class SongPlay extends React.Component {
   constructor(props){
@@ -14,8 +15,29 @@ class SongPlay extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.goToSong = this.goToSong.bind(this)
     this.goToUser = this.goToUser.bind(this)
-    }
+    this.wavesurfer = null;
+    this.state = {
+     playing: false,
+     pos: 0,
+     volume: 0
+   };
+  //  this.handleTogglePlay = this.handleTogglePlay.bind(this);
+   this.handlePosChange = this.handlePosChange.bind(this);
+  }
 
+
+    // handleTogglePlay() {
+    //
+    //   this.setState({
+    //     playing: !this.state.playing
+    //   });
+    // }
+
+  handlePosChange(e) {
+    this.setState({
+        pos: e.originalArgs[0]
+      });
+    }
 
   handleClick(){
 
@@ -37,7 +59,14 @@ class SongPlay extends React.Component {
     this.props.history.push(`/${this.username}`)
   }
 
-  componentWillMount(){
+  componentWillReceiveProps(nextProps){
+
+    if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
+      this.setState({playing: true, volume: 0})
+    } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
+      this.setState({playing: false, volume: 0})
+    }
+
   }
 
   componentDidMount(){
@@ -45,7 +74,18 @@ class SongPlay extends React.Component {
     let username;
     if (this.props.user){
       this.username = this.props.user.username
+
+      // document[`wavesurfer${this.props.waveformid}`].setVolume(0);
+      // debugger
     }
+
+    // debugger
+    // if (this.props.audio.id && this.props.audio.id === this.props.song.id) {
+    //   this.wavesurfer.setVolume(0)
+    // }
+
+
+
   }
 
 
@@ -68,8 +108,6 @@ class SongPlay extends React.Component {
       var daysresult = `${daysago} days ago`
     }
 
-
-
     let genre = `#${this.props.song.genre}`
 
     let spb;
@@ -80,7 +118,7 @@ class SongPlay extends React.Component {
     }
 
 
-      if (this.props.user !== null ){
+      if (this.props.user !== null || this.props.user !== undefined){
 
         return(
           <div className='songplaybox'>
@@ -102,8 +140,18 @@ class SongPlay extends React.Component {
                   <div className="songplay-genre"><span className="genre-tag">{genre}</span></div>
                 </div>
               </div>
-              <div className='songplay-waveform'>
-              </div>
+              <div id={`waveform${this.props.waveformid}`}></div>
+                <Wavesurfer
+                   audioFile={this.props.song.track_url}
+                   container={`#waveform${this.props.waveformid}`}
+                   onPosChange={this.handlePosChange}
+                   volume='0'
+                   playing={this.state.playing}
+                   options={{waveColor: '#ddd',
+                     progressColor:'#ff7540'}}
+                   ref={Wavesurfer => this.wavesurfer = Wavesurfer}
+                   />
+
               <div className='songplay-buttonbar'>
               </div>
               </div>
@@ -115,6 +163,7 @@ class SongPlay extends React.Component {
 }
 
 const mapStateToProps = (state, passedDown) => {
+  debugger
   return {
     user: state.users.byID[passedDown.song.user_id],
     audio: state.audio
@@ -131,3 +180,12 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SongPlay));
+
+// <Wavesurfer
+//    audioFile={this.props.song.track_url}
+//    container={`#waveform${this.props.waveformid}`}
+//    pos={this.state.pos}
+//    onPosChange={this.handlePosChange}
+//    playing={this.state.playing}
+//    ref={Wavesurfer => this.wavesurfer = Wavesurfer}
+//    />

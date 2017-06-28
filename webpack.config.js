@@ -11,6 +11,8 @@ module.exports = {
     loaders: [
       {
         test: [/\.jsx?$/, /\.js?$/],
+        test: require.resolve("wavesurfer.js"),
+        loader: "expose?WaveSurfer"
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {

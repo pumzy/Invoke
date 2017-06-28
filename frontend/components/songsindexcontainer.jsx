@@ -34,7 +34,7 @@ class SongsIndex extends React.Component {
      <section className="songindexlist">
        <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
-          {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
+          {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay waveformid={song.id} song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
         </ul>
       </section>
     </div>
