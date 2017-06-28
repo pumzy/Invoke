@@ -58,7 +58,7 @@ class SongCurrentPlayButton extends React.Component {
     return(
 
       <div>
-        <img src={src} onClick={() =>this.giveToPlaybar} className="PlayinSongPage"  ref={img => this.playbutton = img}/>
+        <img src={src} onClick={this.giveToPlaybar} className="PlayinSongPage"  ref={img => this.playbutton = img}/>
       </div>
     )
   }

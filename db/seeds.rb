@@ -139,8 +139,8 @@ song7 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 7,
-  track: File.open("app/assets/songs/My-Songs-Know-What-You-Did-In-the-Dark(Light-Em-Up)-copy.mp3"),
-  cover_art: File.open("app/assets/images/falloutboycover.jpg")
+  track: File.open("app/assets/songs/07 Thanks For The Memories.mp3"),
+  cover_art: File.open("app/assets/images/falloutboyinfinity.jpg")
   )
 
 # song8 = Song.create!(
