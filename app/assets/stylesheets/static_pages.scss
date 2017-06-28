@@ -32,6 +32,7 @@ html {
  }
 
 .modal-backdrop {
+    transition: opacity .2s linear;
     top: 0;
     padding: 500px;
     position: fixed;
@@ -279,6 +280,7 @@ body {
         padding-right: 20px;
         width: 16.666%;
         float: left;
+        margin-bottom: 35px;
 
         .dh-img {
 
@@ -324,10 +326,12 @@ body {
   // position: absolute;
   width: 90%;
   background-color: white;
+  margin: 0 auto;
 
 
 
-  transform: translate(0, -6.5%);
+
+  transform: translate(0, -4.6%);
   // background-color: white;
   height: 100%;
   // position: absolute;

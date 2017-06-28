@@ -349,7 +349,7 @@
       display: block;
       border-radius: 50%;
       box-shadow: rgba(0,0,0,.1)0 0 0 1px inset;
-      background-size: cover;
+      object-fit: cover;
       background-position: 50% 50%;
     }
 

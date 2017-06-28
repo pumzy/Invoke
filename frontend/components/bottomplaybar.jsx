@@ -44,7 +44,6 @@ class BottomPlayBar extends React.Component {
 
 
   componentWillUpdate(nextProps){
-    debugger
 
     if (!this.music){
       return;
