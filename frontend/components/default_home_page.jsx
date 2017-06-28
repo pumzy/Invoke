@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { fetchSongs } from '../actions/song_actions'
+import { fetchUsers} from '../actions/user_actions'
 import { logout, clearErrors } from '../actions/session_actions'
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import SessionForm from './session_form'
@@ -35,6 +37,15 @@ class DefaultHomePage extends React.Component   {
     $("html").removeClass("faker")
   }
 
+  componentDidMount() {
+    this.props.fetchUsers().then(() => this.props.fetchSongs())
+  }
+
+  componentWillUnmount(){
+    // this.props.removeSongs()
+    // this.props.clearUsers()
+  }
+
 
   render(){
 
@@ -44,11 +55,14 @@ class DefaultHomePage extends React.Component   {
       $("html").addClass("faker")
     }
 
+    let allsonglist = this.props.allsongs.slice(0,12)
+
 
     let heading = <h1>Welcome to Invoke</h1>
       return (
 
         <div className='defaulthomecontainer'>
+
           <div className="headercontainer">
             <div className='homepagelogo'></div>
 
@@ -63,6 +77,34 @@ class DefaultHomePage extends React.Component   {
           <Modal isOpen={this.state.createModalOpen} onClose={() => this.closeCreateModal()}>
             <SessionForm formType={'signup'} />
           </Modal>
+          <div className="hmmmm"></div>
+          <div className="dummysearch-div">
+            <div className="homepage-search-filler">
+            <div className="homepage-searchbar-div">
+              <input type="search" className="homepage-searchbar" placeholder="Search for artists, bands, tracks, podcasts">
+              </input>
+              <button className="homepage-searchbar-button"></button>
+            </div>
+            <span className="homepage-or-span">or</span>
+            <button className="homepage-searchdiv-ancillary-button">Upload your own</button>
+          </div>
+          </div>
+          <div className="notloggedin-trending-section">
+            <h2 className="trending-notlogged-header">Peek at what’s trending for free in the Invoke community</h2>
+            <div className="top-track-list-div">
+              <ul className="top-track-list">
+                  {allsonglist.map(song => {
+                    let user = this.props.usersbyID[song.user_id]
+                return  <li key={song.id} className="dh-li">
+                            <img className="dh-img" src={song.cover_art_url} />
+                            <span className="dh-title">{song.title}</span>
+                            <span className="dh-artist">{user.username}</span>
+                        </li>
+                  }
+                 )}
+              </ul>
+            </div>
+          </div>
           {backdrop}
         </div>
       );
@@ -73,13 +115,21 @@ class DefaultHomePage extends React.Component   {
 
 const mapStateToProps = (state) => {
   return { currentUser: state.session.currentUser,
-           errors: state.session.errors  }
+           errors: state.session.errors,
+           allsongs: state.songs.allsongs,
+           usersbyID: state.users.byID
+         }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     clearErrors: () => dispatch(clearErrors()),
+    fetchSongs: () => dispatch(fetchSongs()),
+    removeSongs: () => dispatch(removeSongs()),
+    fetchUsers: () => dispatch(fetchUsers()),
+    clearUsers: () => dispatch(clearUsers()),
+    removeAudioToken: () => dispatch(removeAudioToken())
   }
 }
 
