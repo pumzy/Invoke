@@ -135,7 +135,7 @@ song6 = Song.create!(
   )
 
 song7 = Song.create!(
-  title: 'My songs know what you did in the dark',
+  title: 'Thanks for the memories',
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 7,
@@ -153,12 +153,12 @@ song7 = Song.create!(
 #   )
 
 song9 = Song.create!(
-  title: 'Dani California',
+  title: 'The Adventures of Rain Dance Maggie',
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 4,
-  track: File.open("app/assets/songs/Danny California.mp3"),
-  cover_art: File.open("app/assets/images/danicalifornia.gif")
+  track: File.open("app/assets/songs/07 The Adventures of Rain Dance Maggie.mp3"),
+  cover_art: File.open("app/assets/images/raindancecover.jpg")
   )
 
 song10 = Song.create!(
