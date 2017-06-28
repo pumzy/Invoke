@@ -80,8 +80,8 @@ class SessionForm extends React.Component {
   render() {
     let buttontext;
     if (this.props.formType === "signup"){
-      buttontext = "Sign Up"
-    } else{ buttontext = "Log In"
+      buttontext = "Create an account"
+    } else{ buttontext = "Continue"
     };
 
     let headertext;
@@ -99,8 +99,11 @@ class SessionForm extends React.Component {
     return (
       <div className="session-form-container">
 
+        <button className="demo-login">Continue as a Guest</button>
+
+        <h2 className="divider">or</h2>
+
         <form onSubmit={this.handleSubmit} className="session-form-form">
-        <h2>{headertext}</h2>
           <div className="session-form">
             <br/>
             <input type="text"
@@ -119,10 +122,12 @@ class SessionForm extends React.Component {
             <br/>
             <span className="imagepreviewonform">{avatarupload} {avatarpreview}</span>
             <br />
+            {this.displayErrors()}
             <button onClick={this.handleSubmit} className='auth-form-button'>{buttontext}</button>
           </div>
         </form>
-        {this.displayErrors()}
+        <p className="disclaimer-form">
+  Please note that this site is being used only for educational and portfolio purposes. I will not use any information or any music on this site for commercial purposes.</p>
       </div>
     );
   }
@@ -156,3 +161,5 @@ export default connect(
 // processForm: user => dispatch(processForm(user)),
 // formType
 // const processForm = (formType === 'login') ? login : signup;
+
+// <h2>{headertext}</h2>
