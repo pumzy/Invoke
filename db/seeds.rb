@@ -94,7 +94,7 @@ song2 = Song.create!(
   description: "This is a very good song, friends",
   user_id: 1,
   track: File.open("app/assets/songs/Yellow.mp3"),
-  cover_art: File.open("app/assets/images/yellowalbum.jpg")
+  cover_art: File.open("app/assets/images/Yellow_cover_art.jpg")
   )
 
 song3 = Song.create!(
