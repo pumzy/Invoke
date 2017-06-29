@@ -30,8 +30,16 @@
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   # Need to do the song models.
+
+
   has_many :songs
   has_many :comments
+  has_many :likes
+
+
+  has_many :liked_songs,
+  through: :likes,
+  source: :song
 
 
 
