@@ -6,7 +6,8 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import Wavesurfer from 'react-wavesurfer'
-import { fetchLikesBySongID} from '../actions/like_actions'
+import { fetchLikes, fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
+
 
 class SongPlay extends React.Component {
   constructor(props){
@@ -96,13 +97,8 @@ class SongPlay extends React.Component {
       this.username = this.props.user.username
       // document[`wavesurfer${this.props.waveformid}`].setVolume(0);
       //
-
     }
-
-    // if (this.props.song.id  === this.props.audio.id){
-    //   this.props.requestAudioPlaybackTime();
-    // }
-
+    this.props.fetchLikesBySongID(this.props.song.id)
   }
 
 
@@ -197,7 +193,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     changePlaybackTime: (time) => dispatch(changePlaybackTime(time)),
     requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime()),
-    fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id))
+    fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id)),
+    removeLikes: () => dispatch(removeLikes()),
+    createLike: (like) => dispatch(createLike(like)),
+    deleteLike: (like) => dispatch(deleteLike(like))
   }
 }
 

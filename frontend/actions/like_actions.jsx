@@ -37,6 +37,13 @@ export const removeLikes = () => {
   }
 }
 
+export const fetchLikes = () => dispatch => (
+  APIUtil.fetchLikes().then(likes => {
+    return dispatch(receiveLikes(likes))
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
 
 
 

@@ -673,7 +673,7 @@ body {
   height: 100%;
   width: 100%;
   background-image:  asset-url('logo-navbar.png');
-  background-color: orange;
+  background-color: #ff4100;
   object-fit: contain;
   background-position: right 319px top 2px;
     a:hover {
@@ -681,6 +681,7 @@ body {
       background-image:  asset-url('logo-navbar.png');
       background-position: right 319px top 2px;
       background-color:  orange;
+      object-fit: contain;
     }
   // background-size: cover;
   // background-position: top;
