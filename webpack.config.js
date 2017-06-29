@@ -23,4 +23,8 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", "*"]
   }
+  {
+    test: require.resolve("wavesurfer.js"),
+    loader: "expose?WaveSurfer"
+  }
 };
