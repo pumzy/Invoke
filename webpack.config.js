@@ -11,13 +11,15 @@ module.exports = {
     loaders: [
       {
         test: [/\.jsx?$/, /\.js?$/],
-        test: require.resolve("wavesurfer.js"),
-        loader: 'expose?WaveSurfer',
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: require.resolve("wavesurfer.js"),
+        loader: "expose?WaveSurfer"
       }
     ]
   },
@@ -25,6 +27,4 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", "*"]
   },
-
-
 };
