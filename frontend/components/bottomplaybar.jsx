@@ -184,11 +184,13 @@ class BottomPlayBar extends React.Component {
       // this.music.play()
       // playbutton.className = "";
       // playbutton.className = "pause";
+      this.props.provideAudioPlaybackTime(this.music.currentTime)
       store.dispatch(this.props.receivePlayToken())
     } else if (this.props.audio.token === "PLAYING") {
       // this.music.pause();
 		  // playbutton.className = "";
 		  // playbutton.className = "play";
+      this.props.provideAudioPlaybackTime(this.music.currentTime)
       store.dispatch(this.props.receivePauseToken());
     };
   }

@@ -1,4 +1,4 @@
-import { receiveAudio, removeAudio, removeAudioToken, receivePlayToken, receivePauseToken } from '../actions/audio_actions'
+import { receiveAudio, removeAudio, removeAudioToken, receivePlayToken, receivePauseToken, requestAudioPlaybackTime  } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import React from 'react'
 import { Route, withRouter } from 'react-router-dom';
@@ -32,6 +32,8 @@ class SongCurrentPlayButton extends React.Component {
     if (this.props.audio.id === this.props.song.id && this.props.audio.token === "PAUSED") {
       // this.playbutton.src = "https://s3.us-east-2.amazonaws.com/invoke-development/songshow-playbutton.png"
       this.props.receivePlayToken()
+      this.props.requestAudioPlaybackTime();
+
       // Dispatch the pause action, set the audio to pause.
       // Got to dispatch the pause action in the playbutton container
 
@@ -41,6 +43,8 @@ class SongCurrentPlayButton extends React.Component {
     } else if (this.props.audio.id === this.props.song.id && this.props.audio.token === "PLAYING"){
       // this.playbutton.src = "https://s3.us-east-2.amazonaws.com/invoke-development/songshow-pausebutton.png"
       this.props.receivePauseToken();
+      this.props.requestAudioPlaybackTime();
+
     }
 
 
@@ -77,7 +81,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     removeAudioToken: () => dispatch(removeAudioToken()),
     receivePlayToken: () => dispatch(receivePlayToken()),
-    receivePauseToken: () => dispatch(receivePauseToken())
+    receivePauseToken: () => dispatch(receivePauseToken()),
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
 
   }
 }

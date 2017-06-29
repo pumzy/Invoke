@@ -6,7 +6,7 @@ class Like < ApplicationRecord
 
 
 
-  validates :user, uniqueness: {scope: :like}
+  validates :user, uniqueness: {scope: :song}
   # has_many :playlists
   # has_many :comments
 

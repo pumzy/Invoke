@@ -1,5 +1,5 @@
 class Api::LikesController < ApplicationController
-  before_action :set_like, only: [:show, :edit, :update, :destroy]
+  before_action :set_like, only: [:show, :edit, :update]
 
   def index
     @like = Like.all
@@ -17,7 +17,8 @@ class Api::LikesController < ApplicationController
   end
 
   def indexsong
-    @comments = Comment.where(song_id: params[:songid])
+
+    @likes = Like.where(song_id: params[:songid])
     render :index
   end
 
@@ -33,6 +34,7 @@ class Api::LikesController < ApplicationController
 
 
   def destroy
+    @like = Like.find_by(user_id: current_user.id, song_id: like_params[:song_id])
     if @like.destroy
       render :show
     else
@@ -46,6 +48,6 @@ class Api::LikesController < ApplicationController
     end
 
     def like_params
-      params.require(:like).permit(:body, :song_id, :like_time)
+      params.require(:like).permit(:song_id)
     end
 end

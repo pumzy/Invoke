@@ -10,6 +10,7 @@ import SongUpdate from './edit';
 import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
 import { requestAudioPlaybackTime } from '../actions/audio_actions';
+import { fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import Wavesurfer from 'react-wavesurfer'
 
 
@@ -22,6 +23,8 @@ class SongPage extends React.Component {
     this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
+    this.likeSong = this.likeSong.bind(this);
+    this.unlikeSong = this.unlikeSong.bind(this);
     this.handlePosChange = this.handlePosChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
@@ -38,8 +41,9 @@ class SongPage extends React.Component {
 
   componentDidMount(){
     this.props.fetchOneUser(this.props.match.params.username);
-    this.props.fetchSongByTitle(this.props.match.params.title).then((response) => this.props.fetchCommentsBySongID(response.song.id));
-
+    this.props.fetchSongByTitle(this.props.match.params.title).then((response) => {
+      this.props.fetchCommentsBySongID(response.song.id)
+      this.props.fetchLikesBySongID(response.song.id)})
 
 
     // if (this.props.audio.id){
@@ -110,6 +114,7 @@ class SongPage extends React.Component {
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.removeComments()
+    this.props.removeLikes()
     if (this.props.song.id  === this.props.audio.id){
         this.props.requestAudioPlaybackTime();
       }
@@ -134,6 +139,16 @@ class SongPage extends React.Component {
         pos: e.originalArgs[0]
       });
     }
+
+
+  likeSong(){
+    // debugger
+    this.props.createLike({like: {song_id: this.props.song.id}})
+  }
+
+  unlikeSong(){
+    this.props.deleteLike({like: {song_id: this.props.song.id}})
+  }
 
 
 
@@ -171,6 +186,23 @@ class SongPage extends React.Component {
 
 
 
+
+
+
+    let likebutton;
+    let likecount
+
+    if (!isNaN(this.props.likedUsers[0])){
+      if (this.props.likedUsers.includes(this.props.currentUser.id)) {
+        likebutton = <button onClick={this.unlikeSong}  className="songpage-likebutton-liked">Liked</button>
+      } else {
+        likebutton = <button onClick={this.likeSong} className="songpage-likebutton-notliked">Like</button>
+      }
+      likecount = this.props.likedUsers.length
+    } else {
+      likecount = 0;
+      likebutton = <button onClick={this.likeSong} className="songpage-likebutton-notliked">Like</button>
+    }
 
 
 
@@ -249,6 +281,7 @@ class SongPage extends React.Component {
         )
       }
 
+
       return(
         <div className="song-page">
           {result}
@@ -265,8 +298,12 @@ class SongPage extends React.Component {
             />
         </div>
           <div className="songpage-user-buttons">
+            {likebutton}
             {this.editbutton}
             {this.deletebutton}
+            <div className="songpage-counters">
+              <button className="songpage-like-count">{likecount}</button>
+            </div>
           </div>
         </div>
         <div className="rest-of-songpage">
@@ -303,12 +340,15 @@ class SongPage extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
+
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
       currentUser: state.session.currentUser,
       comments: state.comments.allcomments,
-      audio: state.audio
+      audio: state.audio,
+      likes: state.likes.alllikes,
+      likedUsers: Object.keys(state.likes.bySongID).join(",").split(",").map(key => parseInt(key))
     };
   }
 
@@ -323,7 +363,11 @@ const mapDispatchToProps = (dispatch) => {
     removeComments: () => dispatch(removeComments()),
     createComment: (comment) => dispatch(createComment(comment)),
     deleteComment: (comment) => dispatch(deleteComment(comment)),
-    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime()),
+    fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id)),
+    removeLikes: () => dispatch(removeLikes()),
+    createLike: (like) => dispatch(createLike(like)),
+    deleteLike: (like) => dispatch(deleteLike(like))
   }
 }
 

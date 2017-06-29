@@ -6,12 +6,14 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import Wavesurfer from 'react-wavesurfer'
+import { fetchLikesBySongID} from '../actions/like_actions'
 
 class SongPlay extends React.Component {
   constructor(props){
     super(props);
     // this.giveToPlaybar = this.giveToPlaybar.bind(this
     this.props.fetchOneUserByID(this.props.song.user_id);
+    // this.props.fetchLikesBySongID(this.props.song.id)
     // this.props.requestAudioPlaybackTime();
     this.handleClick = this.handleClick.bind(this)
     this.handleWaveformClick = this.handleWaveformClick.bind(this);
@@ -74,7 +76,7 @@ class SongPlay extends React.Component {
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
       this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
     } else if(nextProps.audio.id !== this.props.song.id){
-      debugger
+
       this.setState({playing: false, volume: 0, pos: 0})
     }
 
@@ -183,7 +185,8 @@ const mapStateToProps = (state, passedDown) => {
 
   return {
     user: state.users.byID[passedDown.song.user_id],
-    audio: state.audio
+    audio: state.audio,
+    likes: state.likes.alllikes
   }
 }
 
@@ -193,7 +196,8 @@ const mapDispatchToProps = (dispatch) => {
     removeAudio: (song) => dispatch(removeAudio(song)),
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     changePlaybackTime: (time) => dispatch(changePlaybackTime(time)),
-    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime()),
+    fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id))
   }
 }
 

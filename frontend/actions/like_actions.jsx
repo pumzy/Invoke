@@ -1,4 +1,11 @@
+import * as APIUtil from '../util/like_api_util';
+import React from 'react'
 
+
+export const RECEIVE_LIKES = "RECEIVE_LIKES";
+export const RECEIVE_LIKE = "RECEIVE_LIKE";
+export const REMOVE_LIKE = "REMOVE_LIKE";
+export const REMOVE_LIKES = "REMOVE_LIKES";
 
 
 export const receiveLike = (like) => {
@@ -24,6 +31,14 @@ export const removeLike = like => {
   }
 }
 
+export const removeLikes = () => {
+  return {
+    type: REMOVE_LIKES
+  }
+}
+
+
+
 
 export const deleteLike = (like) => dispatch => (
   APIUtil.deleteLike(like).then(like => (
@@ -33,13 +48,14 @@ export const deleteLike = (like) => dispatch => (
   ))
 )
 
-export const createLike = (like) => dispatch => (
+export const createLike = (like) => dispatch => {
+  // debugger
   APIUtil.createLike(like).then(like => {
     return dispatch(receiveLike(like))
   }, err => (
     dispatch(receiveErrors(err.responseJSON))
   ))
-)
+}
 
 
 export const fetchLikesBySongID = (id) => dispatch => (

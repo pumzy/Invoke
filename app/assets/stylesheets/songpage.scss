@@ -421,6 +421,79 @@
       // float: right;
     }
 
+    .songpage-likebutton-liked {
+      width: 63px;
+      height: 20px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiNGNTAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
+      background-size: contain;
+      background-repeat: no-repeat;
+      vertical-align: top;
+      text-align: right;
+      padding: 2px 6px 2px 10px;
+      border: 1px solid #e5e5e5;
+      border-radius: 3px;
+      background-color: #fff;
+      cursor: pointer;
+      color: #f50;
+      font-size: 14px;
+      line-height: 0px;
+      white-space: nowrap;
+      font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+      font-weight: 100;
+      box-sizing: border-box;
+
+    }
+
+    .songpage-likebutton-notliked {
+      width: 57px;
+      height: 20px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiMwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
+      background-size: contain;
+      background-repeat: no-repeat;
+      vertical-align: top;
+      text-align: right;
+      padding: 2px 7px 2px 10px;
+      border: 1px solid #e5e5e5;
+      border-radius: 3px;
+      background-color: #fff;
+      cursor: pointer;
+      color: #333;
+      font-size: 14px;
+      line-height: 0px;
+      white-space: nowrap;
+      font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+      font-weight: 100;
+      box-sizing: border-box;
+    }
+
+    .songpage-counters {
+      justify-self: flex-end;
+      position: absolute;
+      left: 76.3%;
+      bottom: 28px;;
+      // margin: 0 auto !important;
+      .songpage-like-count {
+        width: 30px;
+        height: 20px;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfbGlrZXNfZ3JleTwvdGl0bGU+PHBhdGggZD0iTTEwLjgwNSAzYy0yLjAyIDAtMi44MDQgMi4zNDUtMi44MDQgMi4zNDVTNy4yMTMgMyA1LjE5NiAzQzMuNDk0IDMgMS43NDggNC4wOTYgMi4wMyA2LjUxNGMuMzQ0IDIuOTUzIDUuNzI1IDYuNDc5IDUuOTYzIDYuNDg3LjIzOC4wMDggNS43MzgtMy43MjIgNS45ODgtNi41QzE0LjE4OCA0LjIwMSAxMi41MDcgMyAxMC44MDUgM3oiIGZpbGw9IiM5OTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==);
+        background-size: contain;
+        background-repeat: no-repeat;
+        vertical-align: top;
+        text-align: right;
+        padding: 0px 0px 0px 0px;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        color: #999;
+        font-size: 12px;
+        line-height: 16px;
+        white-space: nowrap;
+        font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+        font-weight: 100;
+        box-sizing: border-box;
+      }
+    }
+
 
     .editbutton {
       // position: absolute;
@@ -481,7 +554,7 @@
   }
 
   .comment-creation-portion {
-    width: calc(100% - 300px);
+    width: calc(100% - 213px);
     margin-bottom: 10px;
     height: 40px;
     box-sizing: border-box;
