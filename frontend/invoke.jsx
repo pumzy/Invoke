@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-
-  window.fetchSongByUserID = fetchSongByUserID
-  window.fetchSongByTitle = fetchSongByTitle
-  window.deleteSong = deleteSong
-  window.store = store
+  // 
+  // window.fetchSongByUserID = fetchSongByUserID
+  // window.fetchSongByTitle = fetchSongByTitle
+  // window.deleteSong = deleteSong
+  // window.store = store
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
 });
