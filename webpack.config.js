@@ -17,10 +17,7 @@ module.exports = {
           presets: ['es2015', 'react']
         }
       },
-      {
-        test: require.resolve("wavesurfer.js"),
-        loader: "expose?WaveSurfer"
-      }
+    
     ]
   },
   devtool: 'source-maps',
