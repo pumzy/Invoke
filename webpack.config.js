@@ -11,7 +11,7 @@ module.exports = {
     loaders: [
       {
         test: require.resolve("wavesurfer.js"),
-        loader: "expose?WaveSurfer"
+        loader: "expose-loader?WaveSurfer"
       },
       {
         test: [/\.jsx?$/, /\.js?$/],
