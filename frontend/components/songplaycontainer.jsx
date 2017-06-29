@@ -21,12 +21,15 @@ class SongPlay extends React.Component {
     this.goToSong = this.goToSong.bind(this)
     this.goToUser = this.goToUser.bind(this)
     this.wavesurfer = null;
+    this.likeSong = this.likeSong.bind(this);
+    this.unlikeSong = this.unlikeSong.bind(this);
     this.state = {
      playing: false,
      pos: 0,
      volume: 0
    };
-   
+   debugger
+
   //  this.handleTogglePlay = this.handleTogglePlay.bind(this);
    this.handlePosChange = this.handlePosChange.bind(this);
   }
@@ -70,6 +73,16 @@ class SongPlay extends React.Component {
     this.props.history.push(`/${this.username}`)
   }
 
+  likeSong(){
+    debugger
+    this.props.createLike({like: {song_id: this.props.song.id}})
+  }
+
+  unlikeSong(){
+    this.props.deleteLike({like: {song_id: this.props.song.id}})
+  }
+
+
   componentWillReceiveProps(nextProps){
 
 
@@ -99,7 +112,7 @@ class SongPlay extends React.Component {
       // document[`wavesurfer${this.props.waveformid}`].setVolume(0);
       //
     }
-    this.props.fetchLikesBySongID(this.props.song.id)
+    // this.props.fetchLikesBySongID(this.props.song.id)
   }
 
 
@@ -130,6 +143,23 @@ class SongPlay extends React.Component {
     } else {
       spb = <SongPlayButton song={this.props.song} />
     }
+
+    let likebutton;
+
+    let userIds = this.props.likes.map(like => like.user_id)
+    let likecount =  this.props.likes.length
+    debugger
+
+
+
+      if (userIds.includes(this.props.currentUser.id)) {
+        likebutton = <button onClick={this.unlikeSong}  className="songpage-likebutton-liked">{likecount}</button>
+      } else {
+        likebutton = <button onClick={this.likeSong} className="songpage-likebutton-notliked">{likecount}</button>
+      }
+
+
+
 
 
       if (this.props.user !== null || this.props.user !== undefined){
@@ -169,6 +199,7 @@ class SongPlay extends React.Component {
                    />
                  </div>
               <div className='songplay-buttonbar'>
+                {likebutton}
               </div>
               </div>
             </div>
@@ -183,7 +214,7 @@ const mapStateToProps = (state, passedDown) => {
   return {
     user: state.users.byID[passedDown.song.user_id],
     audio: state.audio,
-    likes: state.likes.alllikes
+    currentUser: state.session.currentUser
   }
 }
 

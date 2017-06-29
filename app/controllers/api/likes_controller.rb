@@ -2,7 +2,7 @@ class Api::LikesController < ApplicationController
   before_action :set_like, only: [:show, :edit, :update]
 
   def index
-    @like = Like.all
+    @likes = Like.all
   end
 
 

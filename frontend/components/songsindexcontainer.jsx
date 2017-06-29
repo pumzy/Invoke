@@ -5,22 +5,41 @@ import { fetchUsers, clearUsers } from '../actions/user_actions'
 import { removeAudioToken} from '../actions/audio_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
-import { fetchLikes } from '../actions/like_actions'
+import { fetchLikes, removeLikes } from '../actions/like_actions'
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
 class SongsIndex extends React.Component {
+  constructor(props){
+    super(props)
+    this.props.fetchUsers().then(() => this.props.fetchSongs())
+    this.props.fetchLikes()
+    this.likes = [];
+  }
+
   componentDidMount() {
-    this.props.fetchUsers().then(() => this.props.fetchSongs()).then(() => this.props.fetchLikes())
+    this.props.fetchUsers().then(() => this.props.fetchSongs())
   }
 
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.clearUsers()
+    this.props.removeLikes()
 
     // this.props.removeAudioToken();
   }
 
   render() {
+
+    // let likes = [];
+    // if (this.props.likes){
+    //   debugger
+    //   likes = this.props.likes
+    // }
+    let likes = [];
+    if(this.props.likes.length > 0 ){
+      likes = this.props.likes;
+    }
+
     return (
     <div className="index">
       <div className="Homepagenavdiv">
@@ -35,7 +54,7 @@ class SongsIndex extends React.Component {
      <section className="songindexlist">
        <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
-          {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay waveformid={song.id} song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
+          {this.props.allsongs.map(song => <li key={song.id}  className="indexlist"><SongPlay likes={likes.filter(like => like.song_id === song.id)} waveformid={song.id} song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
         </ul>
       </section>
     </div>
@@ -51,7 +70,7 @@ const mapStateToProps = (state) => {
            allsongs: state.songs.allsongs,
            usersbyID: state.users.byID,
           audio: state.audio,
-          likes: state.alllikes}
+          likes: state.likes.alllikes}
 }
 
 const mapDispatchToProps = (dispatch) => {

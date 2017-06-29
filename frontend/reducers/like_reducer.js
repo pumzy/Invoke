@@ -8,6 +8,7 @@ const LikeReducer = (state={ bySongID: {}, byUserID: {}, alllikes: [] }, action)
   let newState = merge({}, state);
   switch (action.type) {
     case RECEIVE_LIKES:
+    
       action.likes.forEach(like => (newState.bySongID[like.user_id] = like))
       action.likes.forEach(like => (newState.byUserID[like.song_id] = like))
       action.likes.forEach(like => (newState.alllikes.push(like)))

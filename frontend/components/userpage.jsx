@@ -4,6 +4,7 @@ import { fetchOneUserByID, fetchOneUser } from '../actions/user_actions.js'
 import Error404 from './404page'
 import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
+import { removeLikes } from '../actions/like_actions'
 
 import SongPlay from './songplaycontainer'
 
@@ -29,6 +30,7 @@ class UserPage extends React.Component {
   }
 
   componentWillUnmount(){
+    this.props.removeLikes()
   }
 
   componentWillUpdate(nextProps){
@@ -46,7 +48,16 @@ class UserPage extends React.Component {
     if (!this.props.user){
       result = <Error404 />
     } else {
-      let songs = this.props.songs.map(song => (<SongPlay song={song} key={song.id} />));
+      let likes = [];
+      if(this.props.likes.length > 0 ){
+        likes = this.props.likes;
+      }
+
+
+
+      let songs = this.props.songs.map(song => (<SongPlay song={song} key={song.id} likes={likes.filter(like => like.song_id === song.id)}/>));
+
+
 
 let links =  <ul className='user-page-navlinks'>
                 <li><NavLink to={`/${this.props.user.username}`}>All</NavLink></li>
@@ -98,13 +109,15 @@ const mapStateToProps = (state, ownProps) => {
     // let user = null;
     // const getuser = new Promise((resolve, reject) => resolve(store.dispatch(fetchOneUserByID(username)))).then( () => ({user: state.users.byUsername[state.users.allusers[0]]}));
     return {user: state.users.byUsername[ownProps.match.params.username],
-            songs: state.songs.allsongs }
+            songs: state.songs.allsongs,
+          likes: state.likes.alllikes }
           }
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id)),
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
-    removeSongs: () => dispatch(removeSongs())
+    removeSongs: () => dispatch(removeSongs()),
+    removeLikes: () => dispatch(removeLikes())
   }
 }
 

@@ -17,12 +17,14 @@ import Wavesurfer from 'react-wavesurfer'
 class SongPage extends React.Component {
   constructor(props){
     super(props)
+    this.props.removeLikes()
     this.goToUser = this.goToUser.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
     this.byeBye = this.byeBye.bind(this);
     this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
+    this.props.fetchOneUser(this.props.match.params.username);
     this.likeSong = this.likeSong.bind(this);
     this.unlikeSong = this.unlikeSong.bind(this);
     this.handlePosChange = this.handlePosChange.bind(this);
@@ -40,7 +42,7 @@ class SongPage extends React.Component {
 
 
   componentDidMount(){
-    this.props.fetchOneUser(this.props.match.params.username);
+
     this.props.fetchSongByTitle(this.props.match.params.title).then((response) => {
       this.props.fetchCommentsBySongID(response.song.id)
       this.props.fetchLikesBySongID(response.song.id)})
@@ -142,7 +144,7 @@ class SongPage extends React.Component {
 
 
   likeSong(){
-    //
+    // debugger
     this.props.createLike({like: {song_id: this.props.song.id}})
   }
 
@@ -203,7 +205,6 @@ class SongPage extends React.Component {
       likecount = 0;
       likebutton = <button onClick={this.likeSong} className="songpage-likebutton-notliked">Like</button>
     }
-
 
 
     let genre = `#${this.props.song.genre}`
@@ -302,7 +303,7 @@ class SongPage extends React.Component {
             {this.editbutton}
             {this.deletebutton}
             <div className="songpage-counters">
-              <button className="songpage-like-count">{likecount}</button>
+              <div className="songpage-like-count">{likecount}</div>
             </div>
           </div>
         </div>
@@ -340,7 +341,13 @@ class SongPage extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-
+  debugger
+  // let userid = 0
+  // let likedUsers = "hello"
+  // if (state.songs.allsongs.length > 0 && state.likes.alllikes.length > 0){
+  //   userid = state.users.allusers[0].id
+  //   likedUsers = Object.keys(state.likes.bySongID[userid]).join(",").split(",").map(key => parseInt(key))
+  // }
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
