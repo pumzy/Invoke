@@ -142,7 +142,7 @@ class SongPage extends React.Component {
 
 
   likeSong(){
-    // debugger
+    //
     this.props.createLike({like: {song_id: this.props.song.id}})
   }
 
