@@ -11,13 +11,13 @@ module.exports = {
     loaders: [
       {
         test: [/\.jsx?$/, /\.js?$/],
-        exclude: /node_modules\/(?!(wavesurfer|wavesurfer.js)\/).*/,
+        exclude: /node_modules\/(?!(wavesurfer|wavesurfer.js|react-wavesurfer)\/).*/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react']
         }
-      },
-    
+      }
+
     ]
   },
   devtool: 'source-maps',
