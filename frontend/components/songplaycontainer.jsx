@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { receiveAudio, removeAudio } from '../actions/audio_actions'
+import { receiveAudio, removeAudio, changePlaybackTime, requestAudioPlaybackTime } from '../actions/audio_actions'
 import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
@@ -12,7 +12,9 @@ class SongPlay extends React.Component {
     super(props);
     // this.giveToPlaybar = this.giveToPlaybar.bind(this
     this.props.fetchOneUserByID(this.props.song.user_id);
+    // this.props.requestAudioPlaybackTime();
     this.handleClick = this.handleClick.bind(this)
+    this.handleWaveformClick = this.handleWaveformClick.bind(this);
     this.goToSong = this.goToSong.bind(this)
     this.goToUser = this.goToUser.bind(this)
     this.wavesurfer = null;
@@ -32,6 +34,11 @@ class SongPlay extends React.Component {
     //     playing: !this.state.playing
     //   });
     // }
+
+  handleWaveformClick(e){
+
+  }
+
 
   handlePosChange(e) {
     this.setState({
@@ -61,30 +68,38 @@ class SongPlay extends React.Component {
 
   componentWillReceiveProps(nextProps){
 
+
     if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
-      this.setState({playing: true, volume: 0})
+      this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
-      this.setState({playing: false, volume: 0})
+      this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
+    } else if(nextProps.audio.id !== this.props.song.id){
+      debugger
+      this.setState({playing: false, volume: 0, pos: 0})
     }
 
   }
+
+  componentWillUnmount(){
+    if (this.props.song.id  === this.props.audio.id){
+        this.props.requestAudioPlaybackTime();
+      }
+  }
+
 
   componentDidMount(){
     this.username = null
     let username;
     if (this.props.user){
       this.username = this.props.user.username
-
       // document[`wavesurfer${this.props.waveformid}`].setVolume(0);
-      // debugger
+      //
+
     }
 
-    // debugger
-    // if (this.props.audio.id && this.props.audio.id === this.props.song.id) {
-    //   this.wavesurfer.setVolume(0)
+    // if (this.props.song.id  === this.props.audio.id){
+    //   this.props.requestAudioPlaybackTime();
     // }
-
-
 
   }
 
@@ -140,18 +155,20 @@ class SongPlay extends React.Component {
                   <div className="songplay-genre"><span className="genre-tag">{genre}</span></div>
                 </div>
               </div>
-              <div id={`waveform${this.props.waveformid}`}></div>
+              <div id={`waveform${this.props.waveformid}`} onClick={this.handleWaveformClick}>
                 <Wavesurfer
                    audioFile={this.props.song.track_url}
                    container={`#waveform${this.props.waveformid}`}
                    onPosChange={this.handlePosChange}
+                   pos={this.state.pos}
                    volume='0'
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
                      progressColor:'#ff7540'}}
+
                    ref={Wavesurfer => this.wavesurfer = Wavesurfer}
                    />
-
+                 </div>
               <div className='songplay-buttonbar'>
               </div>
               </div>
@@ -163,7 +180,7 @@ class SongPlay extends React.Component {
 }
 
 const mapStateToProps = (state, passedDown) => {
-  debugger
+
   return {
     user: state.users.byID[passedDown.song.user_id],
     audio: state.audio
@@ -174,7 +191,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     receiveAudio: (song) => dispatch(receiveAudio(song)),
     removeAudio: (song) => dispatch(removeAudio(song)),
-    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id))
+    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
+    changePlaybackTime: (time) => dispatch(changePlaybackTime(time)),
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
   }
 }
 

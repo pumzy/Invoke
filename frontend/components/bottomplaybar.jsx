@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { fetchOneUser, fetchOneUserByID, clearUsers } from '../actions/user_actions'
-import { receivePauseToken, receivePlayToken} from '../actions/audio_actions'
+import { receivePauseToken, receivePlayToken, provideAudioPlaybackTime } from '../actions/audio_actions'
 
 
 
@@ -34,10 +34,17 @@ class BottomPlayBar extends React.Component {
     if (nextProps.audio.track_url !== "" && nextProps.audio.id !== this.props.audio.id){
       this.props.fetchOneUserByID(nextProps.audio.user_id)
     }
-    if (this.props.audio.id === null){
+    if (nextProps.audio.id === null){
       this.footer.className = "aintnothinghere"
-    } else {
+    }
+    else {
       this.footer.className = "audiofooter"
+    }
+    // if (nextProps.audio.token === "WAVEFORM-OVERRIDE" && nextProps.audio.id === this.props.audio.id){
+    //   this.music.currentTime = nextProps.audio.time
+    // }
+    if (nextProps.audio.request === "REQUEST-TIME"){
+      this.props.provideAudioPlaybackTime(this.music.currentTime)
     }
   }
 
@@ -56,6 +63,8 @@ class BottomPlayBar extends React.Component {
       this.music.pause()
       this.playbutton.className = "play";
     }
+
+
   }
 
 
@@ -88,6 +97,9 @@ class BottomPlayBar extends React.Component {
     let currentTime = this.music.currentTime;
     this.fullduration.innerText = (this.timeshow(this.music.duration))
 
+    // if (this.props.audio.request === "REQUEST-TIME"){
+    //   this.props.provideAudioPlaybackTime(currentTime)
+    // }
 
     let newval = currentTime/duration;
     let res = newval.toLocaleString("en", {minimumFractionDigits: 10, style: "percent"})
@@ -112,6 +124,7 @@ class BottomPlayBar extends React.Component {
     var newpos = e.clientX - this.playbar.offsetLeft - this.playbar.offsetParent.offsetLeft- this.container.offsetLeft;
     this.music.style.width = newpos;
     this.music.currentTime = (newpos/holderwidth) * duration;
+    this.props.provideAudioPlaybackTime(this.music.currentTime)
     //
 
   }
@@ -255,7 +268,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchOneUser: (username) => dispatch(fetchOneUser(username)),
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     receivePlayToken: () => dispatch(receivePlayToken),
-    receivePauseToken: () => dispatch(receivePauseToken)
+    receivePauseToken: () => dispatch(receivePauseToken),
+    provideAudioPlaybackTime: (currentTime) => dispatch(provideAudioPlaybackTime(currentTime))
   }
 }
 

@@ -5,10 +5,12 @@ import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { fetchSongByTitle, removeSongs, deleteSong } from '../actions/song_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
+import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import SongUpdate from './edit';
 import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
-
+import { requestAudioPlaybackTime } from '../actions/audio_actions';
+import Wavesurfer from 'react-wavesurfer'
 
 
 class SongPage extends React.Component {
@@ -20,17 +22,32 @@ class SongPage extends React.Component {
     this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
+    this.handlePosChange = this.handlePosChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       body: "",
       comment_time: "",
-      song_id: null
+      song_id: null,
+      playing: false,
+      pos: 0,
+      volume: 0
     }
   }
+
+
 
   componentDidMount(){
     this.props.fetchOneUser(this.props.match.params.username);
     this.props.fetchSongByTitle(this.props.match.params.title).then((response) => this.props.fetchCommentsBySongID(response.song.id));
+
+
+
+    // if (this.props.audio.id){
+    //   if (this.props.song.id === this.props.audio.id){
+    //     this.props.requestAudioPlaybackTime();
+    //   }
+    // }
+
   }
 
   handleSubmit(e){
@@ -93,6 +110,9 @@ class SongPage extends React.Component {
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.removeComments()
+    if (this.props.song.id  === this.props.audio.id){
+        this.props.requestAudioPlaybackTime();
+      }
   }
 
   componentWillReceiveProps(nextProps){
@@ -101,7 +121,23 @@ class SongPage extends React.Component {
     this.props.removeSongs()
     this.props.clearUsers()
     }
+
+    if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === nextProps.song.id) {
+      this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
+    } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === nextProps.song.id) {
+      this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
+    }
   }
+
+  handlePosChange(e) {
+    this.setState({
+        pos: e.originalArgs[0]
+      });
+    }
+
+
+
+
 
   goToUser(){
     this.props.history.push(`/${this.props.match.params.username}`)
@@ -139,13 +175,38 @@ class SongPage extends React.Component {
 
 
     let genre = `#${this.props.song.genre}`
-    let songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
+    let songplay;
+    let waveform = null;
+
+    if (this.props.audio.id !== null && this.props.audio.id === this.props.song.id){
+      songplay = <SongCurrentPlayButton className="PlayinSongPage" song={this.props.song} />
+      waveform = <Wavesurfer
+         audioFile={this.props.song.track_url}
+         container={`#waveform-songpage`}
+         onPosChange={this.handlePosChange}
+         pos={this.state.pos}
+         volume='0'
+         onClick={this.handleWaveformClick}
+         playing={this.state.playing}
+         options={{waveColor: '#ddd',
+           progressColor:'#ff7540'}}
+
+         ref={Wavesurfer => this.wavesurfer = Wavesurfer}
+         />
+
+
+
+
+
+    } else {
+      songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
+    }
 
     let timesincerelease = this.howLongAgo(this.props.song.created_at)
 
 
     // Created date functionality
-    
+
     let releasedate
 
     let rubydate = this.props.song.created_at.slice(0, 10)
@@ -177,8 +238,8 @@ class SongPage extends React.Component {
                   <div className="time"><span className="genre-tag">{genre}</span></div>
                 </div>
               </div>
-              <div className='waveform'>
-
+              <div className='waveform' id='waveform-songpage'>
+                {waveform}
               </div>
             </div>
             <div className='song-coverart' >
@@ -246,7 +307,8 @@ const mapStateToProps = (state, ownProps) => {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
       currentUser: state.session.currentUser,
-      comments: state.comments.allcomments
+      comments: state.comments.allcomments,
+      audio: state.audio
     };
   }
 
@@ -260,7 +322,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchCommentsBySongID: (id) => dispatch(fetchCommentsBySongID(id)),
     removeComments: () => dispatch(removeComments()),
     createComment: (comment) => dispatch(createComment(comment)),
-    deleteComment: (comment) => dispatch(deleteComment(comment))
+    deleteComment: (comment) => dispatch(deleteComment(comment)),
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
   }
 }
 

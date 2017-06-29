@@ -3,6 +3,10 @@ export const RECEIVE_AUDIO = "RECEIVE_AUDIO"
 export const REMOVE_AUDIO = "REMOVE_AUDIO"
 export const REMOVE_AUDIO_TOKEN = "REMOVE_AUDIO_TOKEN"
 export const RECEIVE_AUDIO_TOKEN = "RECEIVE_AUDIO_TOKEN"
+export const PROVIDE_AUDIO_PLAYBACK_TIME = "PROVIDE_AUDIO_PLAYBACK_TIME"
+export const CHANGE_PLAYBACK_TIME = "CHANGE_PLAYBACK_TIME"
+export const REQUEST_AUDIO_PLAYBACK_TIME = "REQUEST_AUDIO_PLAYBACK_TIME"
+export const CLEAR_AUDIO_REQUEST = "CLEAR_AUDIO_REQUEST"
 
 
 export const receiveAudio = (audio) => {
@@ -36,5 +40,31 @@ export const removeAudioToken = () => {
   return {
     type: REMOVE_AUDIO_TOKEN,
     token: ""
+  }
+}
+
+export const provideAudioPlaybackTime = (time) => {
+
+  return {
+    type: PROVIDE_AUDIO_PLAYBACK_TIME,
+    time
+  }
+}
+
+export const requestAudioPlaybackTime = () => {
+
+  return {
+    type: REQUEST_AUDIO_PLAYBACK_TIME,
+    request: 'REQUEST-TIME'
+  }
+}
+
+
+export const changePlaybackTime = (time) => {
+
+  return {
+    type: PROVIDE_AUDIO_PLAYBACK_TIME,
+    token: 'WAVEFORM-OVERRIDE',
+    time
   }
 }
