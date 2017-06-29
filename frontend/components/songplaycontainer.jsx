@@ -190,7 +190,7 @@ class SongPlay extends React.Component {
                    container={`#waveform${this.props.waveformid}`}
                    onPosChange={this.handlePosChange}
                    pos={this.state.pos}
-                   volume='0'
+                   volume={this.state.volume}
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
                      progressColor:'#ff7540'}}
