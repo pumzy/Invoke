@@ -11,13 +11,13 @@ import { fetchLikes, removeLikes } from '../actions/like_actions'
 class SongsIndex extends React.Component {
   constructor(props){
     super(props)
-    this.props.fetchUsers().then(() => this.props.fetchSongs())
-    this.props.fetchLikes()
+    // this.props.fetchUsers().then(() => this.props.fetchSongs())
     this.likes = [];
   }
 
   componentDidMount() {
     this.props.fetchUsers().then(() => this.props.fetchSongs())
+    this.props.fetchLikes()
   }
 
   componentWillUnmount(){
@@ -32,14 +32,14 @@ class SongsIndex extends React.Component {
 
     // let likes = [];
     // if (this.props.likes){
-    //   debugger
+    //   
     //   likes = this.props.likes
     // }
     let likes = [];
     if(this.props.likes.length > 0 ){
       likes = this.props.likes;
     }
-
+    
     return (
     <div className="index">
       <div className="Homepagenavdiv">
@@ -54,7 +54,15 @@ class SongsIndex extends React.Component {
      <section className="songindexlist">
        <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
-          {this.props.allsongs.map(song => <li key={song.id}  className="indexlist"><SongPlay likes={likes.filter(like => like.song_id === song.id)} waveformid={song.id} song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
+          {
+            this.props.allsongs.map(song => (
+              <li key={`song_${song.id}`}  className="indexlist">
+                <SongPlay likes={likes.filter(like => like.song_id === song.id)}
+                  waveformid={song.id} song={song}
+                  user={this.props.usersbyID[song.user_id]} />
+              </li>
+            ))
+          }
         </ul>
       </section>
     </div>

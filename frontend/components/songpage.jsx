@@ -144,7 +144,7 @@ class SongPage extends React.Component {
 
 
   likeSong(){
-    // debugger
+    //
     this.props.createLike({like: {song_id: this.props.song.id}})
   }
 
@@ -341,7 +341,7 @@ class SongPage extends React.Component {
 
 
 const mapStateToProps = (state, ownProps) => {
-  debugger
+
   // let userid = 0
   // let likedUsers = "hello"
   // if (state.songs.allsongs.length > 0 && state.likes.alllikes.length > 0){

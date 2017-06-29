@@ -28,7 +28,7 @@ class SongPlay extends React.Component {
      pos: 0,
      volume: 0
    };
-   debugger
+
 
   //  this.handleTogglePlay = this.handleTogglePlay.bind(this);
    this.handlePosChange = this.handlePosChange.bind(this);
@@ -74,7 +74,7 @@ class SongPlay extends React.Component {
   }
 
   likeSong(){
-    debugger
+
     this.props.createLike({like: {song_id: this.props.song.id}})
   }
 
@@ -148,7 +148,7 @@ class SongPlay extends React.Component {
 
     let userIds = this.props.likes.map(like => like.user_id)
     let likecount =  this.props.likes.length
-    debugger
+
 
 
 
@@ -190,7 +190,7 @@ class SongPlay extends React.Component {
                    container={`#waveform${this.props.waveformid}`}
                    onPosChange={this.handlePosChange}
                    pos={this.state.pos}
-                   volume={this.state.volume}
+                   volume={0}
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
                      progressColor:'#ff7540'}}

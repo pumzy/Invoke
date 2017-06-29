@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { fetchSongs } from '../actions/song_actions'
-import { fetchUsers} from '../actions/user_actions'
+import { fetchSongs, removeSongs } from '../actions/song_actions'
+import { fetchUsers, clearUsers } from '../actions/user_actions'
 import { logout, clearErrors } from '../actions/session_actions'
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import SessionForm from './session_form'
@@ -42,8 +42,8 @@ class DefaultHomePage extends React.Component   {
   }
 
   componentWillUnmount(){
-    // this.props.removeSongs()
-    // this.props.clearUsers()
+    this.props.removeSongs()
+    this.props.clearUsers()
   }
 
 
