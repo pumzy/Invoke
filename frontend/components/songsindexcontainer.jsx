@@ -9,14 +9,8 @@ import { fetchLikes } from '../actions/like_actions'
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
 class SongsIndex extends React.Component {
-
-  constructor(props){
-    super(props)
-    this.props.fetchUsers().then(() => this.props.fetchSongs())
-
-  }
   componentDidMount() {
-    // this.props.fetchUsers().then(() => this.props.fetchSongs()).then(() => this.props.fetchLikes())
+    this.props.fetchUsers().then(() => this.props.fetchSongs()).then(() => this.props.fetchLikes())
   }
 
   componentWillUnmount(){
@@ -41,10 +35,7 @@ class SongsIndex extends React.Component {
      <section className="songindexlist">
        <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
-          {this.props.allsongs.map(song => {
-
-            return <li key={song.id} className="indexlist"><SongPlay waveformid={song.id}  song={song} user={this.props.usersbyID[song.user_id]} /></li>
-            })}
+          {this.props.allsongs.map(song => <li key={song.id} className="indexlist"><SongPlay waveformid={song.id} song={song} user={this.props.usersbyID[song.user_id]} /></li>  )}
         </ul>
       </section>
     </div>
@@ -60,8 +51,7 @@ const mapStateToProps = (state) => {
            allsongs: state.songs.allsongs,
            usersbyID: state.users.byID,
           audio: state.audio,
-          likes: state.alllikes
-        }
+          likes: state.alllikes}
 }
 
 const mapDispatchToProps = (dispatch) => {
