@@ -26,6 +26,7 @@ class SongPlay extends React.Component {
      pos: 0,
      volume: 0
    };
+   
   //  this.handleTogglePlay = this.handleTogglePlay.bind(this);
    this.handlePosChange = this.handlePosChange.bind(this);
   }
