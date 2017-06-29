@@ -23,7 +23,7 @@ class SongsIndex extends React.Component {
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.clearUsers()
-    this.props.removeLikes()
+    // this.props.removeLikes()
 
     // this.props.removeAudioToken();
   }
@@ -32,14 +32,14 @@ class SongsIndex extends React.Component {
 
     // let likes = [];
     // if (this.props.likes){
-    //   
+    //
     //   likes = this.props.likes
     // }
     let likes = [];
     if(this.props.likes.length > 0 ){
       likes = this.props.likes;
     }
-    
+
     return (
     <div className="index">
       <div className="Homepagenavdiv">
@@ -88,7 +88,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchUsers: () => dispatch(fetchUsers()),
     clearUsers: () => dispatch(clearUsers()),
     removeAudioToken: () => dispatch(removeAudioToken()),
-    fetchLikes: () => dispatch(fetchLikes())
+    fetchLikes: () => dispatch(fetchLikes()),
+    removeLikes: () => dispatch(removeLikes())
   }
 }
 
