@@ -28,7 +28,7 @@ This was perhaps one of the hardest logical challenges when building this websit
 
 The logged in homepage is a pseudo-index container which will show you all the songs posted by the users that you have followed. This page renders multiple waveforms, and is comprised on a number of 'SongplayContainers'. This page will allow you to dynamically choose songs and render waveforms. By clicking play on one song, another will stop. An image of it is below. 
 
-![image of homepage](docs/invoke-logged-in.png)
+![image of homepage](docs/Invoke-logged-in.png)
 
 
 ### User Show and Song Show pages
