@@ -171,6 +171,7 @@ class SongPage extends React.Component {
 
   render(){
 
+
     if (!this.props.song || !this.props.user) {
       return null
     } else {
@@ -217,12 +218,14 @@ class SongPage extends React.Component {
          audioFile={this.props.song.track_url}
          container={`#waveform-songpage`}
          onPosChange={this.handlePosChange}
+         className="test"
          pos={this.state.pos}
          volume='0'
          onClick={this.handleWaveformClick}
          playing={this.state.playing}
          options={{waveColor: '#ddd',
-           progressColor:'#ff7540'}}
+           progressColor:'#ff7540',
+           barWidth: 1}}
 
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />

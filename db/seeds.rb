@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.destroy_all
+
 user1 = User.create!(
   username: 'Coldplay',
   password: 'password',
@@ -77,7 +79,7 @@ user12 = User.create!(
   avatar: File.open("app/assets/images/oasis.jpg")
   )
 
-
+Song.destroy_all
 
 song1 = Song.create!(
   title: 'Wonderwall',

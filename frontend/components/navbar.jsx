@@ -5,15 +5,50 @@ import { logout } from '../actions/session_actions'
 
 
 
+
 class NavBar extends React.Component {
   constructor(props){
     super(props)
     this.wildcard =  "/" + `${this.props.currentUser.id}`;
-
+    this.results = null;
     this.logout = this.props.logout.bind(this)
+    this.update = this.update.bind(this);
+    this.queryusers = null;
+    this.querysongs = null;
+    this.state = {
+      query: ""
+    }
   }
 
+  update(field) {
+
+
+    this.querysongs = [...new Set(this.props.songs)].slice(0,5).filter(song => song.includes(this.state.query)).map(song => <li className="navbar-search-item">{song}</li>)
+    this.queryusers = [...new Set(this.props.users)].slice(0,5).filter(user => user.includes(this.state.query)).map(user => <li className="navbar-search-item">{user}</li>)
+
+
+    if (this.state.query !== ""){
+
+    this.results = <ul className="navbar-search-dropdown-ul">
+        <li className="navbar-search-dropdown-header-1">Search for <q>{this.state.query}</q></li>
+              <li className="navbar-search-dropdown-header">{this.querysongs.length > 0 ? "Songs" : null}</li>
+              {this.querysongs}
+              <li className="navbar-search-dropdown-header">{this.queryusers.length > 0 ? "Users" : null}</li>
+              {this.queryusers}
+                  </ul>
+  } else {
+    this.results = null;
+  }
+  return e => this.setState({
+    [field]: e.currentTarget.value
+  });
+
+  }
+
+
   render(){
+
+
 
     return(
     <div className="navbar-container">
@@ -25,7 +60,8 @@ class NavBar extends React.Component {
         <li> <NavLink to="/you/collection"> Collection </NavLink> </li>
       </ul>
         <ul>
-          <input type="search" placeholder="Search" className="nav-search"/>
+          <input type="search" placeholder="Search" className="nav-search" value={this.state.query} onChange={this.update("query")}/>
+          {this.results}
         </ul>
       <ul className="navigation-right">
         <li> <NavLink to="/upload"> Upload </NavLink></li>
@@ -48,7 +84,9 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    songs: state.songs.allsongs.map(song => song.title),
+    users: state.users.allusers.map(user => user.username)
   }
 }
 const mapDispatchToProps = (dispatch) => {

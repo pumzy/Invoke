@@ -13,7 +13,7 @@ class SongPlay extends React.Component {
   constructor(props){
     super(props);
     // this.giveToPlaybar = this.giveToPlaybar.bind(this
-    this.props.fetchOneUserByID(this.props.song.user_id);
+    // this.props.fetchOneUserByID(this.props.song.user_id);
     // this.props.fetchLikesBySongID(this.props.song.id)
     // this.props.requestAudioPlaybackTime();
     this.handleClick = this.handleClick.bind(this)
@@ -193,7 +193,8 @@ class SongPlay extends React.Component {
                    volume={'0'}
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
-                     progressColor:'#ff7540'}}
+                     progressColor:'#ff7540',
+                     barWidth: 1}}
 
                    ref={Wavesurfer => this.wavesurfer = Wavesurfer}
                    />
