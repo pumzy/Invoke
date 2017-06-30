@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :songs
     resources :users
     resources :likes
+    resources :search, only: [:index]
     get '/users/show2/:id', to: "users#show2"
     get '/songs/show2/:title', to: "songs#show2"
     get '/songs/userfind/:userid', to: "songs#indexuser"

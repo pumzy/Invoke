@@ -12,6 +12,7 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-search": "^2.0.5",
     "react-wavesurfer": "^0.8.3",
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",

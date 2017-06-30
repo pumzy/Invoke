@@ -20,6 +20,11 @@
 #
 
 class Song < ApplicationRecord
+  include PgSearch
+  multisearchable :against => :title,
+                  :using => {
+                    :tsearch => {:prefix => true}
+                  }
 
 
   validates_presence_of :title

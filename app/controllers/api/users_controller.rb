@@ -11,6 +11,7 @@ class Api::UsersController < ApplicationController
     render :show
   end
 
+
   # GET /api/users/1
   # GET /api/users/1.json
   def show
