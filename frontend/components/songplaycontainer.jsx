@@ -8,7 +8,6 @@ import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import Wavesurfer from 'react-wavesurfer'
 import { fetchLikes, fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 
-
 class SongPlay extends React.Component {
   constructor(props){
     super(props);
@@ -49,7 +48,8 @@ class SongPlay extends React.Component {
 
   handlePosChange(e) {
     this.setState({
-        pos: e.originalArgs[0]
+        pos: e.originalArgs[0],
+        volume: 0
       });
     }
 
@@ -94,6 +94,7 @@ class SongPlay extends React.Component {
 
       this.setState({playing: false, volume: 0, pos: 0})
     }
+    debugger
 
   }
 
@@ -149,7 +150,7 @@ class SongPlay extends React.Component {
     let userIds = this.props.likes.map(like => like.user_id)
     let likecount =  this.props.likes.length
 
-
+    let a = 0;
 
 
       if (userIds.includes(this.props.currentUser.id)) {
@@ -190,7 +191,7 @@ class SongPlay extends React.Component {
                    container={`#waveform${this.props.waveformid}`}
                    onPosChange={this.handlePosChange}
                    pos={this.state.pos}
-                   volume="0"
+                   volume={a}
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
                      progressColor:'#ff7540',
