@@ -13,7 +13,6 @@ class SongsIndex extends React.Component {
   constructor(props){
     super(props)
     this.likes = [];
-    debugger
     if (this.props.location.pathname === '/stream'){
       this.props.fetchCurrentUserFollows();
     }
@@ -30,7 +29,7 @@ class SongsIndex extends React.Component {
     // this.props.removeLikes()
 
     // this.props.removeAudioToken();
-    
+
   }
 
   render() {
