@@ -79,6 +79,12 @@ user12 = User.create!(
   avatar: File.open("app/assets/images/oasis.jpg")
   )
 
+user13 = User.create!(
+  username: 'Guest',
+  password: 'password',
+  avatar: File.open("app/assets/images/user.png")
+  )
+
 Song.destroy_all
 
 song1 = Song.create!(

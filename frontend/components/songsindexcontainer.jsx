@@ -6,13 +6,17 @@ import { removeAudioToken} from '../actions/audio_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
 import { fetchLikes, removeLikes } from '../actions/like_actions'
+import { fetchCurrentUserFollows} from '../actions/follow_actions'
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
 class SongsIndex extends React.Component {
   constructor(props){
     super(props)
-    // this.props.fetchUsers().then(() => this.props.fetchSongs())
     this.likes = [];
+    debugger
+    if (this.props.location.pathname === '/stream'){
+      this.props.fetchCurrentUserFollows();
+    }
   }
 
   componentDidMount() {
@@ -55,7 +59,7 @@ class SongsIndex extends React.Component {
        <h2 className="streamheader">Hear the latest posts from the people you’re following: </h2>
         <ul>
           {
-            this.props.allsongs.map(song => (
+            this.props.allsongs.slice(0,10).map(song => (
               <li key={`song_${song.id}`}  className="indexlist">
                 <SongPlay likes={likes.filter(like => like.song_id === song.id)}
                   waveformid={song.id} song={song}
@@ -89,7 +93,8 @@ const mapDispatchToProps = (dispatch) => {
     clearUsers: () => dispatch(clearUsers()),
     removeAudioToken: () => dispatch(removeAudioToken()),
     fetchLikes: () => dispatch(fetchLikes()),
-    removeLikes: () => dispatch(removeLikes())
+    removeLikes: () => dispatch(removeLikes()),
+    fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows())
   }
 }
 

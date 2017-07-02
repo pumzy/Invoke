@@ -73,18 +73,20 @@ class SongPlay extends React.Component {
     this.props.history.push(`/${this.username}`)
   }
 
-  likeSong(){
-
+  likeSong(e){
+    e.preventDefault()
     this.props.createLike({like: {song_id: this.props.song.id}})
+    // this.props.requestAudioPlaybackTime();
   }
 
-  unlikeSong(){
+  unlikeSong(e){
+    e.preventDefault()
     this.props.deleteLike({like: {song_id: this.props.song.id}})
+    // this.props.requestAudioPlaybackTime();
   }
 
 
   componentWillReceiveProps(nextProps){
-
 
     if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
       this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
@@ -94,7 +96,7 @@ class SongPlay extends React.Component {
 
       this.setState({playing: false, volume: 0, pos: 0})
     }
-    
+
 
   }
 
@@ -113,6 +115,7 @@ class SongPlay extends React.Component {
       // document[`wavesurfer${this.props.waveformid}`].setVolume(0);
       //
     }
+    if (this.props.audio.id === this.props.song.id) this.props.requestAudioPlaybackTime();
     // this.props.fetchLikesBySongID(this.props.song.id)
   }
 
@@ -191,7 +194,7 @@ class SongPlay extends React.Component {
                    container={`#waveform${this.props.waveformid}`}
                    onPosChange={this.handlePosChange}
                    pos={this.state.pos}
-                   volume='0'
+                   volume="0"
                    playing={this.state.playing}
                    options={{waveColor: '#ddd',
                      progressColor:'#ff7540',

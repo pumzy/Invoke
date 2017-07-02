@@ -35,6 +35,7 @@ gem 'figaro'
 gem 'aws-sdk', '~> 2'
 gem 'pg_search'
 gem 'sequel-pg-trgm'
+gem 'audio_waveform-ruby', :require => 'audio_waveform'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

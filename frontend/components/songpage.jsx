@@ -57,6 +57,7 @@ class SongPage extends React.Component {
   }
 
   handleSubmit(e){
+    e.preventDefault()
     if (e.keyCode === 13) {
     var comment = this.state;
     let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
@@ -143,13 +144,16 @@ class SongPage extends React.Component {
     }
 
 
-  likeSong(){
-    //
+  likeSong(e){
+    e.preventDefault()
     this.props.createLike({like: {song_id: this.props.song.id}})
+    this.props.requestAudioPlaybackTime();
   }
 
-  unlikeSong(){
+  unlikeSong(e){
+    e.preventDefault()
     this.props.deleteLike({like: {song_id: this.props.song.id}})
+    this.props.requestAudioPlaybackTime();
   }
 
 

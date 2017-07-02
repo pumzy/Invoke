@@ -44,6 +44,7 @@ class SongUpdate extends React.Component {
   }
 
   updateCoverart(e){
+    e.preventDefault();
     var file = e.currentTarget.files[1]
     var fileReader = new FileReader();
     var that = this;
@@ -57,6 +58,7 @@ class SongUpdate extends React.Component {
   }
 
   updateTrack(e){
+    e.preventDefault();
     var file = e.currentTarget.files[0]
     var fileReader = new FileReader();
     var that = this;
@@ -97,13 +99,15 @@ class SongUpdate extends React.Component {
       });
     }
 
-  openCoverartUploadBox(){
+  openCoverartUploadBox(e){
+    e.preventDefault();
     this.imagebutton.click()
   }
 
 
 
   updateCoverart(e){
+    e.preventDefault();
     var file = e.currentTarget.files[0]
     var fileReader = new FileReader();
     var that = this;

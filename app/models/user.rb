@@ -54,6 +54,13 @@
   has_many :comments
   has_many :likes
 
+  has_many :followers,
+  class_name: :User
+
+  has_many :followed_users,
+  foreign_key: :user_id,
+  class_name: :User
+
 
   has_many :liked_songs,
   through: :likes,

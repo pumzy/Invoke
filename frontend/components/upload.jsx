@@ -25,6 +25,7 @@ class SongUpload extends React.Component {
 
 
   updateCoverart(e){
+    e.preventDefault();
     var file = e.currentTarget.files[1]
     var fileReader = new FileReader();
     var that = this;
@@ -38,6 +39,7 @@ class SongUpload extends React.Component {
   }
 
   updateTrack(e){
+    e.preventDefault();
     var file = e.currentTarget.files[0]
     var fileReader = new FileReader();
     var that = this;
@@ -90,6 +92,7 @@ class SongUpload extends React.Component {
 
 
   updateCoverart(e){
+    e.preventDefault();
     var file = e.currentTarget.files[0]
     var fileReader = new FileReader();
     var that = this;

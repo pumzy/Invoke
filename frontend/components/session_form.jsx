@@ -14,6 +14,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateFile = this.updateFile.bind(this);
+    this.guestLogin = this.guestLogin.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -21,6 +22,18 @@ class SessionForm extends React.Component {
       this.props.history.push('/');
     }
   }
+
+  guestLogin(){
+    const user = {
+      username: "Guest",
+      password: "password",
+    };
+
+    this.props.login({user});
+
+  }
+
+
 
   componentWillMount(){
     this.props.clearErrors();
@@ -99,7 +112,7 @@ class SessionForm extends React.Component {
     return (
       <div className="session-form-container">
 
-        <button className="demo-login">Continue as a Guest</button>
+        <button className="demo-login" onClick={this.guestLogin} >Continue as a Guest</button>
 
         <h2 className="divider">or</h2>
 
