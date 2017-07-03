@@ -42509,7 +42509,7 @@ var SongPlay = function (_React$Component) {
 
         this.setState({ playing: false, volume: 0, pos: 0 });
       }
-      debugger;
+      ;
     }
   }, {
     key: 'componentWillUnmount',

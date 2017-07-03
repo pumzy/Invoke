@@ -42329,7 +42329,7 @@ var SongsIndex = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SongsIndex.__proto__ || Object.getPrototypeOf(SongsIndex)).call(this, props));
 
     _this.likes = [];
-    debugger;
+    ;
     if (_this.props.location.pathname === '/stream') {
       _this.props.fetchCurrentUserFollows();
     }
