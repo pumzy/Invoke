@@ -62,7 +62,23 @@ this.ball.style.left = (ballval) + 'px';
 
 ### Logged in homepage
 
-The logged in homepage is a pseudo-index container which will show you all the songs posted by the users that you have followed. This page renders multiple waveforms, and is comprised on a number of 'SongplayContainers'. This page will allow you to dynamically choose songs and render waveforms. By clicking play on one song, another will stop. An image of it is below.
+The logged in homepage is a pseudo-index container which will show you all the songs posted by the users that you have followed. This page renders multiple waveforms, and is comprised on a number of 'SongplayContainers'. This page will allow you to dynamically choose songs and render waveforms. By clicking play on one song, another will stop.
+
+
+The code snippet which handles song change:
+
+```js
+if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
+  this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
+} else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
+  this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
+} else if(nextProps.audio.id !== this.props.song.id){
+
+  this.setState({playing: false, volume: 0, pos: 0})
+}
+```
+
+An image of the logged in homepage.
 
 ![image of homepage](docs/Invoke-logged-in.png)
 
