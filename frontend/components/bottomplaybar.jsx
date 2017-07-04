@@ -85,8 +85,6 @@ class BottomPlayBar extends React.Component {
 
     ended(e){
 
-      // this.playbutton.className = "";
-		  // this.playbutton.className = "play";
       store.dispatch(this.props.receivePauseToken());
     }
 
@@ -96,10 +94,6 @@ class BottomPlayBar extends React.Component {
     let duration = this.music.duration;
     let currentTime = this.music.currentTime;
     this.fullduration.innerText = (this.timeshow(this.music.duration))
-
-    // if (this.props.audio.request === "REQUEST-TIME"){
-    //   this.props.provideAudioPlaybackTime(currentTime)
-    // }
 
     let newval = currentTime/duration;
     let res = newval.toLocaleString("en", {minimumFractionDigits: 10, style: "percent"})

@@ -57,7 +57,7 @@ class SongPage extends React.Component {
   }
 
   handleSubmit(e){
-    e.preventDefault()
+    // e.preventDefault()
     if (e.keyCode === 13) {
     var comment = this.state;
     let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
