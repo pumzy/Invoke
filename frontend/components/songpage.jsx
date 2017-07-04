@@ -57,7 +57,6 @@ class SongPage extends React.Component {
   }
 
   handleSubmit(e){
-    // e.preventDefault()
     if (e.keyCode === 13) {
     var comment = this.state;
     let currentlyPlayingSong = document.getElementsByClassName("playbar-song-infoslice")
@@ -84,6 +83,7 @@ class SongPage extends React.Component {
     // .then(() => this.props.fetchCommentsBySongID(this.props.song.id))
     // this.props.removeComments();
     this.props.createComment({comment})
+    this.props.requestAudioPlaybackTime()
 
   } else
    {return null;}
