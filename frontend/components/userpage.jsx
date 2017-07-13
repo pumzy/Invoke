@@ -1,11 +1,12 @@
 import React from 'react'
 import { fetchSongsByUserID, removeSongs } from '../actions/song_actions.js'
 import { fetchOneUserByID, fetchOneUser } from '../actions/user_actions.js'
+import {  requestAudioPlaybackTime } from '../actions/audio_actions'
 import Error404 from './404page'
 import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { removeLikes } from '../actions/like_actions'
-import { fetchCurrentUserFollows, fetchFollowsByUserID, removeFollows } from '../actions/follow_actions'
+import { fetchCurrentUserFollows, fetchFollowsByUserID, removeFollows, createFollow, deleteFollow } from '../actions/follow_actions'
 
 import SongPlay from './songplaycontainer'
 
@@ -15,6 +16,8 @@ class UserPage extends React.Component {
 
   constructor(props){
     super(props)
+    this.followUser = this.followUser.bind(this )
+    this.unfollowUser = this.unfollowUser.bind(this )
   }
 
   componentDidMount(){
@@ -45,7 +48,38 @@ class UserPage extends React.Component {
   }
 
 
+  followUser(e){
+    e.preventDefault()
+    this.props.createFollow({follow: {followee_id: this.props.user.id}})
+
+  }
+
+  unfollowUser(e){
+    e.preventDefault()
+    this.props.deleteFollow({follow: {followee_id: this.props.user.id}})
+
+  }
+
+
   render(){
+
+
+        let followbutton;
+        let followedUsers =  Object.keys(this.props.follows.byFollowerID).join(",").split(",").map(key => parseInt(key))
+        let followcount = followedUsers.length
+
+
+        if (!isNaN(followedUsers[0])){
+          if (followedUsers.includes(this.props.currentUser.id)) {
+            followbutton = <button onClick={this.unfollowUser}  >{followcount}</button>
+          } else {
+            followbutton = <button onClick={this.followUser} >{followcount}</button>
+          }
+          followcount = followedUsers.length
+        } else {
+          followcount = 0;
+          followbutton = <button onClick={this.followUser} >{followcount}</button>
+        }
 
     let result;
     if (!this.props.user){
@@ -90,6 +124,7 @@ let links =  <ul className='user-page-navlinks'>
         </div>
         <div className="userpage-belowheader">
         <ul className="songindexlist">
+          {followbutton}
           {songs}
         </ul>
       </div>
@@ -113,7 +148,8 @@ const mapStateToProps = (state, ownProps) => {
     return {user: state.users.byUsername[ownProps.match.params.username],
             songs: state.songs.allsongs,
           likes: state.likes.alllikes,
-          follows: state.follows}
+          follows: state.follows,
+          currentUser: state.session.currentUser}
           }
 
 const mapDispatchToProps = (dispatch) => {
@@ -124,7 +160,10 @@ const mapDispatchToProps = (dispatch) => {
     removeLikes: () => dispatch(removeLikes()),
     fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows()),
     fetchFollowsByUserID: (userid) => dispatch(fetchFollowsByUserID(userid)),
-    removeFollows: () => dispatch(removeFollows())
+    removeFollows: () => dispatch(removeFollows()),
+    createFollow: (follow) => dispatch(createFollow(follow)),
+    deleteFollow: (follow) => dispatch(deleteFollow(follow)),
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
   }
 }
 

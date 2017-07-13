@@ -9,6 +9,7 @@ import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import SongUpdate from './edit';
 import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
+import {createFollow, fetchFollowsByUserID} from '../actions/follow_actions'
 import { requestAudioPlaybackTime } from '../actions/audio_actions';
 import { fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import Wavesurfer from 'react-wavesurfer'
@@ -155,8 +156,6 @@ class SongPage extends React.Component {
     this.props.deleteLike({like: {song_id: this.props.song.id}})
     this.props.requestAudioPlaybackTime();
   }
-
-
 
 
 
@@ -381,7 +380,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id)),
     removeLikes: () => dispatch(removeLikes()),
     createLike: (like) => dispatch(createLike(like)),
-    deleteLike: (like) => dispatch(deleteLike(like))
+    deleteLike: (like) => dispatch(deleteLike(like)),
+    fetchFollowsByUserID: (id) => dispatch(fetchFollowsByUserID(id)),
+    createFollow: (follow) => dispatch(createFollow(follow))
   }
 }
 

@@ -23,7 +23,7 @@ class Api::FollowsController < ApplicationController
 
   def create
     @follow = Follow.new(follow_params)
-    @follow.user_id = current_user.id
+    @follow.follower_id = current_user.id
       if @follow.save
         render :show
       else
