@@ -141,13 +141,13 @@ let links =  <ul className='user-page-navlinks'>
                 <td className="sidebar-stats-td">
 
                     <h3 className="sidebar-stats-header">Following</h3>
-                    <div className="sidebar-stats-value">1</div>
+                    <div className="sidebar-stats-value">{this.props.user.followingnum}</div>
 
                 </td>
                 <td className="sidebar-stats-td">
 
                     <h3 className="sidebar-stats-header">Tracks</h3>
-                    <div className="sidebar-stats-value">{this.props.songs.length}</div>
+                    <div className="sidebar-stats-value">{this.props.user.songnum}</div>
 
                 </td>
               </tr>
