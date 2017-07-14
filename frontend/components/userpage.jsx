@@ -71,14 +71,14 @@ class UserPage extends React.Component {
 
         if (!isNaN(followedUsers[0])){
           if (followedUsers.includes(this.props.currentUser.id)) {
-            followbutton = <button onClick={this.unfollowUser}  >{followcount}</button>
+            followbutton = <button onClick={this.unfollowUser} className='userpage-follow-button-unfollow'  > Unfollow </button>
           } else {
-            followbutton = <button onClick={this.followUser} >{followcount}</button>
+            followbutton = <button onClick={this.followUser} className='userpage-follow-button-follow'>  Follow </button>
           }
           followcount = followedUsers.length
         } else {
           followcount = 0;
-          followbutton = <button onClick={this.followUser} >{followcount}</button>
+          followbutton = <button onClick={this.followUser} className='userpage-follow-button-follow'> Follow </button>
         }
 
     let result;
@@ -102,6 +102,7 @@ let links =  <ul className='user-page-navlinks'>
                 <li><NavLink to={`/${this.props.user.username}/playlists`}>Playlists</NavLink></li>
                 <li><NavLink to={`/${this.props.user.username}/albums`}>Albums</NavLink></li>
                 <li><NavLink to={`/${this.props.user.username}/reposts`}>Reposts</NavLink></li>
+                {followbutton}
             </ul>
 
     result =
@@ -124,9 +125,36 @@ let links =  <ul className='user-page-navlinks'>
         </div>
         <div className="userpage-belowheader">
         <ul className="songindexlist">
-          {followbutton}
+
           {songs}
         </ul>
+        <div className='userpage-sidebar'>
+          <div >
+            <table className='stats'>
+              <tbody className='userpage-stats-tbody'><tr>
+                <td className="sidebar-stats-td">
+
+                    <h3 className="sidebar-stats-header">Followers</h3>
+                    <div className="sidebar-stats-value">{followcount}</div>
+
+                </td>
+                <td className="sidebar-stats-td">
+
+                    <h3 className="sidebar-stats-header">Following</h3>
+                    <div className="sidebar-stats-value">1</div>
+
+                </td>
+                <td className="sidebar-stats-td">
+
+                    <h3 className="sidebar-stats-header">Tracks</h3>
+                    <div className="sidebar-stats-value">{this.props.songs.length}</div>
+
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
       </div>
       </div>
 

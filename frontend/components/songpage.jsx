@@ -13,6 +13,9 @@ import {createFollow, fetchFollowsByUserID} from '../actions/follow_actions'
 import { requestAudioPlaybackTime } from '../actions/audio_actions';
 import { fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import Wavesurfer from 'react-wavesurfer'
+// import Wavesurfer from 'wavesurfer'
+import createFragment from 'react-addons-create-fragment';
+
 
 
 class SongPage extends React.Component {
@@ -149,6 +152,8 @@ class SongPage extends React.Component {
     e.preventDefault()
     this.props.createLike({like: {song_id: this.props.song.id}})
     this.props.requestAudioPlaybackTime();
+    console.log(`${this.wavesurfer._wavesurfer.backend.mergedPeaks}`)
+    window.wavesurfer= this.wavesurfer
   }
 
   unlikeSong(e){
@@ -233,7 +238,27 @@ class SongPage extends React.Component {
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />
 
-
+      // if (this.props.song.id === this.props.audio.id){
+      //  waveform = Wavesurfer.create({
+      //    container: document.querySelector('#waveform-songpage'),
+      //    waveColor: 'blue',
+      //    progressColor: 'black',
+      //    waveformHeight: 3,
+      //    cursorColor: 'black',
+      //    normalize: true,
+      //    backend: 'MediaElement',
+      //    height: 150
+      //  })
+      //  //
+      //  //
+      //  //
+      //
+      //
+      //   waveform.on('ready', () => {
+      //       console.log("Wavefrm loaded successfully!!!");
+      //
+      //     window.waveform = waveform;
+      //   });
 
 
 
@@ -279,6 +304,7 @@ class SongPage extends React.Component {
               </div>
               <div className='waveform' id='waveform-songpage'>
                 {waveform}
+
               </div>
             </div>
             <div className='song-coverart' >
@@ -287,7 +313,6 @@ class SongPage extends React.Component {
           </div>
         )
       }
-
 
       return(
         <div className="song-page">

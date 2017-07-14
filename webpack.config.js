@@ -25,6 +25,9 @@ module.exports = {
   },
   devtool: 'source-maps',
   resolve: {
-    extensions: [".js", ".jsx", "*"]
+    extensions: [".js", ".jsx", "*"],
+    alias: {
+      'wavesurfer': path.resolve(__dirname, './node_modules/wavesurfer.js/dist/wavesurfer.js')
+    }
   },
 };

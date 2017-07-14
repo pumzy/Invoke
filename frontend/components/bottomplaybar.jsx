@@ -217,7 +217,7 @@ class BottomPlayBar extends React.Component {
     if (this.props.audio.track_url !== "") {
 
       audioplayer = <div className="playbar" ref={div => this.container = div}>
-                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended}  ref={audio => this.music = audio} >
+                          <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended} id='song'  ref={audio => this.music = audio} >
                             <source src={this.props.audio.track_url}type="audio/ogg" />
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>

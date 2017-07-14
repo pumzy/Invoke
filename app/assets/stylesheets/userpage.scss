@@ -18,9 +18,9 @@
     margin: 0 auto;
     height: 100%;
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     background: white;
-    
+
 }
 
 //  background: #518489;
@@ -102,6 +102,7 @@
   list-style: none;
   position: relative;
 
+
   li:first-child {
     margin-left: 0;
   }
@@ -137,4 +138,121 @@
 
 
     }
+}
+
+.userpage-follow-button-unfollow{
+  min-width: 31px;
+  float: left;
+  margin-right: 5px;
+  color: #f50;
+  border: 1px solid #f50;
+  display: inline-block;
+   position: absolute;
+   right: 0;
+   height: 26px;
+ padding: 2px 11px 2px 10px;
+ border-radius: 3px;
+  background-color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+
+
+
+}
+
+
+.userpage-follow-button-follow{
+  min-width: 31px;
+  float: left;
+  margin-right: 5px;
+  background-color: #f50;
+  border-color: #f50;
+  color: #fff;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  height: 26px;
+
+  padding: 2px 11px 2px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+  box-sizing: border-box;
+
+}
+
+
+.userpage-belowheader{
+  display: flex;
+  flex-direction: row;
+
+  .songindexlist{
+    padding-right: 50px;
+  }
+
+  .userpage-sidebar{
+
+    position: relative;
+    margin: 0 auto;
+    width: 300px;
+    height: 400px;
+    padding-left: 40px;
+    border-left: 1px solid #f2f2f2;
+
+
+  }
+}
+
+.stats{
+  width: 100%;
+  margin: 0 0 14px 0;
+  font-size: 14px;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  display: table;
+  border-color: grey;
+  .userpage-stats-tbody{
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+    .sidebar-stats-td{
+      text-indent: 0;
+      width: 33.33%;
+      text-align: left;
+      border-right: 1px solid #f2f2f2;
+
+      .sidebar-stats-header{
+        margin-top: 0;
+        line-height: .9;
+        padding: 5px 0 3px;
+        font-size: 12px;
+        font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+        font-weight: 100;
+        color: #999;
+      }
+      .sidebar-stats-value{
+        font-size: 20px;
+        line-height: 1.2;
+        font-family: "InterstateSound Tnum", "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+        font-weight: 100;
+        color: #999;
+      }
+    }
+  }
 }
