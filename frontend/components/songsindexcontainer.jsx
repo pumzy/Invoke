@@ -20,13 +20,15 @@ class SongsIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchOneUser(this.props.currentUser.username).then((response) =>{
-      this.user = response.user
-      this.props.fetchUsers()
-      for (var i = 0; i < this.user.followed_user_ids.length; i++) {
-        this.props.fetchSongsByUserID(this.user.followed_user_ids[i])
-      }
-    })
+    if(!this.user){
+      this.props.fetchOneUser(this.props.currentUser.username).then((response) =>{
+        this.user = response.user
+        this.props.fetchUsers()
+        for (var i = 0; i < this.user.followed_user_ids.length; i++) {
+          this.props.fetchSongsByUserID(this.user.followed_user_ids[i])
+        }
+      })
+    }
 
 
 

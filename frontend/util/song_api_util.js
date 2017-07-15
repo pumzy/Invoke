@@ -26,6 +26,14 @@ export const updateSong = (formData, id) => {
   })
 }
 
+export const updateSongCount = (id) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/songs/${id}`,
+    data: {token: 'addcount', id: id}
+  })
+}
+
 export const fetchSongs = () => {
   return $.ajax({
     method: "GET",

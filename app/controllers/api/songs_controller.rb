@@ -40,6 +40,17 @@ class Api::SongsController < ApplicationController
 
 
   def update
+    if params[:token] == 'addcount'
+      @song.playcount += 1
+      if @song.save
+        render :show, status: :ok
+      else
+        render json: @song.errors, status: :unprocessable_entity
+      end
+      return
+    end
+
+
       if @song.update(song_params)
         render :show, status: :ok
       else
