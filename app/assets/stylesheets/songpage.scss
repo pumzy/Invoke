@@ -344,13 +344,17 @@
     .artist-info-songpage {
 
       .artist-info-username {
-            margin: 6px 0 5px 0;
+            margin: 6px 0 0px 0;
             line-height: 1.3;
             font-weight: 100;
             font-size: 14px;
-            text-align: center;
-            text-indent: 2px;
 
+            text-indent: 4px;
+
+            .verification-badge{
+              position: absolute;
+              padding-left: 5px;
+            }
       }
     }
 
@@ -594,4 +598,78 @@
   background-position-y: 10px;
   background-image: asset-url("comment-icon.jpg");
   margin-right: 3px;
+}
+
+.artist-info-songpage{
+  font-family: "InterstateSound Tnum","Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+
+  button{
+    position: relative;
+    min-width: 25px;
+    font-size: 11px;
+    padding: 2px 9px 2px 8px;
+    height: 22px;
+    line-height: 16px;
+  }
+
+  .artist-data{
+
+
+
+    .artist-metadata{
+      list-style: none;
+      margin: 0 0 0 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      .after-icon-badge{
+        display: inline;
+        position: relative;
+        bottom: 3px;
+        left: 3px;
+      }
+
+        .songpage-artist-followcount-image{
+
+          width: 30%;
+          margin-right: 5px;
+          padding-right: 4px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          color: #999;
+          font-size: 11px;
+          line-height: 12px;
+          font-weight: 100;
+
+          .follower-icon{
+            width: 16px;
+            height: 16px;
+
+          }
+
+        }
+
+        .songpage-artist-songcount-image{
+          width: 30%;
+          margin-right: 5px;
+          padding-right: 4px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          color: #999;
+          font-size: 11px;
+          line-height: 12px;
+          font-weight: 100;
+          .track-icon{
+            width: 16px;
+            height: 16px;
+
+          }
+        }
+    }
+
+
+  }
+
+
 }

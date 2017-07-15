@@ -5,6 +5,7 @@ export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 
+
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
@@ -18,6 +19,8 @@ export const receiveErrors = errors => ({
 export const clearErrors = errors => ({
   type: CLEAR_ERRORS
 })
+
+
 
 
 export const signup = user => dispatch => {

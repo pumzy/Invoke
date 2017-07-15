@@ -1,12 +1,13 @@
 import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
-import { fetchSongs, removeSongs } from '../actions/song_actions'
+import { fetchSongs, removeSongs, fetchSongsByUserID } from '../actions/song_actions'
 import { fetchUsers, clearUsers } from '../actions/user_actions'
 import { removeAudioToken} from '../actions/audio_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
 import { fetchLikes, removeLikes } from '../actions/like_actions'
-import { fetchCurrentUserFollows} from '../actions/follow_actions'
+import { fetchCurrentUserFollows, removeFollows} from '../actions/follow_actions'
+
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
 class SongsIndex extends React.Component {
@@ -16,16 +17,37 @@ class SongsIndex extends React.Component {
     if (this.props.location.pathname === '/stream'){
       this.props.fetchCurrentUserFollows();
     }
+
   }
 
   componentDidMount() {
-    this.props.fetchUsers().then(() => this.props.fetchSongs())
+
+
+    this.props.fetchUsers()
+    for (var i = 0; i < this.props.currentUser.followed_user_ids.length; i++) {
+      this.props.fetchSongsByUserID(this.props.currentUser.followed_user_ids[i])
+    }
+    if (this.props.newFollows){
+      for (var i = 0; i < this.props.newFollows.length; i++) {
+        if (!this.props.currentUser.followed_user_ids.includes(this.props.newFollows[i])){
+          this.props.fetchSongsByUserID(this.props.newFollows[i])
+        }
+      }
+    }
+
+
     this.props.fetchLikes()
+  }
+
+  componentWillReceiveProps(nextProps){
+
   }
 
   componentWillUnmount(){
     this.props.removeSongs()
     this.props.clearUsers()
+    this.props.removeFollows()
+    this.props.removeLikes()
     // this.props.removeLikes()
 
     // this.props.removeAudioToken();
@@ -82,7 +104,9 @@ const mapStateToProps = (state) => {
            allsongs: state.songs.allsongs,
            usersbyID: state.users.byID,
           audio: state.audio,
-          likes: state.likes.alllikes}
+          likes: state.likes.alllikes,
+          currentUser: state.session.currentUser,
+          newFollows: state.follows.newFollows}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -94,7 +118,9 @@ const mapDispatchToProps = (dispatch) => {
     removeAudioToken: () => dispatch(removeAudioToken()),
     fetchLikes: () => dispatch(fetchLikes()),
     removeLikes: () => dispatch(removeLikes()),
-    fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows())
+    fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows()),
+    removeFollows: () => dispatch(removeFollows()),
+    fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id))
   }
 }
 

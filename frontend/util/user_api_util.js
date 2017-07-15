@@ -12,6 +12,13 @@ export const fetchUsers = () => {
     url: "api/users"
   })
 }
+export const fetchAllUsers = () => {
+  return $.ajax({
+    method: "GET",
+    url: "api/users",
+    data: {token: 'AAAAA'}
+  })
+}
 
 
 export const fetchOneUserByID = (id) => {

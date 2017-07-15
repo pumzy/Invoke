@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { fetchSongs, removeSongs } from '../actions/song_actions'
-import { fetchUsers, clearUsers } from '../actions/user_actions'
+import { fetchAllUsers, clearUsers } from '../actions/user_actions'
 import { logout, clearErrors } from '../actions/session_actions'
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import SessionForm from './session_form'
@@ -38,7 +38,7 @@ class DefaultHomePage extends React.Component   {
   }
 
   componentDidMount() {
-    this.props.fetchUsers().then(() => this.props.fetchSongs())
+    this.props.fetchAllUsers().then(() => this.props.fetchSongs())
   }
 
   componentWillUnmount(){
@@ -127,7 +127,7 @@ const mapDispatchToProps = (dispatch) => {
     clearErrors: () => dispatch(clearErrors()),
     fetchSongs: () => dispatch(fetchSongs()),
     removeSongs: () => dispatch(removeSongs()),
-    fetchUsers: () => dispatch(fetchUsers()),
+    fetchAllUsers: () => dispatch(fetchAllUsers()),
     clearUsers: () => dispatch(clearUsers()),
     removeAudioToken: () => dispatch(removeAudioToken())
   }

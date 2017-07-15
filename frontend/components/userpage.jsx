@@ -6,7 +6,9 @@ import Error404 from './404page'
 import {connect} from 'react-redux'
 import { NavLink, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { removeLikes } from '../actions/like_actions'
-import { fetchCurrentUserFollows, fetchFollowsByUserID, removeFollows, createFollow, deleteFollow } from '../actions/follow_actions'
+import { fetchCurrentUserFollows, fetchFollowsByUserID, removeFollows, createFollow, deleteFollow, addSessionFollow, removeSessionFollow  } from '../actions/follow_actions'
+
+
 
 import SongPlay from './songplaycontainer'
 
@@ -31,12 +33,15 @@ class UserPage extends React.Component {
   componentWillReceiveProps(nextProps){
     if (nextProps.match.params.username !== this.props.match.params.username){
     this.props.removeSongs()
+    this.props.removeFollows()
+    this.props.removeLikes()
     }
   }
 
   componentWillUnmount(){
     this.props.removeLikes()
     this.props.removeFollows()
+    this.props.removeSongs()
   }
 
   componentWillUpdate(nextProps){
@@ -51,12 +56,16 @@ class UserPage extends React.Component {
   followUser(e){
     e.preventDefault()
     this.props.createFollow({follow: {followee_id: this.props.user.id}})
+    this.props.addSessionFollow(this.props.user.id)
 
   }
 
   unfollowUser(e){
     e.preventDefault()
     this.props.deleteFollow({follow: {followee_id: this.props.user.id}})
+    this.props.removeSessionFollow(this.props.user.id)
+
+
 
   }
 
@@ -191,7 +200,9 @@ const mapDispatchToProps = (dispatch) => {
     removeFollows: () => dispatch(removeFollows()),
     createFollow: (follow) => dispatch(createFollow(follow)),
     deleteFollow: (follow) => dispatch(deleteFollow(follow)),
-    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime())
+    requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime()),
+    addSessionFollow: (id) => dispatch(addSessionFollow(id)),
+    removeSessionFollow: (id) => dispatch(removeSessionFollow(id))
   }
 }
 

@@ -9,7 +9,7 @@ import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import SongUpdate from './edit';
 import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
-import {createFollow, fetchFollowsByUserID} from '../actions/follow_actions'
+import {createFollow, fetchFollowsByUserID, removeFollows, deleteFollow} from '../actions/follow_actions'
 import { requestAudioPlaybackTime } from '../actions/audio_actions';
 import { fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import Wavesurfer from 'react-wavesurfer'
@@ -25,10 +25,14 @@ class SongPage extends React.Component {
     this.goToUser = this.goToUser.bind(this);
     this.goToEdit = this.goToEdit.bind(this);
     this.byeBye = this.byeBye.bind(this);
+    this.followUser = this.followUser.bind(this)
+    this.unfollowUser = this.unfollowUser.bind(this)
     this.howLongAgo = this.howLongAgo.bind(this);
     this.editbutton = null;
     this.deletebutton = null;
-    this.props.fetchOneUser(this.props.match.params.username);
+    this.props.fetchOneUser(this.props.match.params.username).then((response) => {
+      this.props.fetchFollowsByUserID(response.user.id)
+    })
     this.likeSong = this.likeSong.bind(this);
     this.unlikeSong = this.unlikeSong.bind(this);
     this.handlePosChange = this.handlePosChange.bind(this);
@@ -52,11 +56,23 @@ class SongPage extends React.Component {
       this.props.fetchLikesBySongID(response.song.id)})
 
 
-    // if (this.props.audio.id){
-    //   if (this.props.song.id === this.props.audio.id){
-    //     this.props.requestAudioPlaybackTime();
-    //   }
-    // }
+  }
+
+  followUser(e){
+    e.preventDefault()
+    this.props.createFollow({follow: {followee_id: this.props.user.id}})
+    if (this.props.audio.token === 'PLAYING'){
+      this.props.requestAudioPlaybackTime();
+    }
+
+  }
+
+  unfollowUser(e){
+    e.preventDefault()
+    this.props.deleteFollow({follow: {followee_id: this.props.user.id}})
+    if (this.props.audio.token === 'PLAYING'){
+      this.props.requestAudioPlaybackTime();
+    }
 
   }
 
@@ -122,6 +138,7 @@ class SongPage extends React.Component {
     this.props.removeSongs()
     this.props.removeComments()
     this.props.removeLikes()
+    this.props.removeFollows()
     if (this.props.song.id  === this.props.audio.id){
         this.props.requestAudioPlaybackTime();
       }
@@ -132,6 +149,8 @@ class SongPage extends React.Component {
     if (nextProps.match.params.username !== this.props.match.params.username || nextProps.match.params.title !== this.props.match.params.title){
     this.props.removeSongs()
     this.props.clearUsers()
+    this.props.removeFollows()
+    this.props.removeLikes()
     }
 
     if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === nextProps.song.id) {
@@ -151,7 +170,9 @@ class SongPage extends React.Component {
   likeSong(e){
     e.preventDefault()
     this.props.createLike({like: {song_id: this.props.song.id}})
-    this.props.requestAudioPlaybackTime();
+    if (this.props.audio.token === 'PLAYING'){
+      this.props.requestAudioPlaybackTime();
+    }
     console.log(`${this.wavesurfer._wavesurfer.backend.mergedPeaks}`)
     window.wavesurfer= this.wavesurfer
   }
@@ -159,7 +180,9 @@ class SongPage extends React.Component {
   unlikeSong(e){
     e.preventDefault()
     this.props.deleteLike({like: {song_id: this.props.song.id}})
-    this.props.requestAudioPlaybackTime();
+    if (this.props.audio.token === 'PLAYING'){
+      this.props.requestAudioPlaybackTime();
+    }
   }
 
 
@@ -184,6 +207,7 @@ class SongPage extends React.Component {
       return null
     } else {
       if (this.props.currentUser && this.props.user){
+
         if (this.props.currentUser.id === this.props.user.id){
           this.editbutton = <button onClick={this.goToEdit} className="editbutton">Edit</button>
           this.deletebutton = <button onClick={this.byeBye} className="deletebutton">Delete</button>
@@ -194,6 +218,23 @@ class SongPage extends React.Component {
 
       return <CommentShow comment={comment} timeago={this.howLongAgo(comment.created_at)} parent={this} />
       })
+
+      let followbutton;
+      let followedUsers =  Object.keys(this.props.follows.byFollowerID).join(",").split(",").map(key => parseInt(key))
+      let followcount = followedUsers.length
+
+
+      if (!isNaN(followedUsers[0])){
+        if (followedUsers.includes(this.props.currentUser.id)) {
+          followbutton = <button onClick={this.unfollowUser} className='userpage-follow-button-unfollow'  > Unfollow </button>
+        } else {
+          followbutton = <button onClick={this.followUser} className='userpage-follow-button-follow'>  Follow </button>
+        }
+        followcount = followedUsers.length
+      } else {
+        followcount = 0;
+        followbutton = <button onClick={this.followUser} className='userpage-follow-button-follow'> Follow </button>
+      }
 
 
 
@@ -238,27 +279,6 @@ class SongPage extends React.Component {
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />
 
-      // if (this.props.song.id === this.props.audio.id){
-      //  waveform = Wavesurfer.create({
-      //    container: document.querySelector('#waveform-songpage'),
-      //    waveColor: 'blue',
-      //    progressColor: 'black',
-      //    waveformHeight: 3,
-      //    cursorColor: 'black',
-      //    normalize: true,
-      //    backend: 'MediaElement',
-      //    height: 150
-      //  })
-      //  //
-      //  //
-      //  //
-      //
-      //
-      //   waveform.on('ready', () => {
-      //       console.log("Wavefrm loaded successfully!!!");
-      //
-      //     window.waveform = waveform;
-      //   });
 
 
 
@@ -342,7 +362,14 @@ class SongPage extends React.Component {
         <div className="left-comment-pane">
           <img className="artist-avatar-songpage" src={this.props.user.avatar_url} onClick={this.goToUser}/ >
           <div className="artist-info-songpage">
-            <h3 className="artist-info-username" onClick={this.goToUser}> {this.props.user.username} </h3>
+            <h3 className="artist-info-username" onClick={this.goToUser}> {this.props.user.username} <img className='verification-badge' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UHJvIFN0YXI8L3RpdGxlPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTYgMTJBNiA2IDAgMSAwIDYgMGE2IDYgMCAwIDAgMCAxMnoiIGZpbGw9IiNGNTAiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNNiA4LjA3TDMuMzU1IDkuNjRsLjY3Ni0zLTIuMzEtMi4wMyAzLjA2Mi0uMjg1TDYgMS41bDEuMjE3IDIuODI1IDMuMDYzLjI4NC0yLjMxMSAyLjAzLjY3NiAzLjAwMnoiLz48L2c+PC9zdmc+'></img></h3>
+            <div className='artist-data'>
+            <ul className='artist-metadata'>
+              <li className='songpage-artist-followcount-image'><img className='follower-icon' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCI+PHBhdGggZmlsbD0icmdiYSgxNTMsIDE1MywgMTUzLCAwLjcpIiBkPSJNMTguNCAxOC41bDIuNSA1IC4yLjVIMjhsLTIuMS00LjMtNC4xLTEuNXYtMi41YzEuMi0xLjEgMS44LTMuMiAxLjgtNS4xIDAtMi4xLTItMy42LTMuNS0zLjZzLTMuNSAxLjYtMy41IDMuNmMwIDEuOS41IDQgMS44IDUuMXYyLjVoLS4xbC4xLjN6Ii8+PHBhdGggZmlsbD0iIzk5OSIgZD0iTTE3LjUgMTlsLTUtMS44di0zYzEuNC0xLjIgMi0zLjggMi01LjkgMC0yLjQtMi4zLTQuMy00LTQuMy0xLjcgMC00IDEuOC00IDQuMyAwIDIuMi42IDQuNyAyIDUuOXYzbC01IDEuOEwxIDI0aDE5bC0yLjUtNXoiLz48L3N2Zz4='></img><div className='after-icon-badge'>{followcount}</div></li>
+              <li className='songpage-artist-songcount-image'> <img className='track-icon' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCI+PHBhdGggZmlsbD0iIzIyMiIgZD0iTTUgMTJoMnY0SDV6TTIxIDEyaDJ2NGgtMnpNMTcgMTBoMnY4aC0yek05IDhoMnYxMkg5ek0xMyA1aDJ2MThoLTJ6Ii8+PC9zdmc+'></img><div className='after-icon-badge'>{this.props.user.songnum}</div></li>
+            </ul>
+            {followbutton}
+            </div>
           </div>
         </div>
         <div className="comments-songpage">
@@ -373,12 +400,7 @@ class SongPage extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 
-  // let userid = 0
-  // let likedUsers = "hello"
-  // if (state.songs.allsongs.length > 0 && state.likes.alllikes.length > 0){
-  //   userid = state.users.allusers[0].id
-  //   likedUsers = Object.keys(state.likes.bySongID[userid]).join(",").split(",").map(key => parseInt(key))
-  // }
+
     return  {
       user: state.users.byUsername[ownProps.match.params.username],
       song: state.songs.byTitle[ownProps.match.params.title],
@@ -386,7 +408,8 @@ const mapStateToProps = (state, ownProps) => {
       comments: state.comments.allcomments,
       audio: state.audio,
       likes: state.likes.alllikes,
-      likedUsers: Object.keys(state.likes.bySongID).join(",").split(",").map(key => parseInt(key))
+      likedUsers: Object.keys(state.likes.bySongID).join(",").split(",").map(key => parseInt(key)),
+      follows: state.follows
     };
   }
 
@@ -407,7 +430,9 @@ const mapDispatchToProps = (dispatch) => {
     createLike: (like) => dispatch(createLike(like)),
     deleteLike: (like) => dispatch(deleteLike(like)),
     fetchFollowsByUserID: (id) => dispatch(fetchFollowsByUserID(id)),
-    createFollow: (follow) => dispatch(createFollow(follow))
+    createFollow: (follow) => dispatch(createFollow(follow)),
+    deleteFollow: (follow) => dispatch(deleteFollow(follow)),
+    removeFollows: () => dispatch(removeFollows())
   }
 }
 

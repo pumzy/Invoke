@@ -43,6 +43,14 @@ export const fetchUsers = () => dispatch => (
   ))
 )
 
+export const fetchAllUsers = () => dispatch => (
+  APIUtil.fetchAllUsers().then(users => {
+    return dispatch(receiveUsers(users))
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
 export const fetchOneUser = (username) => dispatch => (
   APIUtil.fetchOneUser(username).then(user => (
     dispatch(receiveUser(user))

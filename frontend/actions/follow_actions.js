@@ -6,6 +6,8 @@ export const RECEIVE_FOLLOWS = "RECEIVE_FOLLOWS";
 export const RECEIVE_FOLLOW = "RECEIVE_FOLLOW";
 export const REMOVE_FOLLOW = "REMOVE_FOLLOW";
 export const REMOVE_FOLLOWS = "REMOVE_FOLLOWS";
+export const ADD_SESSION_FOLLOW = 'ADD_SESSION_FOLLOW';
+export const REMOVE_SESSION_FOLLOW = 'REMOVE_SESSION_FOLLOW';
 
 
 export const receiveFollow = (follow) => {
@@ -36,6 +38,15 @@ export const removeFollows = () => {
     type: REMOVE_FOLLOWS
   }
 }
+export const addSessionFollow = id => ({
+  type: ADD_SESSION_FOLLOW,
+  id
+})
+
+export const removeSessionFollow = id => ({
+  type: REMOVE_SESSION_FOLLOW,
+  id
+})
 
 export const fetchCurrentUserFollows = () => dispatch => (
   APIUtil.fetchCurrentUserFollows().then(follows => {

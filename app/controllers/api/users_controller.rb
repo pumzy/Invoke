@@ -3,7 +3,17 @@ class Api::UsersController < ApplicationController
   # GET /api/users
   # GET /api/users.json
   def index
-    @users = User.all
+
+    if params[:token]
+      @users = User.all
+    else
+      @users = []
+
+      followed = Follow.where(follower_id: current_user.id).map {|a| a.followee_id}
+      followed.each do |id|
+        @users << User.find_by(id: id)
+      end
+    end
   end
 
   def show2
@@ -66,6 +76,6 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :avatar)
+      params.require(:user).permit(:username, :password, :avatar, :token)
     end
 end

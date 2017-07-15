@@ -1,9 +1,9 @@
 import { merge } from 'lodash'
-import {  RECEIVE_FOLLOWS, RECEIVE_FOLLOW, REMOVE_FOLLOW, REMOVE_FOLLOWS } from '../actions/follow_actions'
+import {  RECEIVE_FOLLOWS, RECEIVE_FOLLOW, REMOVE_FOLLOW, REMOVE_FOLLOWS, ADD_SESSION_FOLLOW, REMOVE_SESSION_FOLLOW } from '../actions/follow_actions'
 
 
 
-const FollowReducer = (state={ byFollowerID: {}, byFolloweeID: {}, allfollows: [] }, action) => {
+const FollowReducer = (state={ byFollowerID: {}, byFolloweeID: {}, allfollows: [], newFollows: [] }, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   switch (action.type) {
@@ -25,19 +25,32 @@ const FollowReducer = (state={ byFollowerID: {}, byFolloweeID: {}, allfollows: [
       delete newState.byFollowerID[action.follow.follower_id]
       let indexneeded = state.allfollows.indexOf(action.follow);
       let followdup = state.allfollows.slice(0)
-      var newarray = [];
+      let newarray = [];
       state.allfollows.forEach(follow => {
         if( follow.id !== action.follow.id) {
           newarray.push(follow)
         }
       })
-
       newState.allfollows = newarray
       return newState;
-
-    case REMOVE_FOLLOWS:
-      return { byFollowerID: {}, byFolloweeID: {}, allfollows: [] }
-
+      case REMOVE_FOLLOWS:
+        return { byFollowerID: {}, byFolloweeID: {}, allfollows: [], newFollows: state.newFollows }
+      case ADD_SESSION_FOLLOW:
+        let newarray1 = state.newFollows
+        newarray1.push(action.id)
+        newState.newFollows = newarray1
+        return newState;
+      case REMOVE_SESSION_FOLLOW:
+        let newarray2 = state.newFollows
+        let index = state.newFollows.indexOf(action.id)
+        debugger
+        if (index){
+        newarray2.splice(index,1)
+        newState.newFollows = newarray2
+        return newState;
+      } else {
+        return state
+      }
     default:
       return state;
   }
