@@ -274,7 +274,8 @@ class SongPage extends React.Component {
          playing={this.state.playing}
          options={{waveColor: '#ddd',
            progressColor:'#ff7540',
-           barWidth: 1}}
+           barWidth: 2,
+          height: 100}}
 
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />
@@ -284,6 +285,18 @@ class SongPage extends React.Component {
 
     } else {
       songplay = <SongPlayButton className="PlayinSongPage" song={this.props.song} />
+        waveform = <Wavesurfer
+           audioFile={this.props.song.track_url}
+           container={`#waveform-songpage`}
+           volume='0'
+           playing={false}
+           options={{waveColor: '#ddd',
+             progressColor:'#ff7540',
+             barWidth: 2,
+            height: 100}}
+
+           ref={Wavesurfer => this.wavesurfer = Wavesurfer}
+           />
     }
 
     let timesincerelease = this.howLongAgo(this.props.song.created_at)

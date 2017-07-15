@@ -196,9 +196,10 @@ class SongPlay extends React.Component {
                    pos={this.state.pos}
                    volume="0"
                    playing={this.state.playing}
-                   options={{waveColor: '#ddd',
+                   options={{waveColor: '#8c8c8c',
                      progressColor:'#ff7540',
-                     barWidth: 1}}
+                     barWidth: 2,
+                     height: 60}}
 
                    ref={Wavesurfer => this.wavesurfer = Wavesurfer}
                    />

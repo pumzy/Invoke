@@ -59,7 +59,6 @@ class SongsIndex extends React.Component {
   }
 
   render() {
-    debugger
     // let likes = [];
     // if (this.props.likes){
     //
