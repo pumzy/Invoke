@@ -12,6 +12,7 @@ import SongPage from './songpage'
 import Error404 from './404page'
 import SongUpdate from './edit';
 import SongUpload from './upload'
+import SongChartIndex from './songchartindex'
 
 
 
@@ -22,7 +23,7 @@ const App = () =>(
   <AuthRoute path="/" component={DefaultHomePage} />
     <Switch>
       <ProtectedRoute exact path="/stream" component={LoggedInHomePage} />
-      <ProtectedRoute exact path="/test" component={SongIndex} />
+      <ProtectedRoute exact path="/charts" component={SongChartIndex} />
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
       <ProtectedRoute exact path="/:username" component={UserPage} />

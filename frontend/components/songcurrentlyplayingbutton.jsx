@@ -3,7 +3,6 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import React from 'react'
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { updateSongCount } from '../actions/song_actions'
 
 
 class SongCurrentPlayButton extends React.Component {
@@ -12,7 +11,7 @@ class SongCurrentPlayButton extends React.Component {
     this.giveToPlaybar = this.giveToPlaybar.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.props.fetchOneUserByID(this.props.song.user_id);
-    this.props.updateSongCount(this.props.song.id)
+
   }
 
   componentWillUpdate(){

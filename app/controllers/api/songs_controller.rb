@@ -3,7 +3,11 @@ class Api::SongsController < ApplicationController
 
 
   def index
-    @songs = Song.all
+    if params[:token] == 'chart'
+      @songs = Song.order(playcount: :desc).limit(params[:num])
+    else
+      @songs = Song.all
+    end
   end
 
   def indexuser

@@ -3,6 +3,8 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import React from 'react'
 import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { updateSongCount } from '../actions/song_actions'
+
 
 
 class SongPlayButton extends React.Component {
@@ -40,6 +42,7 @@ class SongPlayButton extends React.Component {
     // }
 
     // else {
+      this.props.updateSongCount(this.props.song.id)
       const reset = new Promise((resolve, reject) => resolve(this.props.removeAudio()));
       reset.then(() => this.props.receiveAudio(Object.assign(song, {token: "PLAYING"})));
     // }
@@ -75,7 +78,8 @@ const mapDispatchToProps = (dispatch) => {
     removeAudio: (song) => dispatch(removeAudio(song)),
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     removeAudioToken: () => dispatch(removeAudioToken()),
-    receivePlayToken: () => dispatch(receivePlayToken())
+    receivePlayToken: () => dispatch(receivePlayToken()),
+    updateSongCount: (id) => dispatch(updateSongCount(id))
   }
 }
 

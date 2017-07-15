@@ -1,0 +1,140 @@
+
+
+.songplaybox-chart{
+  width: 100%;
+
+
+  .songplay-item-chart{
+
+    display: flex;
+    padding: 10px;
+    margin-left: -10px;
+    margin-right: -10px;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+
+
+
+    .songplay-song-chart{
+      width: 100%;
+      .songplay-song-information{
+        display: flex;
+        flex-direction: row;
+
+
+        .songplay-left-chart{
+          flex: 1;
+          overflow: hidden;
+
+          .infospan-chart{
+
+
+            .songplay-artist-chart{
+              max-width: 80%;
+              margin-top: 0;
+              font-weight: 100;
+              color: #999;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              word-break: normal;
+
+            }
+
+            .songplay-title-chart{
+              color: #333;
+              font-size: 14px;
+              font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+              font-weight: 100;
+              max-width: 80%;
+              margin-top: 0;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              word-break: normal;
+            }
+          }
+
+
+
+        }
+
+        .songplay-right-chart{
+          .stat-icon-playcontainer-chart{
+            position: relative;
+            top: 3px;
+            margin-right: 3px;
+          }
+
+          .container-playcount-chart{
+            font-size: 12px;
+            line-height: 16px;
+            font-family: "InterstateSound Tnum","Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            font-weight: 100;
+            color: #999;
+            text-align: right;
+
+          }
+
+        }
+
+
+
+      }
+
+      .songplay-buttonbar-chart{
+        display: none;
+      }
+
+    }
+
+
+    .songplay-coverart-chart{
+      height: 50px;
+      width: 50px;
+      margin-right: 20px;
+      img {
+        height: 100%;
+        width:100%;
+      }
+    }
+
+    &:hover{
+      .songplay-right-chart{
+        display: none;
+      }
+      .songplay-buttonbar-chart{
+        width: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 18px;
+
+
+          img{
+            position: relative;
+            background-color: transparent;
+            border: none;
+            top: 15px;
+            right: 5px;
+            height: 40px;
+            width: 40px;
+          }
+
+          button{
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            padding: 2px 6px 2px 13px;
+            width: 20px;
+            margin-right: 1.4%;
+
+          }
+      }
+    }
+  }
+
+
+}

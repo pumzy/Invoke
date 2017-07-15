@@ -180,8 +180,8 @@ class SongPlay extends React.Component {
               <div className='songplay-song-information'>
                 <div className="songplay-left">
                   <div className="infospan">
-                    <div className="songplay-artist"> <span className="songplay-span-artist" onClick={this.goToUser}>{this.username}</span></div>
-                    <div className="songplay-title"> <span className="songplay-span-title" onClick={this.goToSong}>{this.props.song.title}</span></div>
+                    <div className="songplay-artist-chart"> <span className="songplay-span-artist" onClick={this.goToUser}>{this.username}</span></div>
+                    <div className="songplay-title-chart"> <span className="songplay-span-title" onClick={this.goToSong}>{this.props.song.title}</span></div>
                   </div>
                 </div>
                 <div className="songplay-right">
@@ -206,6 +206,10 @@ class SongPlay extends React.Component {
                  </div>
               <div className='songplay-buttonbar'>
                 {likebutton}
+                <span className='container-commentcount'>{this.props.song.commentnum}</span>
+                <img className='stat-icon-playcontainer' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfY29tbWVudDwvdGl0bGU+PHBhdGggZD0iTTUgM2MtMS4xMDUgMC0yIC44ODctMiAyLjAwNnYyLjk4OEMzIDkuMTAyIDMuODg3IDEwIDUgMTBoNmMxLjEwNSAwIDItLjg4NyAyLTIuMDA2VjUuMDA2QTEuOTk4IDEuOTk4IDAgMCAwIDExIDNINXptMCA3djNsMy0zSDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4='></img>
+                <span className='container-playcount'>{this.props.song.playcount}</span>
+                <img className='stat-icon-playcontainer' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfcGxheSA0PC90aXRsZT48cGF0aCBkPSJNNCAxM1YzbDkgNS05IDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4='></img>
               </div>
               </div>
             </div>

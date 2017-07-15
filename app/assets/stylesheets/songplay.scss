@@ -187,6 +187,46 @@
             font-weight: 100;
             box-sizing: border-box;
           }
+
+
+
+          .container-playcount{
+            float: right;
+            margin-right: 5px;
+            padding-right: 4px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            color: #999;
+            font-size: 11px;
+            line-height: 12px;
+            font-family: "InterstateSound Tnum","Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            font-weight: 100;
+          }
+
+          .stat-icon-playcontainer{
+            float: right;
+            position: relative;
+            top: 3px;
+            margin-right: 2px;
+          }
+
+
+
+
+
+          .container-commentcount{
+            float: right;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-right : 0;
+            padding-right: 0;
+            color: #999;
+            font-size: 11px;
+            line-height: 12px;
+
+          }
+
+
         }
 
       }
