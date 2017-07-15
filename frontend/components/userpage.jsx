@@ -56,14 +56,14 @@ class UserPage extends React.Component {
   followUser(e){
     e.preventDefault()
     this.props.createFollow({follow: {followee_id: this.props.user.id}})
-    this.props.addSessionFollow(this.props.user.id)
+    // this.props.addSessionFollow(this.props.user.id)
 
   }
 
   unfollowUser(e){
     e.preventDefault()
     this.props.deleteFollow({follow: {followee_id: this.props.user.id}})
-    this.props.removeSessionFollow(this.props.user.id)
+    // this.props.removeSessionFollow(this.props.user.id)
 
 
 

@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
 import { fetchLikes, removeLikes } from '../actions/like_actions'
 import { fetchCurrentUserFollows, removeFollows} from '../actions/follow_actions'
+import {fetchOneUser} from '../actions/user_actions'
 
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
@@ -14,32 +15,35 @@ class SongsIndex extends React.Component {
   constructor(props){
     super(props)
     this.likes = [];
-    if (this.props.location.pathname === '/stream'){
-      this.props.fetchCurrentUserFollows();
-    }
+    this.user;
 
   }
 
   componentDidMount() {
-
-
-    this.props.fetchUsers()
-    for (var i = 0; i < this.props.currentUser.followed_user_ids.length; i++) {
-      this.props.fetchSongsByUserID(this.props.currentUser.followed_user_ids[i])
-    }
-    if (this.props.newFollows){
-      for (var i = 0; i < this.props.newFollows.length; i++) {
-        if (!this.props.currentUser.followed_user_ids.includes(this.props.newFollows[i])){
-          this.props.fetchSongsByUserID(this.props.newFollows[i])
-        }
+    this.props.fetchOneUser(this.props.currentUser.username).then((response) =>{
+      this.user = response.user
+      this.props.fetchUsers()
+      for (var i = 0; i < this.user.followed_user_ids.length; i++) {
+        this.props.fetchSongsByUserID(this.user.followed_user_ids[i])
       }
-    }
+    })
+
+
+
+    // if (this.props.newFollows){
+    //   for (var i = 0; i < this.props.newFollows.length; i++) {
+    //     if (!this.user.followed_user_ids.includes(this.props.newFollows[i])){
+    //       this.props.fetchSongsByUserID(this.props.newFollows[i])
+    //     }
+    //   }
+    // }
 
 
     this.props.fetchLikes()
   }
 
   componentWillReceiveProps(nextProps){
+
 
   }
 
@@ -55,7 +59,7 @@ class SongsIndex extends React.Component {
   }
 
   render() {
-
+    debugger
     // let likes = [];
     // if (this.props.likes){
     //
@@ -120,7 +124,8 @@ const mapDispatchToProps = (dispatch) => {
     removeLikes: () => dispatch(removeLikes()),
     fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows()),
     removeFollows: () => dispatch(removeFollows()),
-    fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id))
+    fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id)),
+    fetchOneUser: (username) => dispatch(fetchOneUser(username))
   }
 }
 

@@ -3,6 +3,7 @@ class Api::UsersController < ApplicationController
   # GET /api/users
   # GET /api/users.json
   def index
+    
 
     if params[:token]
       @users = User.all

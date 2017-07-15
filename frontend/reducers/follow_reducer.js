@@ -43,7 +43,6 @@ const FollowReducer = (state={ byFollowerID: {}, byFolloweeID: {}, allfollows: [
       case REMOVE_SESSION_FOLLOW:
         let newarray2 = state.newFollows
         let index = state.newFollows.indexOf(action.id)
-        debugger
         if (index){
         newarray2.splice(index,1)
         newState.newFollows = newarray2
