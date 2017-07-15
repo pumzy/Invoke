@@ -45,13 +45,13 @@ export const fetchSongs = () => dispatch => (
   ))
 )
 
-export const fetchChartSongs = (num) => dispatch => (
-  APIUtil.fetchChartSongs(num).then(songs => {
+export const fetchChartSongs = (num, genre) => dispatch => {
+  return APIUtil.fetchChartSongs(num, genre).then(songs => {
     return dispatch(receiveSongs(songs))
   }, err => (
     dispatch(receiveErrors(err.responseJSON))
   ))
-)
+}
 
 
 export const fetchOneSong = (id) => dispatch => (

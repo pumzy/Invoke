@@ -41,11 +41,11 @@ export const fetchSongs = () => {
   })
 }
 
-export const fetchChartSongs = (num) => {
+export const fetchChartSongs = (num, genre) => {
   return $.ajax({
     method: "GET",
     url: "api/songs",
-    data: {token: 'chart', num: num}
+    data: {token: 'chart', num: num, genre: genre}
   })
 }
 

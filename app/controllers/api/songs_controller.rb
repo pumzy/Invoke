@@ -3,8 +3,10 @@ class Api::SongsController < ApplicationController
 
 
   def index
-    if params[:token] == 'chart'
+    if params[:token] == 'chart' && (!params[:genre] || params[:genre] == 'all')
       @songs = Song.order(playcount: :desc).limit(params[:num])
+    elsif  params[:token] == 'chart' && params[:genre] && params[:genre] != 'all'
+      @songs = Song.where({genre: params[:genre]}).order(playcount: :desc).limit(params[:num])
     else
       @songs = Song.all
     end
