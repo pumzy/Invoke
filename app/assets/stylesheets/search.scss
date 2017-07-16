@@ -5,16 +5,16 @@
   bottom: 4px;
   right: 3px;
   position: relative;
-  height: 100vh;
   padding: 20px;
   box-sizing: border-box;
 
 
   .searchpage-header{
-
+    top: 27px;
+    width: 1200px;
     z-index: 10;
-    background-color: #fff;
-    padding-top: 29px;
+    background-color: white;
+    padding-top: 40px;
     padding-right: 10px;
     position: fixed;
     font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
@@ -25,11 +25,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 24px;
-
   }
+
+  @media screen and (max-width: 1360px){
+    .searchpage-header{
+      width: 1000px
+    }
+  }
+  @media screen and (max-width: 1180px){
+    .searchpage-header{
+      width: 900px
+    }
+  }
+
+
   .search-leftpane{
     position: absolute;
-    top: 125px;
+    top: 100px;
     bottom: 0;
     width: 220px;
 
@@ -63,10 +75,17 @@
           background-repeat: no-repeat;
           font-size: 14px;
           line-height: 30px;
+          text-decoration: none;
           &:hover{
             background-color: #f50;
           }
 
+
+        }
+
+        .active{
+          background-color: #f50;
+          color: white;
         }
 
         .search-everything-span{
@@ -92,11 +111,61 @@
 
 
   .search-actual{
-    margin-top: 200px;
+    margin-top: 77px;
+    margin-left: 263px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 
     .searched-users{
+      display: table;
+      width: 100%;
+      list-style: none;
+
+      .search-user-li{
+        width: 33%;
+        box-sizing: border-box;
+        padding-right: 20px;
+        float: left;
+        margin-bottom: 35px;
+
+        .search-user-topdiv{
+          display: flex;
+
+          .verification-badge{
+            margin-left: 2px;
+          }
+
+          .user-search-image{
+            width: 120px;
+            height: 120px;
+            display: block;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .user-search-user-info{
+            .artist-metadata{
+              margin-left: 20px;
+
+              li {
+                display: flex;
+                padding: 10px;
+                padding-left: 0px;
+
+                img{
+                  position: relative;
+                  bottom: 5px;
+                }
+              }
+            }
+          }
+
+
+        }
+
+
+      }
 
     }
 
