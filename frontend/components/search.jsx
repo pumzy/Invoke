@@ -8,6 +8,8 @@ import SongPlay from './songplaycontainer'
 class Search extends React.Component{
   constructor(props){
     super(props)
+    // this.props.removeSongs()
+    // this.props.clearUsers()
     this.query = this.props.location.search.slice(3)
     this.state = {
       users: [],
@@ -40,6 +42,7 @@ class Search extends React.Component{
     this.query = nextProps.location.search.slice(3)
 
     if (nextProps.location.search !== this.props.location.search){
+      
       this.setState({nosongs: false})
       this.props.removeSongs()
       this.props.clearUsers()
@@ -54,6 +57,7 @@ class Search extends React.Component{
         }
       })
       this.props.searchUsers(this.query).then(response => {
+
         this.setState({users: response.users})
       })
     }
@@ -108,15 +112,20 @@ class Search extends React.Component{
       })
        } else if ( this.props.location.pathname.includes('tracks')){
         userlist = null;
-        songlist = this.state.songs.map(song => (
-         <li  className='search-song-li'><SongPlay song={song} user={this.props.usersbyID[`${song.user_id}`]} likes={this.props.alllikes.filter(like => like.song_id === song.id)}
-           waveformid={song.id} key={song.id} ></SongPlay></li>
-        ))
+        if (!this.state.nosongs){
+          songlist = this.state.songs.map(song => (
+           <li className='search-song-li'><SongPlay song={song} user={song.user} likes={this.props.alllikes.filter(like => like.song_id === song.id)}
+             waveformid={song.id} ></SongPlay></li>
+          ))
+        }
       } else {
-        songlist = this.state.songs.map(song => (
-         <li className='search-song-li'><SongPlay song={song} user={song.user} likes={this.props.alllikes.filter(like => like.song_id === song.id)}
-           waveformid={song.id} ></SongPlay></li>
-        ))
+        if (!this.state.nosongs){
+          songlist = this.state.songs.map(song => (
+           <li className='search-song-li'><SongPlay song={song} user={song.user} likes={this.props.alllikes.filter(like => like.song_id === song.id)}
+             waveformid={song.id} ></SongPlay></li>
+          ))
+        }
+
         userlist = this.state.users.map(user => {
 
 

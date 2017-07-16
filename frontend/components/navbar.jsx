@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { logout } from '../actions/session_actions'
+import {clearUsers} from '../actions/user_actions'
+import {removeSongs} from '../actions/song_actions'
 
 
 
@@ -13,12 +15,30 @@ class NavBar extends React.Component {
     this.results = null;
     this.logout = this.props.logout.bind(this)
     this.update = this.update.bind(this);
+    this.search = this.search.bind(this)
     this.queryusers = null;
     this.querysongs = null;
+    this.searchKeypress = this.searchKeypress.bind(this)
     this.songs = {}
     this.users = {}
     this.state = {
       query: ""
+    }
+  }
+
+  search(){
+    // his.props.removeSongs()
+    // this.props.clearUsers()
+    this.setState({query: ""})
+    this.props.history.push(`search?q=${this.state.query}`)
+  }
+
+  searchKeypress(e){
+    if (e.key === 'Enter'){
+      // this.props.removeSongs()
+      // this.props.clearUsers()
+      this.setState({query: ""})
+      this.props.history.push(`search?q=${this.state.query}`)
     }
   }
 
@@ -36,7 +56,7 @@ class NavBar extends React.Component {
     if (this.state.query !== ""){
 
     this.results = <ul className="navbar-search-dropdown-ul">
-        <li className="navbar-search-dropdown-header-1">Search for <q>{this.state.query}</q></li>
+        <li className="navbar-search-dropdown-header-1" onClick={this.search}>Search for <q>{this.state.query}</q></li>
               <li className="navbar-search-dropdown-header">{this.querysongs.length > 0 ? "Songs" : null}</li>
               {this.querysongs}
               <li className="navbar-search-dropdown-header">{this.queryusers.length > 0 ? "Users" : null}</li>
@@ -76,7 +96,7 @@ class NavBar extends React.Component {
         <li> <NavLink to="/you/collection"> Collection </NavLink> </li>
       </ul>
         <ul>
-          <input type="search" placeholder="Search" className="nav-search" value={this.state.query} onChange={this.update("query")}/>
+          <input type="search" placeholder="Search" className="nav-search" value={this.state.query} onChange={this.update("query")} onKeyPress={this.searchKeypress}/>
           {this.results}
         </ul>
       <ul className="navigation-right">
@@ -107,7 +127,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    clearUsers: () => dispatch(clearUsers()),
+    removeSongs: () => dispatch(removeSongs())
   }
 }
 
