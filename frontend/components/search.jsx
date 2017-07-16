@@ -37,7 +37,6 @@ class Search extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    debugger
     this.query = nextProps.location.search.slice(3)
 
     if (nextProps.location.search !== this.props.location.search){

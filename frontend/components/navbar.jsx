@@ -15,6 +15,8 @@ class NavBar extends React.Component {
     this.update = this.update.bind(this);
     this.queryusers = null;
     this.querysongs = null;
+    this.songs = {}
+    this.users = {}
     this.state = {
       query: ""
     }
@@ -23,8 +25,12 @@ class NavBar extends React.Component {
   update(field) {
 
 
-    this.querysongs = [...new Set(this.props.songs)].slice(0,5).filter(song => song.includes(this.state.query)).map(song => <li className="navbar-search-item">{song}</li>)
-    this.queryusers = [...new Set(this.props.users)].slice(0,5).filter(user => user.includes(this.state.query)).map(user => <li className="navbar-search-item">{user}</li>)
+    this.querysongs = Object.keys(this.songs).filter(song => song.toLowerCase().includes(this.state.query.toLowerCase())).map(song => <li className="navbar-search-item" onClick={() => {
+      this.props.history.push(`/${this.songs[song]}/${song}`)
+      this.setState({query: ""})}}>{song}</li>)
+    this.queryusers = Object.keys(this.users).filter(user => user.toLowerCase().includes(this.state.query.toLowerCase())).map(user => <li className="navbar-search-item" onClick={() => {
+      this.props.history.push(`/${user}`)
+      this.setState({query: ""})}}>{user}</li>)
 
 
     if (this.state.query !== ""){
@@ -43,6 +49,16 @@ class NavBar extends React.Component {
     [field]: e.currentTarget.value
   });
 
+  }
+
+  componentWillReceiveProps(nextProps){
+
+    for (var i = 0; i < nextProps.users.length; i++) {
+      this.users[nextProps.users[i]] = true
+    }
+    for (var i = 0; i < nextProps.songs.length; i++) {
+      this.songs[nextProps.songs[i].title] = nextProps.songs[i].username
+    }
   }
 
 
@@ -85,7 +101,7 @@ class NavBar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.session.currentUser,
-    songs: state.songs.allsongs.map(song => song.title),
+    songs: state.songs.allsongs.map(song => ({title: song.title, username: song.user.username})),
     users: state.users.allusers.map(user => user.username)
   }
 }
