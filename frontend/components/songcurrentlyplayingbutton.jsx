@@ -9,8 +9,7 @@ class SongCurrentPlayButton extends React.Component {
   constructor(props){
     super(props);
     this.giveToPlaybar = this.giveToPlaybar.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.props.fetchOneUserByID(this.props.song.user_id);
+    // this.handleClick = this.handleClick.bind(this);
 
   }
 
@@ -23,10 +22,7 @@ class SongCurrentPlayButton extends React.Component {
   }
 
 
-  handleClick(){
-      let path = `/${this.props.user.username}/${this.props.song.title}`
-      this.props.history.push(path)
-  }
+
 
   giveToPlaybar(){
 
@@ -71,7 +67,6 @@ class SongCurrentPlayButton extends React.Component {
 
 const mapStateToProps = (state, passedDown) => {
   return {
-    user: state.users.byID[passedDown.song.user_id],
     audio: state.audio
   };
 }

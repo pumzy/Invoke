@@ -10,6 +10,7 @@ import { fetchLikes, fetchLikesBySongID, removeLikes, createLike, deleteLike } f
 
 class SongPlay extends React.Component {
   constructor(props){
+
     super(props);
     // this.giveToPlaybar = this.giveToPlaybar.bind(this
     // this.props.fetchOneUserByID(this.props.song.user_id);
@@ -165,12 +166,12 @@ class SongPlay extends React.Component {
 
 
 
-
       if (this.props.user !== null || this.props.user !== undefined){
+
 
         return(
           <div className='songplaybox'>
-          <div className="songplay-header">  <img src={`${this.props.user.avatar_url}`} className="songplay-avatar" onClick={this.goToSong}/> <Link to={`/${this.username}`}>  {this.username} posted a track {daysresult} </Link> </div>
+          <div className="songplay-header">  <img src={`${this.props.user.avatar_url}`} className="songplay-avatar" onClick={this.goToSong}/> <Link to={`/${this.username}`}>  {this.props.user.username} posted a track {daysresult} </Link> </div>
           <div className="songplay-item">
             <div className='songplay-coverart' >
               <img onClick={this.goToSong} src={this.props.song.cover_art_url} />

@@ -12,7 +12,6 @@
 
   .searchpage-header{
 
-    width: 1180px;
     z-index: 10;
     background-color: #fff;
     padding-top: 29px;
@@ -46,7 +45,7 @@
 
 
       .search-leftpane-options-li{
-
+        cursor: pointer;
         font-size: 14px;
         line-height: 30px;
         width: 205px;
@@ -54,7 +53,7 @@
         white-space: nowrap;
         color: #333;
 
-        span{
+        a{
           background-position: 5px 3px;
           background-repeat: no-repeat;
           color: #333;
@@ -64,6 +63,9 @@
           background-repeat: no-repeat;
           font-size: 14px;
           line-height: 30px;
+          &:hover{
+            background-color: #f50;
+          }
 
         }
 
@@ -89,15 +91,16 @@
   }
 
 
-  .seach-actual{
+  .search-actual{
+    margin-top: 200px;
+    display: flex;
+    justify-content: center;
 
     .searched-users{
-
 
     }
 
     .searched-songs{
-
     }
 
 
