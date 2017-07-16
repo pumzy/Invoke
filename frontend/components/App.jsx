@@ -13,6 +13,8 @@ import Error404 from './404page'
 import SongUpdate from './edit';
 import SongUpload from './upload'
 import SongChartIndex from './songchartindex'
+import Search from './search'
+
 
 
 
@@ -26,8 +28,10 @@ const App = () =>(
       <ProtectedRoute exact path="/charts" component={SongChartIndex} />
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
+      <ProtectedRoute path='/search' component={Search} />
       <ProtectedRoute exact path="/:username" component={UserPage} />
       <ProtectedRoute exact path="/:username/:title/edit" component={SongUpdate} />
+      <ProtectedRoute exact path="/you/:path" component={Error404} />
       <ProtectedRoute exact path="/:username/:title" component={SongPage} />
     </Switch>
   </div>

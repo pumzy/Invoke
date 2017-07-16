@@ -3,13 +3,14 @@ class Api::UsersController < ApplicationController
   # GET /api/users
   # GET /api/users.json
   def index
-    
 
-    if params[:token]
+
+    if params[:token] == 'All'
       @users = User.all
+    elsif params[:token] == 'search'
+      @users = User.where("lower(username) LIKE ?", "%#{params[:query].downcase}%")
     else
       @users = []
-
       followed = Follow.where(follower_id: current_user.id).map {|a| a.followee_id}
       followed.each do |id|
         @users << User.find_by(id: id)

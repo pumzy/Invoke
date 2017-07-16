@@ -52,6 +52,14 @@ export const fetchAllUsers = () => dispatch => (
   ))
 )
 
+export const searchUsers = (query) => dispatch => (
+  APIUtil.searchUsers(query).then(users => {
+    return dispatch(receiveUsers(users))
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
 export const fetchOneUser = (username) => dispatch => (
   APIUtil.fetchOneUser(username).then(user => (
     dispatch(receiveUser(user))

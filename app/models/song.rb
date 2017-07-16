@@ -21,10 +21,13 @@
 
 class Song < ApplicationRecord
   include PgSearch
-  multisearchable :against => :title,
-                  :using => {
-                    :tsearch => {:prefix => true}
-                  }
+  multisearchable :against => [:title]
+                  # :using => {
+                  #   :tsearch => {:prefix => true}
+                  # }
+                  # pg_search_scope :kinda_spelled_like,
+                  # :against => :username,
+                  # :using => :trigram
 
 
   validates_presence_of :title

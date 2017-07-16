@@ -26,9 +26,11 @@ class SongChartPlay extends React.Component {
   }
 
   goToSong(){
+    
     this.props.history.push(`/${this.props.user.username}/${this.props.song.title}`)
   }
   goToUser(){
+
     this.props.history.push(`/${this.props.user.username}`)
   }
 

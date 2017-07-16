@@ -16,7 +16,15 @@ export const fetchAllUsers = () => {
   return $.ajax({
     method: "GET",
     url: "api/users",
-    data: {token: 'AAAAA'}
+    data: {token: 'All'}
+  })
+}
+
+export const searchUsers = (query) => {
+  return $.ajax({
+    method: "GET",
+    url: "api/users",
+    data: {token: 'search', query: query}
   })
 }
 

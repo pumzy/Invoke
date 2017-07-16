@@ -53,6 +53,14 @@ export const fetchChartSongs = (num, genre) => dispatch => {
   ))
 }
 
+export const searchSongs = (query) => dispatch => {
+  return APIUtil.searchSongs(query).then(songs => {
+    return dispatch(receiveSongs(songs))
+  }, err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+}
+
 
 export const fetchOneSong = (id) => dispatch => (
   APIUtil.fetchOneSong(id).then(song => (

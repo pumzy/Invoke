@@ -14,6 +14,10 @@ import {fetchOneUser} from '../actions/user_actions'
 class SongChartIndex extends React.Component {
   constructor(props){
     super(props)
+    this.props.removeSongs()
+    this.props.clearUsers()
+    this.props.removeFollows()
+    this.props.removeLikes()
     this.likes = [];
     this.user;
     this.checknum = this.checknum.bind(this)

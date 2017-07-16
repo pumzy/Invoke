@@ -7,6 +7,8 @@ class Api::SongsController < ApplicationController
       @songs = Song.order(playcount: :desc).limit(params[:num])
     elsif  params[:token] == 'chart' && params[:genre] && params[:genre] != 'all'
       @songs = Song.where({genre: params[:genre]}).order(playcount: :desc).limit(params[:num])
+    elsif params[:token] == 'search'
+      @songs = Song.includes(:user).where("title LIKE ?", "%#{params[:query]}%")
     else
       @songs = Song.all
     end

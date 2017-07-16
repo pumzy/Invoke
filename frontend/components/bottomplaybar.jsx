@@ -21,8 +21,8 @@ class BottomPlayBar extends React.Component {
     this.dragOver = this.dragOver.bind(this);
     this.dragwidth = null;
     this.dragmusic = null;
-    this.goToUser = null;
-    this.goToSong = null;
+    this.goToUser = this.goToUser.bind(this);
+    this.goToSong = this.goToSong.bind(this);
     this.timeshow = this.timeshow.bind(this)
     this.setdata = this.setdata.bind(this);
     this.ended = this.ended.bind(this);
@@ -46,6 +46,15 @@ class BottomPlayBar extends React.Component {
     if (nextProps.audio.request === "REQUEST-TIME"){
       this.props.provideAudioPlaybackTime(this.music.currentTime)
     }
+  }
+
+  goToSong(){
+
+    this.props.history.push(`/${this.props.artist.username}/${this.props.audio.title}`)
+  }
+  goToUser(){
+
+    this.props.history.push(`/${this.props.artist.username}`)
   }
 
 
@@ -166,8 +175,8 @@ class BottomPlayBar extends React.Component {
 
     this.title.innerText = this.props.audio.title;
     this.username.innerText = this.props.artist.username;
-    this.goToUser = () => { return this.props.history.push(`/${this.props.artist.username}`)}
-    this.goToSong = () => { return this.props.history.push(`/${this.props.artist.username}/${this.props.audio.title}`)}
+    // this.goToUser = () => { return this.props.history.push(`/${this.props.artist.username}`)}
+    // this.goToSong = () => { return this.props.history.push(`/${this.props.artist.username}/${this.props.audio.title}`)}
 
   }
 

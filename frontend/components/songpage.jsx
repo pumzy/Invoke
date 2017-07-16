@@ -135,7 +135,7 @@ class SongPage extends React.Component {
 
 
   componentWillUnmount(){
-    this.props.removeSongs()
+    // this.props.removeSongs()
     this.props.removeComments()
     this.props.removeLikes()
     this.props.removeFollows()

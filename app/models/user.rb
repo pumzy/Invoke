@@ -24,14 +24,14 @@
 
   class User < ActiveRecord::Base
     include PgSearch
-    multisearchable :against => :username,
-                    :using => {
-                      :tsearch => {:prefix => true}
-                    }
-
-      pg_search_scope :kinda_spelled_like,
-      :against => :username,
-      :using => :trigram
+    multisearchable :against => [:username]
+      #               :using => {
+      #                 :tsearch => {:prefix => true}
+      #               }
+      #
+      # pg_search_scope :kinda_spelled_like,
+      # :against => :username,
+      # :using => :trigram
 
 
 	attr_reader :password

@@ -1,0 +1,110 @@
+.searchpage{
+  width: 90%;
+  background-color: white;
+  margin: 0 auto;
+  bottom: 4px;
+  right: 3px;
+  position: relative;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+
+
+  .searchpage-header{
+
+    width: 1180px;
+    z-index: 10;
+    background-color: #fff;
+    padding-top: 29px;
+    padding-right: 10px;
+    position: fixed;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 18px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 24px;
+
+  }
+  .search-leftpane{
+    position: absolute;
+    top: 125px;
+    bottom: 0;
+    width: 220px;
+
+    .search-leftpane-options{
+
+      display: block;
+      height: 254px;
+      overflow: hidden !important;
+      width: 222px;
+      position: fixed;
+      box-sizing: border-box;
+      font-family: "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+
+
+      .search-leftpane-options-li{
+
+        font-size: 14px;
+        line-height: 30px;
+        width: 205px;
+        height: 30px;
+        white-space: nowrap;
+        color: #333;
+
+        span{
+          background-position: 5px 3px;
+          background-repeat: no-repeat;
+          color: #333;
+          display: block;
+          padding-left: 33px;
+          background-position: 5px 3px;
+          background-repeat: no-repeat;
+          font-size: 14px;
+          line-height: 30px;
+
+        }
+
+        .search-everything-span{
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAA2CAQAAABpEaGGAAABaElEQVR4Ae2RsWrzMBSFz+K16AUydyj8GJTOeQKTtVsMhT5DR5MxU97AW4YMhexdMwZvoUtoSydPWQIeTP/Tq+Lgi2WDllIKOR/mXkVf4ErC3441NrOFpVBIZyy6tG1sXy1bZBUPycap8qXffdqsTL+ctZvqz1m/7GZNLRSpm71fptA9EoUhuaOaQTl8jPADeldnzlcn5KGPQqV7cve5c1+HHcTXYcN1kYP0MFn0QFnx+/JFvsg0zFjQpZDOEF3aNv7/RhVZxUOy+XwnT+V6ieTf3Xp5Kkn5xfTK9dyp4ylGACKMxlOn1/MamqZUe3KzEO2caLMgq30FTVMomd3M0IIRJf0zSxBBhWZQPh5IpnqjuiePhyM0TdnlZP2hTm9kxV2+g6Ypya07vdxtSiOk0knKpxKac4keH0T3k/e+IK7G0+3Kze5m3a5enn0dqo1wjQkSYSJd7OvgIL4OBukBstJDZKcjEX44X1qTd1xl06oWAAAAAElFTkSuQmCC');
+        }
+
+        .search-people-span{
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAA2CAQAAABpEaGGAAABK0lEQVR4Ae2RMYrCUBCGp7aaI6TYAwTmEiLsHTxBziBewQOIYJ/WbkvZKhcIsbCyCrukMpHZN+yw+y/79CFYpPD/4Jd5fPwQpNFGWErRQCkshJD8Zy3qrNOyAnyPnN0jU0o+/KiHB39gJq2pobOUbCxMDk0PlnN5Mzl0fktmmUslClThhePyQjTCIiaztFG59W1K78I2yu1VuUU5yYjkp/yUlbVUS6mshODhDBv1DJuBEDwcxXBiGd3jy5F+8R8EZZrQ7XQn9XSnjhA8nHqnnnpXE4KHU8zOnannrpgVhODh0GS/NXm/pQml06xMblYN/QUPR/PPd5ND57f+Qda5VoqpwgtH5X6pkfTLnr6xcpQvHzE5vPp2ahe3cdl3o9sXMqwcmtLrFaY0pnwB63WOPUWrM8MAAAAASUVORK5CYII=')
+
+        }
+
+        .search-tracks-span{
+          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAA2AgMAAAC+doGeAAAADFBMVEUAAAAAAAAzMzP///+zpvGeAAAAAnRSTlMATX7+8BUAAAA7SURBVHhevc0rEgAgDEPBmpiY3v+2UJVMBpA8s6afekeHAQWnIzGZV0p8rZ0OWvR0ARv4AuwKBj1CZQvILgRm9OFgvgAAAABJRU5ErkJggg==');
+        }
+
+      }
+
+    }
+
+
+
+  }
+
+
+  .seach-actual{
+
+    .searched-users{
+
+
+    }
+
+    .searched-songs{
+
+    }
+
+
+  }
+
+
+
+
+
+}
