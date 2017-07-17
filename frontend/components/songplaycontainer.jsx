@@ -166,7 +166,7 @@ class SongPlay extends React.Component {
 
 
 
-      if (this.props.user !== null || this.props.user !== undefined){
+      if (this.props.user !== null && this.props.user !== undefined){
 
 
         return(
@@ -216,6 +216,8 @@ class SongPlay extends React.Component {
             </div>
           </div>
         )
+      } else {
+        return <div className='loader'>Loading...</div>
       }
   }
 }

@@ -8,8 +8,8 @@ import { connect } from 'react-redux'
 class SongCurrentPlayButton extends React.Component {
   constructor(props){
     super(props);
+
     this.giveToPlaybar = this.giveToPlaybar.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
 
   }
 
