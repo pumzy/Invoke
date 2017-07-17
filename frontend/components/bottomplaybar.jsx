@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { fetchOneUser, fetchOneUserByID, clearUsers } from '../actions/user_actions'
-import { receivePauseToken, receivePlayToken, provideAudioPlaybackTime } from '../actions/audio_actions'
+import { receivePauseToken, receivePlayToken, provideAudioPlaybackTime, receiveAudio } from '../actions/audio_actions'
 
 
 
@@ -28,6 +28,8 @@ class BottomPlayBar extends React.Component {
     this.ended = this.ended.bind(this);
     this.username = null;
     this.title = null;
+    this.queue = [];
+    this.queueIdx = 0;
   }
 
   componentWillReceiveProps(nextProps){
@@ -38,6 +40,10 @@ class BottomPlayBar extends React.Component {
       this.footer.className = "aintnothinghere"
     }
     else {
+      if (this.props.audio.id === null){
+        this.queue = nextProps.audio.queue;
+        this.queueIdx = 0;
+      }
       this.footer.className = "audiofooter"
     }
     // if (nextProps.audio.token === "WAVEFORM-OVERRIDE" && nextProps.audio.id === this.props.audio.id){
@@ -93,8 +99,14 @@ class BottomPlayBar extends React.Component {
 
 
     ended(e){
-
-      store.dispatch(this.props.receivePauseToken());
+      debugger
+      if (this.queueIdx === this.queue.length -1 || this.queue.length === 0 ){
+        store.dispatch(this.props.receivePauseToken());
+      } else {
+        this.queueIdx += 1
+        this.props.receiveAudio(Object.assign(this.queue[this.queueIdx], {token: "PLAYING", queue: this.queue}));
+        this.music.src = this.queue[this.queueIdx].track_url
+      }
     }
 
 
@@ -224,6 +236,7 @@ class BottomPlayBar extends React.Component {
 
     // const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
+      debugger
 
       audioplayer = <div className="playbar" ref={div => this.container = div}>
                           <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended} id='song'  ref={audio => this.music = audio} >
@@ -274,7 +287,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
     receivePlayToken: () => dispatch(receivePlayToken),
     receivePauseToken: () => dispatch(receivePauseToken),
-    provideAudioPlaybackTime: (currentTime) => dispatch(provideAudioPlaybackTime(currentTime))
+    provideAudioPlaybackTime: (currentTime) => dispatch(provideAudioPlaybackTime(currentTime)),
+    receiveAudio: (audio) => dispatch(receiveAudio(audio))
   }
 }
 

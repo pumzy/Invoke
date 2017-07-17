@@ -68,10 +68,11 @@ class SongPlay extends React.Component {
   // }
 
   goToSong(){
-    this.props.history.push(`/${this.username}/${this.props.song.title}`)
+    this.props.history.push(`/${this.props.user.username}/${this.props.song.title}`)
   }
   goToUser(){
-    this.props.history.push(`/${this.username}`)
+    debugger
+    this.props.history.push(`/${this.props.user.username}`)
   }
 
   likeSong(e){
@@ -171,7 +172,7 @@ class SongPlay extends React.Component {
 
         return(
           <div className='songplaybox'>
-          <div className="songplay-header">  <img src={`${this.props.user.avatar_url}`} className="songplay-avatar" onClick={this.goToSong}/> <Link to={`/${this.username}`}>  {this.props.user.username} posted a track {daysresult} </Link> </div>
+          <div className="songplay-header">  <img src={`${this.props.user.avatar_url}`} className="songplay-avatar" onClick={this.goToSong}/> <Link to={`/${this.props.user.username}`}>  {this.props.user.username} posted a track {daysresult} </Link> </div>
           <div className="songplay-item">
             <div className='songplay-coverart' >
               <img onClick={this.goToSong} src={this.props.song.cover_art_url} />
@@ -181,7 +182,7 @@ class SongPlay extends React.Component {
               <div className='songplay-song-information'>
                 <div className="songplay-left">
                   <div className="infospan">
-                    <div className="songplay-artist-chart"> <span className="songplay-span-artist" onClick={this.goToUser}>{this.username}</span></div>
+                    <div className="songplay-artist-chart"> <span className="songplay-span-artist" onClick={this.goToUser}>{this.props.user.username}</span></div>
                     <div className="songplay-title-chart"> <span className="songplay-span-title" onClick={this.goToSong}>{this.props.song.title}</span></div>
                   </div>
                 </div>
