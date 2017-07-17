@@ -85,12 +85,14 @@ class SongPlay extends React.Component {
     e.preventDefault()
     this.props.deleteLike({like: {song_id: this.props.song.id}})
     // this.props.requestAudioPlaybackTime();
+    
   }
 
 
   componentWillReceiveProps(nextProps){
 
     if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
+      debugger
       this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
       this.setState({playing: false, volume: 0, pos: nextProps.audio.time})

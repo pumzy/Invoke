@@ -30,6 +30,8 @@ class BottomPlayBar extends React.Component {
     this.title = null;
     this.queue = [];
     this.queueIdx = 0;
+    this.nextSong = this.nextSong.bind(this)
+    this.previousSong = this.previousSong.bind(this)
   }
 
   componentWillReceiveProps(nextProps){
@@ -61,6 +63,27 @@ class BottomPlayBar extends React.Component {
   goToUser(){
 
     this.props.history.push(`/${this.props.artist.username}`)
+  }
+
+  nextSong(){
+    if (this.queueIdx < this.queue.length - 1){
+      this.queueIdx += 1
+      this.props.receiveAudio(Object.assign(this.queue[this.queueIdx], {token: "PLAYING", queue: this.queue}));
+      this.music.src = this.queue[this.queueIdx].track_url
+    } else {
+      store.dispatch(this.props.receivePauseToken());
+    }
+  }
+
+  previousSong(){
+    if (this.queueIdx > 0){
+      this.queueIdx -= 1
+      this.props.receiveAudio(Object.assign(this.queue[this.queueIdx], {token: "PLAYING", queue: this.queue}));
+      this.music.src = this.queue[this.queueIdx].track_url
+    } else {
+      store.dispatch(this.props.receivePauseToken());
+      this.music.currentTime = 0;
+    }
   }
 
 
@@ -244,9 +267,9 @@ class BottomPlayBar extends React.Component {
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
                               <div className="controls">
-                                <i className="fa fa-step-backward" aria-hidden="true" id='prev-song-button'></i>
+                                <i className="fa fa-step-backward" aria-hidden="true" id='prev-song-button' onClick={this.previousSong}></i>
                                 <button id="playbutton" className="pause" onClick={this.handleClick} ref={button => this.playbutton = button}/>
-                                <i className="fa fa-step-forward" aria-hidden="true" id='next-song-button'></i>
+                                <i className="fa fa-step-forward" aria-hidden="true" id='next-song-button' onClick={this.nextSong}></i>
                               </div>
                               <span className="time-elapsed" ref={span => this.timeelapased = span}></span>
                               <div className="progress-bar-background" ref={div => this.playbarholder = div} onClick={this.clickbar}    onDrop={this.dragdrop} onDragEnter={this.dragEnter} onDragOver={this.dragOver}>
