@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery prepend: true
+  protect_from_forgery with: :exception, unless: -> { request.format.json? }
   helper_method :current_user, :logged_in?
 
   private

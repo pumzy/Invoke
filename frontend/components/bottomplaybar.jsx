@@ -122,7 +122,7 @@ class BottomPlayBar extends React.Component {
 
 
     ended(e){
-      debugger
+
       if (this.queueIdx === this.queue.length -1 || this.queue.length === 0 ){
         store.dispatch(this.props.receivePauseToken());
       } else {
@@ -259,7 +259,7 @@ class BottomPlayBar extends React.Component {
 
     // const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
-      debugger
+      
 
       audioplayer = <div className="playbar" ref={div => this.container = div}>
                           <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended} id='song'  ref={audio => this.music = audio} >
