@@ -124,6 +124,8 @@ transition-timing-function: ease-in;
   // display: inline-block;
   display: flex;
   justify-content: flex-start;
+  position: relative;
+  right: 20px;
   // flex: 1;
 }
 //
@@ -351,6 +353,7 @@ transition-timing-function: ease-in;
     // display: inline-block;
     display: flex;
     justify-content: flex-start;
+
     // flex: 1;
     display: none;
 
@@ -370,4 +373,18 @@ transition-timing-function: ease-in;
   }
 
 
+}
+
+#prev-song-button{
+  font-size: 17px;
+  position: relative;
+  top: 2.9px;
+  right: 1px;
+}
+
+#next-song-button{
+  font-size: 17px;
+  position: relative;
+  top: 2.9px;
+  left: 15px;
 }

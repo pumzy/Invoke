@@ -244,7 +244,9 @@ class BottomPlayBar extends React.Component {
                             <source src={this.props.audio.track_url} type="audio/mpeg" />
                           </audio>
                               <div className="controls">
+                                <i className="fa fa-step-backward" aria-hidden="true" id='prev-song-button'></i>
                                 <button id="playbutton" className="pause" onClick={this.handleClick} ref={button => this.playbutton = button}/>
+                                <i className="fa fa-step-forward" aria-hidden="true" id='next-song-button'></i>
                               </div>
                               <span className="time-elapsed" ref={span => this.timeelapased = span}></span>
                               <div className="progress-bar-background" ref={div => this.playbarholder = div} onClick={this.clickbar}    onDrop={this.dragdrop} onDragEnter={this.dragEnter} onDragOver={this.dragOver}>
