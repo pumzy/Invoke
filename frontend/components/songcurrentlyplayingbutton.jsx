@@ -66,6 +66,7 @@ class SongCurrentPlayButton extends React.Component {
 }
 
 const mapStateToProps = (state, passedDown) => {
+  debugger
   return {
     audio: state.audio
   };
