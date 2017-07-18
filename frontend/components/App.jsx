@@ -29,6 +29,7 @@ const App = () =>(
       <ProtectedRoute path="/areyoulost" component={Error404} />
       <ProtectedRoute path="/upload" component={SongUpload} />
       <ProtectedRoute path='/search' component={Search} />
+      <ProtectedRoute exact path="/discover" component={Error404} />
       <ProtectedRoute exact path="/:username" component={UserPage} />
       <ProtectedRoute exact path="/:username/:title/edit" component={SongUpdate} />
       <ProtectedRoute exact path="/you/:path" component={Error404} />
