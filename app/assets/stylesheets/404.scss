@@ -5,7 +5,7 @@
   position: relative;
   bottom: 4px;
   right: 2px;
-  height: 100vh;
+  height: 120%;
 
   .error-title{
 
@@ -41,6 +41,7 @@
 		transition: color .5s;
     background-color: #f50;
 
+
     a{
       color: white;
       text-decoration: none;
@@ -63,8 +64,19 @@
       margin: 0 auto;
       width: 800px;
       height: 400px;
-      background-size: cover;
+      background-size: contain;
       background-image: asset-url('construction.png');
+      background-repeat: no-repeat;
+    }
+
+    .cant-find-user{
+      position: relative;
+      bottom: 30px;
+      margin: 0 auto;
+      width: 800px;
+      height: 330px;
+      background-size: cover;
+      background-image: asset-url('cannot-find-user.jpg');
       background-repeat: no-repeat;
     }
 }
