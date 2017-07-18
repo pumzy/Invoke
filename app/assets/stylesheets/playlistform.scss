@@ -1,0 +1,107 @@
+
+.playlist-button{
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.playlist-form-heading-div{
+  background: #fff;
+  padding: 16px 25px 0;
+
+  .playlist-form-header{
+    font-size: 24px;
+    line-height: 1.6;
+    border-bottom: 1px solid #e5e5e5;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-weight: 400;
+  }
+
+}
+
+.rest-of-playlist-form{
+  background: #FFF;
+  padding: 25px;
+  margin-bottom: 5px;
+
+  .create-playlist-textfield{
+    margin: 10px 0;
+    position: relative;
+
+
+    .playlist-title-span{
+      line-height: 16px;
+      font-size: 12px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .create-playlist-input-title, .create-playlist-input-description{
+      display: inline-block;
+      font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      transition: border-color .1s;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+
+
+
+  }
+}
+
+
+.submit-playlist-button{
+  background-color: #f50;
+  border-color: #f50;
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  margin: 0;
+  padding: 2px 11px 2px 10px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-weight: 100;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  float: right;
+  position: relative;
+  right: 25px;
+  bottom: 20px;
+
+}
+//
+#add-to-playlist-button{
+    width: 23px;
+    height: 20px;
+    background-size: contain;
+    background-position: 3px 1px;
+    background-repeat: no-repeat;
+    vertical-align: top;
+    text-align: right;
+    padding: 2px 7px 2px 17px;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    background-color: #fff;
+    cursor: pointer;
+    color: #333;
+    font-size: 14px;
+    line-height: 0px;
+    white-space: nowrap;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-weight: 100;
+    box-sizing: border-box;
+    background-image: asset-url('add-to-playlist.png');
+}

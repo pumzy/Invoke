@@ -7,6 +7,8 @@ import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import Wavesurfer from 'react-wavesurfer'
 import { fetchLikes, fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
+import PlaylistButton from './playlistbutton'
+
 
 class SongPlay extends React.Component {
   constructor(props){
@@ -71,7 +73,7 @@ class SongPlay extends React.Component {
     this.props.history.push(`/${this.props.user.username}/${this.props.song.title}`)
   }
   goToUser(){
-    
+
     this.props.history.push(`/${this.props.user.username}`)
   }
 
@@ -210,6 +212,7 @@ class SongPlay extends React.Component {
                  </div>
               <div className='songplay-buttonbar'>
                 {likebutton}
+                <PlaylistButton></PlaylistButton>
                 <span className='container-commentcount'>{this.props.song.commentnum}</span>
                 <img className='stat-icon-playcontainer' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfY29tbWVudDwvdGl0bGU+PHBhdGggZD0iTTUgM2MtMS4xMDUgMC0yIC44ODctMiAyLjAwNnYyLjk4OEMzIDkuMTAyIDMuODg3IDEwIDUgMTBoNmMxLjEwNSAwIDItLjg4NyAyLTIuMDA2VjUuMDA2QTEuOTk4IDEuOTk4IDAgMCAwIDExIDNINXptMCA3djNsMy0zSDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4='></img>
                 <span className='container-playcount'>{this.props.song.playcount}</span>

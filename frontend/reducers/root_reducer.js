@@ -7,6 +7,7 @@ import CommentReducer from './comment_reducer'
 import LikeReducer from './like_reducer'
 import SearchReducer from './search_reducer'
 import FollowReducer from './follow_reducer'
+import PlaylistReducer from './playlist_reducer'
 
 
 const RootReducer = combineReducers({
@@ -16,7 +17,8 @@ const RootReducer = combineReducers({
   users: UserReducer,
   comments: CommentReducer,
   likes: LikeReducer,
-  follows: FollowReducer
+  follows: FollowReducer,
+  playlists: PlaylistReducer
 });
 
 export default RootReducer;

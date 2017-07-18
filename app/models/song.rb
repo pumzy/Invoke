@@ -17,6 +17,7 @@
 #  cover_art_file_size    :integer
 #  cover_art_updated_at   :datetime
 #  description            :string
+#  playcount              :integer          default("0")
 #
 
 class Song < ApplicationRecord
@@ -39,6 +40,11 @@ class Song < ApplicationRecord
   has_many :user_likes,
   through: :likes,
   source: :user
+
+  has_many :song_playlists
+
+  has_many :playlists,
+  through: :song_playlists
 
 
   has_attached_file :cover_art, styles: { medium: "300x300>", thumb: "100x100#" }, default_url: "photo.jpg"

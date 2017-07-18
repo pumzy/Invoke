@@ -53,6 +53,7 @@
   has_many :songs
   has_many :comments
   has_many :likes
+  has_many :playlists
 
   has_many :followed_users,
   foreign_key: :follower_id,

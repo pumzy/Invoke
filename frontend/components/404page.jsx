@@ -19,10 +19,11 @@ render(){
             <p className="errorText"> Please check back at a later date.</p>
             <div className="backhome">
               <a href="/#/stream">Take me back home</a>
+              <PlaylistButton></PlaylistButton>
             </div>
         </div>
         )
-    } 
+    }
     else {
     return (
       <div className="error-page">
