@@ -92,7 +92,7 @@ song1 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 12,
-  track: File.open("app/assets/songs/Wonderwall.mp3"),
+  track: File.open("app/assets/songs/Wonderwall-26.5-65.2.mp3"),
   cover_art: File.open("app/assets/images/wonderwallcover.jpeg")
   )
 
@@ -120,7 +120,7 @@ song4 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 10,
-  track: File.open("app/assets/songs/The Pretenders.mp3"),
+  track: File.open("app/assets/songs/The Pretenders-0-47.mp3"),
   cover_art: File.open("app/assets/images/pretenderalbum.jpg")
   )
 
@@ -129,7 +129,7 @@ song5 = Song.create!(
   genre: 'Hip Hop',
   description: "This is a very good song, friends",
   user_id: 9,
-  track: File.open("app/assets/songs/Stronger.mp3"),
+  track: File.open("app/assets/songs/Stronger-0-56.1.mp3"),
   cover_art: File.open("app/assets/images/kanyestronger.jpeg")
   )
 
@@ -138,7 +138,7 @@ song6 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 8,
-  track: File.open("app/assets/songs/Save-Tonight.mp3"),
+  track: File.open("app/assets/songs/Save-Tonight-0-50.4.mp3"),
   cover_art: File.open("app/assets/images/savetonightalbum.jpg")
   )
 
@@ -147,25 +147,25 @@ song7 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 7,
-  track: File.open("app/assets/songs/07 Thanks For The Memories.mp3"),
+  track: File.open("app/assets/songs/07 Thanks For The Memories-0-50.1.mp3"),
   cover_art: File.open("app/assets/images/falloutboyinfinity.jpg")
   )
 
-# song8 = Song.create!(
-#   title: 'Lazy Eye',
-#   genre: 'Rock',
-#   description: "This is a very good song, friends",
-#   user_id: 6,
-#   track: File.open("app/assets/songs/Lazy Eye.mp3"),
-#   cover_art: File.open("app/assets/images/silversunalbum.jpg")
-#   )
+song8 = Song.create!(
+  title: 'Lazy Eye',
+  genre: 'Rock',
+  description: "This is a very good song, friends",
+  user_id: 6,
+  track: File.open("app/assets/songs/Lazy Eye-7.4-62.2.mp3"),
+  cover_art: File.open("app/assets/images/silversunalbum.jpg")
+  )
 
 song9 = Song.create!(
   title: 'The Adventures of Rain Dance Maggie',
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 4,
-  track: File.open("app/assets/songs/07 The Adventures of Rain Dance Maggie.mp3"),
+  track: File.open("app/assets/songs/07 The Adventures of Rain Dance Maggie-0-40.2.mp3"),
   cover_art: File.open("app/assets/images/raindancecover.jpg")
   )
 
@@ -192,7 +192,7 @@ song12 = Song.create!(
   genre: 'Rock',
   description: "This is a very good song, friends",
   user_id: 3,
-  track: File.open("app/assets/songs/03 How To Save A Life.mp3"),
+  track: File.open("app/assets/songs/03 How To Save A Life-0-50.6.mp3"),
   cover_art: File.open("app/assets/images/Fray-album-ar.jpg")
   )
 

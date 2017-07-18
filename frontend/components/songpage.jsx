@@ -49,11 +49,13 @@ class SongPage extends React.Component {
 
 
 
+
   componentDidMount(){
 
     this.props.fetchSongByTitle(this.props.match.params.title).then((response) => {
       this.props.fetchCommentsBySongID(response.song.id)
       this.props.fetchLikesBySongID(response.song.id)})
+
 
 
   }
@@ -158,6 +160,7 @@ class SongPage extends React.Component {
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === nextProps.song.id) {
       this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
     }
+    window.checkform = this.wavesurfer
   }
 
   handlePosChange(e) {
@@ -279,6 +282,7 @@ class SongPage extends React.Component {
 
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />
+       this.wavesurfer.wavesurferEl.style.backgroundImage = `url(${this.wavesurfer._wavesurfer.exportImage()})`
 
 
 
