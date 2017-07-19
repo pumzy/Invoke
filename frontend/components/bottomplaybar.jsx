@@ -214,7 +214,6 @@ class BottomPlayBar extends React.Component {
   }
 
   setdata(){
-    debugger
     this.title.innerText = this.props.audio.title;
     this.username.innerText = this.props.audio.user.username;
     // this.goToUser = () => { return this.props.history.push(`/${this.props.artist.username}`)}
