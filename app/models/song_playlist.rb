@@ -8,6 +8,7 @@
 #
 
 class SongPlaylist < ApplicationRecord
+  validates :song, uniqueness: {scope: :playlist}
 
   validates_presence_of :song
   validates_presence_of :playlist

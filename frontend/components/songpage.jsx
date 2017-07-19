@@ -10,7 +10,7 @@ import SongUpdate from './edit';
 import {fetchCommentsBySongID, removeComments, createComment, deleteComment } from '../actions/comment_actions'
 import CommentShow from './commentcontainer'
 import {createFollow, fetchFollowsByUserID, removeFollows, deleteFollow} from '../actions/follow_actions'
-import { requestAudioPlaybackTime } from '../actions/audio_actions';
+import { requestAudioPlaybackTime, changePlaybackTime } from '../actions/audio_actions';
 import { fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import Wavesurfer from 'react-wavesurfer'
 // import Wavesurfer from 'wavesurfer'
@@ -37,6 +37,7 @@ class SongPage extends React.Component {
     this.unlikeSong = this.unlikeSong.bind(this);
     this.handlePosChange = this.handlePosChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleWaveformClick = this.handleWaveformClick.bind(this)
     this.state = {
       body: "",
       comment_time: "",
@@ -160,7 +161,6 @@ class SongPage extends React.Component {
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === nextProps.song.id) {
       this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
     }
-    window.checkform = this.wavesurfer
   }
 
   handlePosChange(e) {
@@ -169,6 +169,13 @@ class SongPage extends React.Component {
       });
     }
 
+  handleWaveformClick(e){
+    // parseInt(this.wavesurfer.wavesurferEl.childNodes[0].childNodes[0].style.width) - to get current pos
+    let clickpos = (e.clientX - e.currentTarget.getBoundingClientRect().left) / e.currentTarget.clientWidth
+    this.props.changePlaybackTime(clickpos)
+  }
+
+
 
   likeSong(e){
     e.preventDefault()
@@ -176,8 +183,7 @@ class SongPage extends React.Component {
     if (this.props.audio.token === 'PLAYING'){
       this.props.requestAudioPlaybackTime();
     }
-    console.log(`${this.wavesurfer._wavesurfer.backend.mergedPeaks}`)
-    window.wavesurfer= this.wavesurfer
+
   }
 
   unlikeSong(e){
@@ -204,7 +210,6 @@ class SongPage extends React.Component {
 
 
   render(){
-
 
     if (!this.props.song || !this.props.user) {
       return null
@@ -273,7 +278,6 @@ class SongPage extends React.Component {
          className="test"
          pos={this.state.pos}
          volume='0'
-         onClick={this.handleWaveformClick}
          playing={this.state.playing}
          options={{waveColor: '#ddd',
            progressColor:'#ff7540',
@@ -282,7 +286,6 @@ class SongPage extends React.Component {
 
          ref={Wavesurfer => this.wavesurfer = Wavesurfer}
          />
-       this.wavesurfer.wavesurferEl.style.backgroundImage = `url(${this.wavesurfer._wavesurfer.exportImage()})`
 
 
 
@@ -339,7 +342,7 @@ class SongPage extends React.Component {
                   <div className="time"><span className="genre-tag">{genre}</span></div>
                 </div>
               </div>
-              <div className='waveform' id='waveform-songpage'>
+              <div className='waveform' id='waveform-songpage' onClick={this.handleWaveformClick}>
                 {waveform}
 
               </div>
@@ -449,7 +452,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchFollowsByUserID: (id) => dispatch(fetchFollowsByUserID(id)),
     createFollow: (follow) => dispatch(createFollow(follow)),
     deleteFollow: (follow) => dispatch(deleteFollow(follow)),
-    removeFollows: () => dispatch(removeFollows())
+    removeFollows: () => dispatch(removeFollows()),
+    changePlaybackTime: (time) => dispatch(changePlaybackTime(time))
   }
 }
 

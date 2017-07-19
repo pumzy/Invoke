@@ -39,8 +39,7 @@ export const removeAudio = () => {
 
 export const removeAudioToken = () => {
   return {
-    type: REMOVE_AUDIO_TOKEN,
-    token: ""
+    type: REMOVE_AUDIO_TOKEN
   }
 }
 
@@ -64,8 +63,8 @@ export const requestAudioPlaybackTime = () => {
 export const changePlaybackTime = (time) => {
 
   return {
-    type: PROVIDE_AUDIO_PLAYBACK_TIME,
+    type: CHANGE_PLAYBACK_TIME,
     token: 'WAVEFORM-OVERRIDE',
-    time
+    set: time
   }
 }

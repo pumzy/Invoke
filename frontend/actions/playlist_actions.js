@@ -69,6 +69,22 @@ export const fetchOnePlaylist = (id) => dispatch => (
   ))
 )
 
+export const addSongToPlaylist = (songid, id) => dispatch => (
+  APIUtil.addSongToPlaylist(songid, id).then(playlist => (
+    dispatch(receivePlaylist(playlist))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
+export const removeSongFromPlaylist = (songid, id) => dispatch => (
+  APIUtil.removeSongFromPlaylist(songid, id).then(playlist => (
+    dispatch(receivePlaylist(playlist))
+  ), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  ))
+)
+
 export const fetchPlaylistByTitle = (title) => dispatch => (
   APIUtil.fetchPlaylistByTitle(title).then(playlist => (
     dispatch(receivePlaylist(playlist))

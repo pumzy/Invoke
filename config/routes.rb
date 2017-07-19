@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     get '/songs/userfind/:userid', to: "songs#indexuser"
     get '/playlists/userfind/:userid', to: "playlists#indexuser"
     get '/playlists/show2/:title', to: "playlists#show2"
+    post '/playlists/addsong/:id', to: "playlists#addSongToPlaylist"
+    post '/playlists/removesong/:id', to: "playlists#removeSongFromPlaylist"
     get '/comments/songfind/:songid', to: "comments#indexsong"
     get '/likes/songfind/:songid', to: "likes#indexsong"
     get '/follows/userfind/:userid', to: "follows#indexuser"

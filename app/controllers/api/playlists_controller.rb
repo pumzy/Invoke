@@ -1,5 +1,5 @@
 class Api::PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :addSongToPlaylist, :removeSongFromPlaylist]
 
   def index
     @playlists = Playlist.all
@@ -45,6 +45,28 @@ class Api::PlaylistsController < ApplicationController
        render json: @playlist.errors, status: :unprocessable_entity
       end
   end
+
+  def addSongToPlaylist
+    @SongPlaylist = SongPlaylist.new
+
+    @SongPlaylist.playlist_id =  @playlist.id
+    @SongPlaylist.song_id = params[:songid]
+      if @SongPlaylist.save
+        render :show, status: :ok
+      else
+       render json: @SongPlaylist.errors, status: :unprocessable_entity
+      end
+  end
+  
+  def removeSongFromPlaylist
+    @SongPlaylist = SongPlaylist.find_by(song_id: params[:songid], playlist_id: @playlist.id)
+      if @SongPlaylist.destroy
+        render :show, status: :ok
+      else
+       render json: @SongPlaylist.errors, status: :unprocessable_entity
+      end
+  end
+
 
   def destroy
     if @playlist.destroy

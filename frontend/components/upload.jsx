@@ -51,18 +51,7 @@ class SongUpload extends React.Component {
     if (file){
       fileReader.readAsDataURL(file);
     };
-    var xhr = new XMLHttpRequest();
-      xhr.open("GET", this.state.songUrl);
-      xhr.responseType = "arraybuffer";
-
-      xhr.addEventListener("load", function onResponse(progressEvent){
-        var waveform = WaveformData.create(progressEvent.target);
-
-        console.log(waveform);
-      });
-
-      xhr.send();
-    debugger
+    
   }
 
   goBack(e){

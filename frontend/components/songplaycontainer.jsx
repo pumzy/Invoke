@@ -45,7 +45,9 @@ class SongPlay extends React.Component {
     // }
 
   handleWaveformClick(e){
-
+    // parseInt(this.wavesurfer.wavesurferEl.childNodes[0].childNodes[0].style.width) - to get current pos
+    let clickpos = (e.clientX - e.currentTarget.getBoundingClientRect().left) / e.currentTarget.clientWidth
+    this.props.changePlaybackTime(clickpos)
   }
 
 
@@ -94,7 +96,6 @@ class SongPlay extends React.Component {
   componentWillReceiveProps(nextProps){
 
     if (nextProps.audio.token === "PLAYING" && nextProps.audio.id === this.props.song.id) {
-
       this.setState({playing: true, volume: 0, pos: nextProps.audio.time})
     } else if (nextProps.audio.token === "PAUSED" && nextProps.audio.id === this.props.song.id) {
       this.setState({playing: false, volume: 0, pos: nextProps.audio.time})
@@ -202,17 +203,18 @@ class SongPlay extends React.Component {
                    pos={this.state.pos}
                    volume="0"
                    playing={this.state.playing}
+                   onClick={this.handleWaveformClick}
                    options={{waveColor: '#8c8c8c',
                      progressColor:'#ff7540',
                      barWidth: 2,
-                     height: 60}}
+                     height: 80}}
 
                    ref={Wavesurfer => this.wavesurfer = Wavesurfer}
                    />
                  </div>
               <div className='songplay-buttonbar'>
                 {likebutton}
-                <PlaylistButton></PlaylistButton>
+                <PlaylistButton song={this.props.song}></PlaylistButton>
                 <span className='container-commentcount'>{this.props.song.commentnum}</span>
                 <img className='stat-icon-playcontainer' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+c3RhdHNfY29tbWVudDwvdGl0bGU+PHBhdGggZD0iTTUgM2MtMS4xMDUgMC0yIC44ODctMiAyLjAwNnYyLjk4OEMzIDkuMTAyIDMuODg3IDEwIDUgMTBoNmMxLjEwNSAwIDItLjg4NyAyLTIuMDA2VjUuMDA2QTEuOTk4IDEuOTk4IDAgMCAwIDExIDNINXptMCA3djNsMy0zSDV6IiBmaWxsPSIjOTk5IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4='></img>
                 <span className='container-playcount'>{this.props.song.playcount}</span>
@@ -247,7 +249,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchLikesBySongID: (id) => dispatch(fetchLikesBySongID(id)),
     removeLikes: () => dispatch(removeLikes()),
     createLike: (like) => dispatch(createLike(like)),
-    deleteLike: (like) => dispatch(deleteLike(like))
+    deleteLike: (like) => dispatch(deleteLike(like)),
+    removeAudioToken: () => dispatch(removeAudioToken())
   }
 }
 

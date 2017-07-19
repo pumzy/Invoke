@@ -21,11 +21,11 @@ export const AudioReducer = (state=defaultState, action ) => {
     case RECEIVE_AUDIO_TOKEN:
       return merge({},state, {token: action.token})
     case REMOVE_AUDIO_TOKEN:
-
+    return merge({},state, {token: ""})
     case PROVIDE_AUDIO_PLAYBACK_TIME:
       return merge({},state, {time: action.time, request: ""})
     case CHANGE_PLAYBACK_TIME:
-      return merge({},state, {time: action.time, token: action.token})
+      return merge({},state, {set: action.set, token: action.token})
     case REQUEST_AUDIO_PLAYBACK_TIME:
       return merge({},state, {request: action.request})
     case CLEAR_AUDIO_REQUEST:

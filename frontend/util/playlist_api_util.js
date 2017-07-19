@@ -6,7 +6,7 @@ export const fetchOnePlaylist = (id) => {
   })
 }
 
-export const createPlaylist = (formData) => {
+export const createPlaylist = (playlist) => {
   return $.ajax({
     method: "POST",
     url: `api/playlists`,
@@ -14,11 +14,27 @@ export const createPlaylist = (formData) => {
   })
 }
 
-export const updatePlaylist = (formData, id) => {
+export const updatePlaylist = (playlist, id) => {
   return $.ajax({
     method: "PATCH",
     url: `api/playlists/${id}`,
     data: {playlist: playlist}
+  })
+}
+
+export const addSongToPlaylist = (songid, id) => {
+  return $.ajax({
+    method: "POST",
+    url: `api/playlists/addsong/${id}`,
+    data: {songid: songid}
+  })
+}
+
+export const removeSongFromPlaylist = (songid, id) => {
+  return $.ajax({
+    method: "POST",
+    url: `api/playlists/removesong/${id}`,
+    data: {songid: songid}
   })
 }
 

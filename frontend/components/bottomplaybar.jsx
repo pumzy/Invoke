@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { fetchOneUser, fetchOneUserByID, clearUsers } from '../actions/user_actions'
-import { receivePauseToken, receivePlayToken, provideAudioPlaybackTime, receiveAudio } from '../actions/audio_actions'
+import { receivePauseToken, receivePlayToken, provideAudioPlaybackTime, receiveAudio, removeAudioToken } from '../actions/audio_actions'
 
 
 
@@ -48,9 +48,7 @@ class BottomPlayBar extends React.Component {
       }
       this.footer.className = "audiofooter"
     }
-    // if (nextProps.audio.token === "WAVEFORM-OVERRIDE" && nextProps.audio.id === this.props.audio.id){
-    //   this.music.currentTime = nextProps.audio.time
-    // }
+
     if (nextProps.audio.request === "REQUEST-TIME"){
       this.props.provideAudioPlaybackTime(this.music.currentTime)
     }
@@ -100,6 +98,15 @@ class BottomPlayBar extends React.Component {
     } else if (nextProps.audio.token === "PAUSED"){
       this.music.pause()
       this.playbutton.className = "play";
+    }
+
+    if (nextProps.audio.token === "WAVEFORM-OVERRIDE" && nextProps.audio.id === this.props.audio.id){
+      this.music.currentTime = nextProps.audio.set * this.music.duration
+      if (this.music.paused){
+        store.dispatch(this.props.receivePauseToken());
+      } else{
+        store.dispatch(this.props.receivePlayToken());
+      }
     }
 
 
@@ -207,9 +214,9 @@ class BottomPlayBar extends React.Component {
   }
 
   setdata(){
-
+    debugger
     this.title.innerText = this.props.audio.title;
-    this.username.innerText = this.props.artist.username;
+    this.username.innerText = this.props.audio.user.username;
     // this.goToUser = () => { return this.props.history.push(`/${this.props.artist.username}`)}
     // this.goToSong = () => { return this.props.history.push(`/${this.props.artist.username}/${this.props.audio.title}`)}
 
@@ -259,7 +266,7 @@ class BottomPlayBar extends React.Component {
 
     // const artist = this.props.artist
     if (this.props.audio.track_url !== "") {
-      
+
 
       audioplayer = <div className="playbar" ref={div => this.container = div}>
                           <audio onTimeUpdate={this.movebar} onCanPlay={this.setdata} onEnded={this.ended} id='song'  ref={audio => this.music = audio} >
@@ -313,7 +320,8 @@ const mapDispatchToProps = (dispatch) => {
     receivePlayToken: () => dispatch(receivePlayToken),
     receivePauseToken: () => dispatch(receivePauseToken),
     provideAudioPlaybackTime: (currentTime) => dispatch(provideAudioPlaybackTime(currentTime)),
-    receiveAudio: (audio) => dispatch(receiveAudio(audio))
+    receiveAudio: (audio) => dispatch(receiveAudio(audio)),
+    removeAudioToken: () => dispatch(removeAudioToken())
   }
 }
 

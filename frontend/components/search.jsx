@@ -106,7 +106,7 @@ class Search extends React.Component{
         return(
           <li className='search-user-li'>
             <div className='search-user-topdiv'>
-              <img src={user.avatar_url} className='user-search-image'></img>
+              <img src={user.avatar_url} className='user-search-image' onClick={() => this.props.history.push(`/${user.username}`)}></img>
               <div className='user-search-user-info'>
                 <h3 onClick={() => this.props.history.push(`/${user.username}`)}>{user.username}<img className='verification-badge' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+UHJvIFN0YXI8L3RpdGxlPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PHBhdGggZD0iTTYgMTJBNiA2IDAgMSAwIDYgMGE2IDYgMCAwIDAgMCAxMnoiIGZpbGw9IiNGNTAiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNNiA4LjA3TDMuMzU1IDkuNjRsLjY3Ni0zLTIuMzEtMi4wMyAzLjA2Mi0uMjg1TDYgMS41bDEuMjE3IDIuODI1IDMuMDYzLjI4NC0yLjMxMSAyLjAzLjY3NiAzLjAwMnoiLz48L2c+PC9zdmc+'></img></h3>
                   <ul className='artist-metadata'>

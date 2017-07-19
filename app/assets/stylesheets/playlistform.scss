@@ -16,11 +16,40 @@
     font-weight: 400;
   }
 
+  .playlist-form-header-ul{
+
+    border-bottom: 1px solid #f2f2f2;
+    list-style: none;
+    margin: 0;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-size: 24px;
+    line-height: 1.6;
+    display: flex;
+    .pfhul{
+      float: left;
+      margin: 0 12px -1px;
+      margin-left: 0;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+
+      &:last-child{
+        margin-left: 12px;
+      }
+    }
+  }
+  .modal-playlist-header-active{
+    border-color: #f50;
+    color: #f50;
+    cursor: default;
+
+  }
+
 }
 
 .rest-of-playlist-form{
   background: #FFF;
   padding: 25px;
+  padding-top: 10px;
   margin-bottom: 5px;
 
   .create-playlist-textfield{
@@ -52,6 +81,190 @@
     }
 
 
+
+  }
+
+  .playlist-songs-form{
+      margin: 20px 0 0 0;
+      border: 1px solid #f2f2f2;
+
+      .playlist-songs-form-ul{
+        list-style: none;
+        margin: 0;
+
+        .playlist-songs-form-ul-li{
+          font: 12px/1.4 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+          position: relative;
+          color: #999;
+          line-height: 30px;
+          height: 30px;
+          padding-left: 5px;
+          outline: 0;
+          border-bottom: 1px solid #f2f2f2;
+          display: flex;
+
+
+          .psfui-image{
+              margin: 5px 5px 0 0;
+            img{
+              width: 20px;
+              height: 20px;
+              object-fit: contain;
+            }
+          }
+
+          .psfui-info{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            word-break: normal;
+
+            .psfui-infou{
+              line-height: 30px;
+              color: #999;
+
+            }
+
+            .psfui-infot{
+              color: black;
+              line-height: 30px;
+            }
+
+          }
+
+
+        }
+      }
+
+  }
+
+  .playlist-modal-filter-input{
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    font-weight: 100;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    transition: border-color .1s;
+    margin: 10px 0;
+  }
+
+  .playlist-modal-filter-ul{
+
+    .playlist-modal-filter-ul-li{
+      display: flex;
+      width: 100%;
+      padding: 10px 0;
+
+      img{
+        width: 50px;
+        height: 50px;
+        opacity: 1;
+        box-shadow: rgba(0,0,0,.1)0 0 0 1px inset;
+        margin-right: 10px;
+      }
+
+      .pmfiulai {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-right: 8px;
+        overflow: hidden;
+        width: 368px;
+
+
+        .track-count-playlist-modal{
+
+          .pmfiulst{
+            color: #999;
+            font-size: 11px;
+            line-height: 12px;
+            display: inline-block;
+            font-family: "InterstateSound Tnum","Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            font-weight: 100;
+            margin-left: -6px;
+          }
+          img{
+            height: 16px;
+            width: 16px;
+            box-shadow: none;
+            position: relative;
+            top: 3px;
+          }
+        }
+
+        .pmfiulau{
+          font-size: 14px;
+          font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+          font-weight: 400;
+          line-height: 1.3;
+          display: block;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          word-break: normal;
+          margin-bottom: 3px;
+        }
+
+      }
+
+      .add-to-playlist-modal-button{
+            min-width: 31px;
+            color: #333;
+            outline: 0;
+            border-color: #ccc;
+            display: inline-block;
+            position: relative;
+            height: 26px;
+            margin: 0;
+            padding: 2px 11px 2px 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            background-color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 20px;
+            white-space: nowrap;
+            font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            font-weight: 100;
+            text-align: center;
+            align-items: flex-start;
+            top: 10px;
+            position: relative;
+
+      }
+
+      .remove-from-playlist-modal-button{
+        color: #f50 !important;
+        min-width: 31px;
+        display: inline-block;
+        position: relative;
+        height: 26px;
+        margin: 0;
+        padding: 2px 11px 2px 10px;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        background-color: #fff;
+        cursor: pointer;
+        color: #333;
+        font-size: 14px;
+        line-height: 20px;
+        white-space: nowrap;
+        font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+        font-weight: 100;
+        text-align: center;
+        box-sizing: border-box;
+        align-items: flex-start;
+        top: 10px;
+        position: relative;
+      }
+    }
 
   }
 }
@@ -104,4 +317,8 @@
     font-weight: 100;
     box-sizing: border-box;
     background-image: asset-url('add-to-playlist.png');
+}
+
+.required-field-asterisk{
+  color: red;
 }
