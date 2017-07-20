@@ -1,0 +1,165 @@
+.sidebar{
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  right: 0;
+  width: 350px;
+  border-left: 1px solid #f2f2f2;
+  // display: flex;
+  // justify-content: center;
+
+  .sidebar-feature{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    background-image: asset-url('feature-photo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px;
+    border-radius: 2.5%;
+
+    .userpage-follow-button-follow{
+      border: none;
+      position: relative;
+      top: 231px;
+      left: 75px;
+      cursor: pointer;
+
+    }
+  }
+
+.sidebar-follow-title{
+  font-weight: 100;
+  color: #999;
+  line-height: 24px;
+  font-family: "InterstateSound Tnum", "Interstate", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+  width: 300px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+  img{
+    height: 20px;
+    width: 20px;
+    position: relative;
+    top: 3px;
+
+  }
+
+}
+
+.sidebar-follow-ul{
+  margin: 0 auto;
+
+  width: 300px;
+
+    .sidebar-follow-li{
+
+      display: flex;
+      padding: 10px 0;
+
+      .sidebar-follow-coverart{
+        cursor: pointer;
+        width: 15px;
+        height: 15px;
+        margin-right: 10px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+
+      .sidebar-follow-userinfo{
+        width: 100%;
+
+
+
+
+        .sidebar-follow-user-username{
+          cursor: pointer;
+          margin: 6px 0 0 0;
+          font-weight: 100;
+          color: #333;
+          font-size: 14px;
+          font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+          line-height: 1.3;
+
+        }
+
+        .sidebar-follow-user-stats{
+          cursor: pointer;
+          width: 100%;
+          span{
+            margin-right: 5px;
+            padding-right: 4px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 11px;
+            line-height: 12px;
+            color: #999;
+            font-family: "InterstateSound Tnum","Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            font-weight: 100;
+
+
+          }
+
+          .sidebar-follow-stat{
+            height: 16px;
+            width: 16px;
+            position: relative;
+            top: 2px;
+
+          }
+
+          .sidebar-follow-button-follow{
+                float: right;
+                min-width: 25px;
+                font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+                font-size: 11px;
+                padding: 2px 9px 2px 8px;
+                height: 22px;
+                line-height: 16px;
+                display: inline-block;
+                position: relative;
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                background-color: #fff;
+                cursor: pointer;
+                color: #333;
+                font-weight: 100;
+                text-align: center;
+                vertical-align: baseline;
+                box-sizing: border-box;
+
+
+          }
+
+          .sidebar-follow-button-unfollow{
+            float: right;
+            min-width: 25px;
+            font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+            color: #f50;
+            font-size: 11px;
+            padding: 2px 9px 2px 8px;
+            height: 22px;
+            line-height: 16px;
+            display: inline-block;
+            position: relative;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            background-color: #fff;
+            cursor: pointer;
+            font-weight: 100;
+            text-align: center;
+            vertical-align: baseline;
+            box-sizing: border-box;
+            white-space: nowrap;
+
+          }
+        }
+      }
+
+    }
+  }
+}

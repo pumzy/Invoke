@@ -36,13 +36,13 @@ const App = () =>(
       <ProtectedRoute exact path="/discover" component={Error404} />
       <ProtectedRoute exact path="/:username" component={UserPage} />
       <ProtectedRoute exact path="/:username/songs" component={UserPage} />
+      <ProtectedRoute exact path="/:username/playlists" component={Error404} />
       <ProtectedRoute exact path="/:username/albums" component={Error404} />
       <ProtectedRoute exact path="/:username/reposts" component={Error404} />
       <ProtectedRoute exact path="/:username/:title/edit" component={SongUpdate} />
       <ProtectedRoute exact path="/you/likes" component={LikePage} />
       <ProtectedRoute exact path="/you/sets" component={CollectionPlaylistPage} />
       <ProtectedRoute exact path="/you/following" component={CollectionFollowPage} />
-      <ProtectedRoute exact path="/:username/playlists" component={Error404} />
       <ProtectedRoute exact path="/you/collection" component={CollectionPage} />
       <ProtectedRoute exact path="/you/:path" component={Error404} />
       <ProtectedRoute exact path="/:username/:title" component={SongPage} />

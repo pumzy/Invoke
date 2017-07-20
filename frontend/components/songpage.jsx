@@ -142,6 +142,7 @@ class SongPage extends React.Component {
     this.props.removeComments()
     this.props.removeLikes()
     this.props.removeFollows()
+    this.props.removeSongs()
     if (this.props.song.id  === this.props.audio.id){
         this.props.requestAudioPlaybackTime();
       }

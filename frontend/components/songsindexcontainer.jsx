@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Link, NavLink } from 'react-router-dom';
-import { fetchSongs, removeSongs, fetchSongsByUserID } from '../actions/song_actions'
+import { fetchSongs, removeSongs, fetchSongsByUserID, removeSong } from '../actions/song_actions'
 import { fetchUsers, clearUsers } from '../actions/user_actions'
 import { removeAudioToken} from '../actions/audio_actions'
 import { connect } from 'react-redux'
 import SongPlay from './songplaycontainer'
 import { fetchLikes, removeLikes } from '../actions/like_actions'
 import { fetchCurrentUserFollows, removeFollows} from '../actions/follow_actions'
-import {fetchOneUser} from '../actions/user_actions'
+import {fetchOneUser, fetchOneUserByID} from '../actions/user_actions'
+import Sidebar from './sidebar'
 
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 
@@ -16,6 +17,9 @@ class SongsIndex extends React.Component {
     super(props)
     this.likes = [];
     this.user;
+    this.newfollows = {}
+    this.donefollows = {}
+
 
   }
 
@@ -26,26 +30,67 @@ class SongsIndex extends React.Component {
         this.props.fetchUsers()
         for (var i = 0; i < this.user.followed_user_ids.length; i++) {
           this.props.fetchSongsByUserID(this.user.followed_user_ids[i])
+
         }
       })
+
     }
 
 
 
-    // if (this.props.newFollows){
-    //   for (var i = 0; i < this.props.newFollows.length; i++) {
-    //     if (!this.user.followed_user_ids.includes(this.props.newFollows[i])){
-    //       this.props.fetchSongsByUserID(this.props.newFollows[i])
-    //     }
-    //   }
-    // }
 
 
     this.props.fetchLikes()
+
+    if (Math.random()  < 0.5){
+
+      $('.sidebar-feature')[0].style.display = 'none'
+    }
+
   }
+
+
 
   componentWillReceiveProps(nextProps){
 
+    for (var i = 0; i < nextProps.allfollows.length; i++) {
+      this.newfollows[nextProps.allfollows[i].id] = nextProps.allfollows[i]
+    }
+
+    // basically setting internal state
+
+    let follows = Object.keys(this.newfollows).map(el => parseInt(el))
+    let followV2 = nextProps.allfollows.map(follow => follow.id)
+    // setting up the follow arrays
+
+    for (var i = 0; i < follows.length; i++) {
+      if (followV2.includes(follows[i]) === false){
+        let userID = this.newfollows[follows[i].toString()].followee_id
+        delete this.newfollows[follows[i].toString()]
+        let allsongs = this.props.allsongs
+        for (var i = 0; i < allsongs.length; i++) {
+
+          if (allsongs[i].user_id === userID){
+            this.props.removeSong(allsongs[i])
+          }
+        }
+      }
+    }
+
+    // if allfollows does not include any of the keys, we delete the thing at that key
+
+    if (Object.keys(this.newfollows).length > 0 ){
+      let newfollowarray = Object.values(this.newfollows)
+      for (var i = 0; i < newfollowarray.length; i++) {
+        if(!this.donefollows[newfollowarray[i].id]){
+          nextProps.fetchOneUserByID(newfollowarray[i].followee_id)
+          nextProps.fetchSongsByUserID(newfollowarray[i].followee_id)
+          this.donefollows[newfollowarray[i].id] = true
+        }
+      }
+    }
+
+    // fetch follows
 
   }
 
@@ -96,6 +141,7 @@ class SongsIndex extends React.Component {
           }
         </ul>
       </section>
+      <Sidebar currentUser={this.user}></Sidebar>
     </div>
     );
   }
@@ -111,7 +157,7 @@ const mapStateToProps = (state) => {
           audio: state.audio,
           likes: state.likes.alllikes,
           currentUser: state.session.currentUser,
-          newFollows: state.follows.newFollows}
+          allfollows: state.follows.allfollows}
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -126,7 +172,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchCurrentUserFollows: () => dispatch(fetchCurrentUserFollows()),
     removeFollows: () => dispatch(removeFollows()),
     fetchSongsByUserID: (id) => dispatch(fetchSongsByUserID(id)),
-    fetchOneUser: (username) => dispatch(fetchOneUser(username))
+    fetchOneUser: (username) => dispatch(fetchOneUser(username)),
+    fetchOneUserByID: (id) => dispatch(fetchOneUserByID(id)),
+    removeSong: (song) => dispatch(removeSong(song))
   }
 }
 

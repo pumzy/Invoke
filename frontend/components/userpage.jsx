@@ -1,6 +1,6 @@
 import React from 'react'
 import { fetchSongsByUserID, removeSongs } from '../actions/song_actions.js'
-import { fetchOneUserByID, fetchOneUser } from '../actions/user_actions.js'
+import { fetchOneUserByID, fetchOneUser, clearUsers } from '../actions/user_actions.js'
 import {  requestAudioPlaybackTime } from '../actions/audio_actions'
 import Error404 from './404page'
 import {connect} from 'react-redux'
@@ -42,6 +42,7 @@ class UserPage extends React.Component {
     this.props.removeLikes()
     this.props.removeFollows()
     this.props.removeSongs()
+    this.props.clearUsers()
   }
 
   componentWillUpdate(nextProps){
@@ -202,7 +203,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteFollow: (follow) => dispatch(deleteFollow(follow)),
     requestAudioPlaybackTime: () => dispatch(requestAudioPlaybackTime()),
     addSessionFollow: (id) => dispatch(addSessionFollow(id)),
-    removeSessionFollow: (id) => dispatch(removeSessionFollow(id))
+    removeSessionFollow: (id) => dispatch(removeSessionFollow(id)),
+    clearUsers: () => dispatch(clearUsers())
   }
 }
 

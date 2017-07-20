@@ -25,6 +25,7 @@
   padding: 0 30px;
   position: relative;
   bottom: 5px;
+  border-right: 1px solid #f2f2f2;
   .songpage-likebutton-liked {
     width: 43px;
     height: 20px;
@@ -106,6 +107,7 @@
     font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
     display: flex;
     flex-direction: row;
+    width: calc(100% - 350px);
 }
 
 .homepage-nav {

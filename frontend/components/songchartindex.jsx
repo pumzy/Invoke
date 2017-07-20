@@ -8,6 +8,7 @@ import SongChartPlay from './songchartplay'
 import { fetchLikes, removeLikes } from '../actions/like_actions'
 import { fetchCurrentUserFollows, removeFollows} from '../actions/follow_actions'
 import {fetchOneUser} from '../actions/user_actions'
+import Sidebar from './sidebar'
 
 // import SongCurrentPlay from './songcurrentplayingButton.jsx'
 

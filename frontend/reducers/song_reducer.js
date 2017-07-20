@@ -22,6 +22,13 @@ const SongReducer = (state={ byTitle: {}, byID: {}, allsongs: [] }, action) => {
     case REMOVE_SONG:
       delete newState.byID[action.song.id]
       delete newState.byTitle[action.song.title]
+      let newarray = []
+      state.allsongs.forEach(song => {
+        if( song.id !== action.song.id) {
+          newarray.push(song)
+        }
+      })
+      newState.allsongs = newarray
       return newState;
 
     case REMOVE_SONGS:

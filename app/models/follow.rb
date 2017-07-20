@@ -11,6 +11,7 @@
 
 class Follow < ActiveRecord::Base
   validates_presence_of :follower, :followee
+  validates :followee, uniqueness: {scope: :follower}
 
   belongs_to :follower,
   foreign_key: :follower_id,

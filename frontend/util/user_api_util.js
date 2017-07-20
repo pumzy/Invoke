@@ -20,6 +20,14 @@ export const fetchAllUsers = () => {
   })
 }
 
+export const fetchRandomUsers = () => {
+  return $.ajax({
+    method: "GET",
+    url: "api/users",
+    data: {token: 'random'}
+  })
+}
+
 export const searchUsers = (query) => {
   return $.ajax({
     method: "GET",

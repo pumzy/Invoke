@@ -9,6 +9,9 @@ class Api::UsersController < ApplicationController
       @users = User.all
     elsif params[:token] == 'search'
       @users = User.where("lower(username) LIKE ?", "%#{params[:query].downcase}%")
+    elsif params[:token] == 'random'
+      current_follows = current_user.followed_users.map {|follow| follow.followee.id}
+      @users = User.limit(3).where.not(id: current_follows)
     else
       @users = []
       followed = Follow.where(follower_id: current_user.id).map {|a| a.followee_id}

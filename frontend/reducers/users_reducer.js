@@ -1,9 +1,9 @@
 import { merge } from 'lodash'
-import {  RECEIVE_USERS, RECEIVE_USER, REMOVE_USER, CLEAR_USERS } from '../actions/user_actions'
+import {  RECEIVE_USERS, RECEIVE_USER, REMOVE_USER, CLEAR_USERS, RANDOM_USERS } from '../actions/user_actions'
 
 
 
-const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [] }, action) => {
+const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [], toFollow: [] }, action) => {
   Object.freeze(state);
   let newState = merge({}, state);
   switch (action.type) {
@@ -22,7 +22,10 @@ const UserReducer = (state={ byUsername: {}, byID: {}, allusers: [] }, action) =
     newState.byUsername.delete(action.user.username)
     return newState;
     case CLEAR_USERS:
-    return { byUsername: {}, byID: {}, allusers: [] };
+    return { byUsername: {}, byID: {}, allusers: [], toFollow: [] };
+    case RANDOM_USERS:
+    action.users.forEach(user => (newState.toFollow.push(user)))
+    return newState
     default:
     return state;
   }
