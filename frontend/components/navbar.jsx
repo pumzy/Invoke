@@ -30,7 +30,7 @@ class NavBar extends React.Component {
     // his.props.removeSongs()
     // this.props.clearUsers()
     this.setState({query: ""})
-    this.props.history.push(`search?q=${this.state.query}`)
+    this.props.history.push(`/search?q=${this.state.query}`)
   }
 
   searchKeypress(e){
@@ -38,7 +38,7 @@ class NavBar extends React.Component {
       // this.props.removeSongs()
       // this.props.clearUsers()
       this.setState({query: ""})
-      this.props.history.push(`search?q=${this.state.query}`)
+      this.props.history.push(`/search?q=${this.state.query}`)
     }
   }
 
@@ -106,6 +106,7 @@ class NavBar extends React.Component {
           <ul className="user-dropdown-ul">
           <li className="user-dropdown-li first-child"> <NavLink to={`/${this.props.currentUser.username}`}> Profile </NavLink></li>
           <li className="user-dropdown-li"> <NavLink to="/you/likes"> Likes </NavLink> </li>
+          <li className="user-dropdown-li"> <NavLink to="/you/sets"> Playlists </NavLink> </li>
           <li className="user-dropdown-li"> <NavLink to="/you/following"> Following </NavLink> </li>
           <li className="user-dropdown-li"> <NavLink to="/discover"> Discover </NavLink> </li>
           <li className="user-dropdown-li"> <a onClick={this.logout} className="navbar-logout">Logout</a></li>

@@ -10,8 +10,9 @@ class Error404 extends React.Component {
 
 
 render(){
+  
 
-    if (this.props.location.pathname.slice(1,4) === 'you' || this.props.location.pathname.slice(1,9) === 'discover' || this.props.location.pathname.slice(1,11) === 'collection'){
+    if (this.props.location.pathname.slice(1,4) === 'you' || this.props.location.pathname.slice(1,9) === 'discover' || this.props.location.pathname.slice(1,11) === 'collection' || this.props.location.pathname.slice(-7) == 'reposts' || this.props.location.pathname.slice(-6) == 'albums' || this.props.location.pathname.slice(-9) == 'playlists' ){
       return (
         <div className="error-page">
           <h1 className="error-title">We're sorry, this part of Invoke is still under construction!</h1>

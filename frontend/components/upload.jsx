@@ -51,7 +51,7 @@ class SongUpload extends React.Component {
     if (file){
       fileReader.readAsDataURL(file);
     };
-    
+
   }
 
   goBack(e){
@@ -109,6 +109,10 @@ class SongUpload extends React.Component {
   }
 
   render() {
+    if(this.state.loading === true){
+      return <div className='loader'>Loading...</div>
+    }
+
     let buttontext = `Upload ${this.state.title}`
 
     let futureurl = `invoke-.herokuapp.com/${this.props.currentUser}/${this.state.title}`

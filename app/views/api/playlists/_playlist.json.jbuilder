@@ -13,4 +13,5 @@ end
 
 json.user do
   json.avatar_url asset_path(playlist.user.avatar.url)
+  json.username playlist.user.username
 end

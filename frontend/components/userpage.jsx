@@ -92,7 +92,7 @@ class UserPage extends React.Component {
 
     let result;
     if (!this.props.user){
-      result = <Error404 />
+      result = <div className='loader'>Loading...</div>
     } else {
       let likes = [];
       if(this.props.likes.length > 0 ){

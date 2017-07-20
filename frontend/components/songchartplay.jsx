@@ -13,8 +13,8 @@ class SongChartPlay extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.goToSong = this.goToSong.bind(this)
     this.goToUser = this.goToUser.bind(this)
-    // this.likeSong = this.likeSong.bind(this);
-    // this.unlikeSong = this.unlikeSong.bind(this);
+    this.likeSong = this.likeSong.bind(this);
+    this.unlikeSong = this.unlikeSong.bind(this);
   }
 
   handleClick(){
@@ -25,8 +25,26 @@ class SongChartPlay extends React.Component {
     }
   }
 
+
+    likeSong(e){
+      e.preventDefault()
+      this.props.createLike({like: {song_id: this.props.song.id}})
+      if (this.props.audio.token === 'PLAYING'){
+        this.props.requestAudioPlaybackTime();
+      }
+
+    }
+
+    unlikeSong(e){
+      e.preventDefault()
+      this.props.deleteLike({like: {song_id: this.props.song.id}})
+      if (this.props.audio.token === 'PLAYING'){
+        this.props.requestAudioPlaybackTime();
+      }
+    }
+
   goToSong(){
-    
+
     this.props.history.push(`/${this.props.user.username}/${this.props.song.title}`)
   }
   goToUser(){

@@ -10,6 +10,9 @@ class Api::SongsController < ApplicationController
       @songs = Song.where({genre: params[:genre]}).order(playcount: :desc).limit(params[:num])
     elsif params[:token] == 'search'
       @songs = Song.where("lower(title) LIKE ?", "%#{params[:query].downcase}%")
+    elsif params[:token] == 'likes'
+      likearray = current_user.likes.map {|like| like.song_id}
+      @songs = Song.where("id IN (?)", likearray)
     else
       @songs = Song.all
     end

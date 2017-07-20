@@ -49,6 +49,14 @@ export const fetchChartSongs = (num, genre) => {
   })
 }
 
+export const fetchLikedSongs = () => {
+  return $.ajax({
+    method: "GET",
+    url: "api/songs",
+    data: {token: 'likes'}
+  })
+}
+
 export const searchSongs = (query) => {
   return $.ajax({
     method: "GET",

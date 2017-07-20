@@ -196,6 +196,7 @@ class SongPage extends React.Component {
 
 
 
+
   goToUser(){
     this.props.history.push(`/${this.props.match.params.username}`)
   }

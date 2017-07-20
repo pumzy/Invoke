@@ -1,0 +1,95 @@
+.likepage-song-item-li{
+
+  box-sizing: border-box;
+  padding-right: 20px;
+  width: 16.666%;
+  float: left;
+  padding-bottom: 30px;
+
+
+  .likepage-song-item-coverart-div{
+    height: 183px;
+    width: 183px;
+    cursor: pointer;
+    .likepage-song-item-coverart{
+      height: 100%;
+      width: 100%;
+    }
+
+   .PlayinSongPage{
+     position: relative;
+     background-color: transparent;
+     border: none;
+     left: 56px;
+     height: 70px;
+     width: 70px;
+     display: none;
+   }
+
+   div{
+     position: relative;
+     bottom: 145px;
+   }
+
+  }
+
+  .likepage-song-item-title{
+    cursor: pointer;
+    .likepage-like-heart{
+      height: 18px;
+      width: 16px;
+      position: relative;
+      top: 3px;
+    }
+    font-weight: 100;
+    width: 100%;
+    display: block;
+    line-height: 1.4;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: normal;
+
+  }
+
+  .likepage-song-item-artist{
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: normal;
+    color: #999;
+    font-weight: 100;
+    line-height: 1.4;
+    font-size: 12px;
+  }
+
+  &:hover{
+    .PlayinSongPage{
+      display: inline-block;
+    }
+  }
+}
+
+.index{
+  height: 100%;
+}
+
+.likepage{
+  height: 100%;
+  .streamheader{
+    padding-top: 30px;
+    font-weight: 100;
+    color: #999;
+    font-size: 18px;
+    font-family: "Interstate","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+    margin-bottom: 35px;
+  }
+
+}
+
+.shift-header{
+  position: relative;
+  left: 3px;
+}
