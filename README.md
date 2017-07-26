@@ -2,7 +2,7 @@
 
 [Invoke][heroku]
 
-[heroku]: http://www.invoke-.herokuapp.com
+[heroku]: http://invoke-.herokuapp.com
 
 Invoke is a full stack web application inspired by soundcloud.  It utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Redux architectural framework on the frontend.  
 
