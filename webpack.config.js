@@ -3,12 +3,24 @@ var path = require("path");
 var webpack = require("webpack");
 
 var plugins = [];
-var devPlugins = [];
 
 var prodPlugins = [
   new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify('production')
+    }
+  }),
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: true
+    }
+  })
+];
+
+var devPlugins = [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('development')
     }
   }),
   new webpack.optimize.UglifyJsPlugin({
