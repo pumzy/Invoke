@@ -6,8 +6,8 @@ import { fetchOneUserByID, clearUsers } from '../actions/user_actions.js'
 import SongPlayButton from './songplaybuttoncontainer'
 import SongCurrentPlayButton from './songcurrentlyplayingbutton'
 import Wavesurfer from 'react-wavesurfer'
-import { fetchLikes, fetchLikesBySongID, removeLikes, createLike, deleteLike } from '../actions/like_actions'
 import PlaylistButton from './playlistbutton'
+
 
 
 class SongPlay extends React.Component {

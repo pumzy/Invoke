@@ -42,10 +42,11 @@ class SongPlayButton extends React.Component {
     // }
 
     // else {
-      let allids = store.getState().songs.allsongs.map( song => song.id)
+
+      let allids = this.props.allsongs.map( song => song.id)
       let slicePos = allids.indexOf(this.props.song.id)
       let queue = this.props.allsongs.slice(slicePos)
-      
+
       this.props.updateSongCount(this.props.song.id)
       const reset = new Promise((resolve, reject) => resolve(this.props.removeAudio()));
       reset.then(() => this.props.receiveAudio(Object.assign(song, {token: "PLAYING", queue: queue})));
